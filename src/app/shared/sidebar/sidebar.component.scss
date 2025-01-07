@@ -1,0 +1,42 @@
+/* styles.css or sidebar.component.css */
+.app-aside {
+    transition: transform 0.3s ease-in-out;
+    // transform: translateX(-175px); /* Hidden by default */
+  }
+  
+  .app-aside.open {
+    // transform: translateX(0); /* Visible when expanded */
+  }
+  .app-aside-expand-md.open {
+    width: 4rem;
+  }
+  .menu-arrow {
+    position: absolute;
+    right: .75rem;
+    top: 50%;
+    height: 1em;
+    width: 1em;
+    line-height: 1em;
+    text-align: center;
+    margin-top: -.375rem;
+    opacity: .4;
+    transform: translateY(0);
+    transition: transform .2s ease-in-out;
+  }
+  .sub-item.menu-item {
+    display: -webkit-box;
+  }
+  .sub-item.menu-icon {
+    margin-right: .5em;
+    text-align: center;
+    font-size: 0.875rem;
+    color: #a6abbd;
+  }
+  .sub-item.menu-link {
+    padding-left: 0px;
+  }
+  .mt-10px {
+    margin-top: 10px;
+  }
+
+  

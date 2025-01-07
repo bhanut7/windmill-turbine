@@ -1,0 +1,29 @@
+<aside class="app-aside app-aside-light app-aside-expand-md {{menuOpen ? 'open' : 'close'}}">
+    <div class="aside-content">
+  
+      <section class="aside-menu perfect-scrollbar">
+        <nav id="stacked-menu" class="stacked-menu {{!menuOpen  ? 'stacked-menu-has-collapsible' : 'stacked-menu-has-compact stacked-menu-has-hoverable'}}">
+          <ul class="menu">
+            <li *ngFor="let item of menuItems" class="menu-item" [class.has-child]="item.subItems">
+              <a href="javascript:void(0)" title="{{item?.title}}" (click)="routeTo(item?.link)" class="menu-link">
+                <span class="menu-icon" (click)="item.opened = !item.opened" [ngClass]="item.icon"></span>
+                <span *ngIf="menuOpen" (click)="item.opened = !item.opened" class="menu-text">{{ item.name }}</span>
+                <span *ngIf="menuOpen && item.badge" (click)="item.opened = !item.opened" class="badge badge-success">{{ item.badge }}</span>
+                <span *ngIf="menuOpen && item.subItems?.length" (click)="item.opened = !item.opened" class="menu-arrow fa fa-chevron-{{item.opened ? 'down' : 'right'}}"></span>
+              </a>
+  
+              <!-- Child menu if present -->
+              <ul *ngIf="item?.subItems?.length && item.opened">
+                <li class="menu-subhead">{{ item.name }}</li>
+                <li *ngFor="let subItem of item.subItems" class="sub-item menu-item">
+                  <span class="mt-10px sub-item menu-icon" [ngClass]="subItem.icon"></span>
+                  <a href="javascript:void(0)" (click)="routeTo(subItem.link)" class="sub-item menu-link">{{ subItem.name }}</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </nav>
+      </section>
+    </div>
+  </aside>
+  

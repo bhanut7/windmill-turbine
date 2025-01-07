@@ -1,0 +1,169 @@
+<header class="app-header app-header-dark">
+    <!-- .top-bar -->
+    <div class="top-bar">
+      <!-- .top-bar-brand -->
+      <div class="top-bar-brand">
+        <a href="javascript:void(0)" (click)="toggleMenu.emit()">
+          <span class="material-icons md-36">menu</span>
+        </a>
+      </div>
+      <!-- /.top-bar-brand -->
+  
+      <!-- .top-bar-list -->
+      <div class="top-bar-list">
+        <!-- .top-bar-item -->
+        <div class="top-bar-item px-2 d-md-none d-lg-none d-xl-none">
+          <!-- toggle menu -->
+          <button class="hamburger hamburger-squeeze" (click)="toggleMenu.emit()" type="button" data-toggle="aside" aria-label="Menu" aria-controls="navigation">
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
+          </button>
+          <!-- /toggle menu -->
+        </div>
+        <!-- /.top-bar-item -->
+  
+        <!-- .top-bar-item -->
+        <div class="top-bar-item top-bar-item-right px-0 d-none d-sm-flex">
+          <!-- .nav -->
+          <ul class="header-nav nav">
+            <!-- .nav-item -->
+            <li class="nav-item dropdown">
+                <a class="nav-link" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <span class="material-icons">notifications</span>
+                  <span class="badge badge-pill badge-danger">3</span> <!-- Badge for unread messages -->
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                  <div class="dropdown-arrow"></div>
+                  <div class="dropdown-header d-flex justify-content-between align-items-center">
+                    <span>Messages</span>
+                    <a href="#" class="text-muted">Mark all as read</a>
+                  </div>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                      <span class="badge badge-circle badge-primary">S</span>
+                    </div>
+                    <div>
+                      <div class="text-truncate">Invitation: Joe's Dinner Fri Aug 22</div>
+                      <div class="small text-muted">2 hours ago</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                      <span class="badge badge-circle badge-secondary">O</span>
+                    </div>
+                    <div>
+                      <div class="text-truncate">Final reminder: Upgrade to Pro</div>
+                      <div class="small text-muted">23 hours ago</div>
+                    </div>
+                  </a>
+                  <a class="dropdown-item d-flex align-items-center" href="#">
+                    <div class="mr-3">
+                      <span class="badge badge-circle badge-success">GZ</span>
+                    </div>
+                    <div>
+                      <div class="text-truncate">Live healthy with this wireless sensor.</div>
+                      <div class="small text-muted">1 day ago</div>
+                    </div>
+                  </a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item text-center small text-primary" href="#">All messages →</a>
+                </div>
+              </li>
+              
+            <!-- /.nav-item -->
+  
+            <!-- New Dropdown Menu -->
+            <li class="nav-item dropdown header-nav-dropdown">
+              <a class="nav-link" href="javascript:void(0)" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span class="oi oi-grid-three-up"></span>
+              </a>
+              <!-- .dropdown-menu -->
+              <div class="dropdown-menu dropdown-menu-rich dropdown-menu-right">
+                <div class="dropdown-arrow"></div>
+                <!-- .dropdown-sheets -->
+                <div class="dropdown-sheets">
+                  <!-- .dropdown-sheet-item -->
+                  <div class="dropdown-sheet-item">
+                    <a href="#" class="tile-wrapper">
+                      <span class="tile tile-lg bg-indigo"><i class="oi oi-people"></i></span>
+                      <span class="tile-peek">Teams</span>
+                    </a>
+                  </div>
+                  <!-- /.dropdown-sheet-item -->
+                  <div class="dropdown-sheet-item">
+                    <a href="#" class="tile-wrapper">
+                      <span class="tile tile-lg bg-teal"><i class="oi oi-fork"></i></span>
+                      <span class="tile-peek">Projects</span>
+                    </a>
+                  </div>
+                  <!-- /.dropdown-sheet-item -->
+                  <div class="dropdown-sheet-item">
+                    <a href="#" class="tile-wrapper">
+                      <span class="tile tile-lg bg-pink"><i class="fa fa-tasks"></i></span>
+                      <span class="tile-peek">Tasks</span>
+                    </a>
+                  </div>
+                  <!-- /.dropdown-sheet-item -->
+                  <div class="dropdown-sheet-item">
+                    <a href="#" class="tile-wrapper">
+                      <span class="tile tile-lg bg-yellow"><i class="oi oi-fire"></i></span>
+                      <span class="tile-peek">Feeds</span>
+                    </a>
+                  </div>
+                  <!-- /.dropdown-sheet-item -->
+                  <div class="dropdown-sheet-item">
+                    <a href="#" class="tile-wrapper">
+                      <span class="tile tile-lg bg-cyan"><i class="oi oi-document"></i></span>
+                      <span class="tile-peek">Files</span>
+                    </a>
+                  </div>
+                  <!-- /.dropdown-sheet-item -->
+                </div>
+                <!-- .dropdown-sheets -->
+              </div>
+              <!-- /.dropdown-menu -->
+            </li>
+            <!-- /.nav-item -->
+  
+          </ul>
+          <!-- /.nav -->
+  
+          <!-- .btn-account -->
+          <div class="dropdown">
+            <button class="btn-account d-none d-md-flex" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="user-avatar">
+                <span class="material-icons md-36">person</span>
+              </span>
+              <span class="account-summary pr-lg-4 d-none d-lg-block">
+                <span class="account-name">John Doe</span>
+                <span class="account-description">johndoe</span>
+              </span>
+            </button>
+            <!-- .dropdown-menu -->
+            <div class="dropdown-menu">
+              <div class="dropdown-arrow"></div>
+              <h6 class="dropdown-header d-none d-md-block d-lg-none">John Doe</h6>
+              <a class="dropdown-item" href="#">
+                <span class="dropdown-icon material-icons">person</span> Profile
+              </a>
+              <a class="dropdown-item" href="#">
+                <span class="dropdown-icon material-icons">logout</span> Logout
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Help Center</a>
+              <a class="dropdown-item" href="#">Ask Forum</a>
+              <a class="dropdown-item" href="#">Keyboard Shortcuts</a>
+            </div>
+            <!-- /.dropdown-menu -->
+          </div>
+          <!-- /.btn-account -->
+        </div>
+        <!-- /.top-bar-item -->
+      </div>
+      <!-- /.top-bar-list -->
+    </div>
+    <!-- /.top-bar -->
+  </header>
+  
