@@ -7,7 +7,40 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LandingComponent implements OnInit {
 
-  menuOpen = false;
+  menuOpen: any = true;
+  public menuItems: any = [
+    { 
+      "name": "Home", 
+      "title": "Dashboard",
+      "icon": "fa fa-home",
+      "link": "/app/dashboard" 
+    },
+    { 
+      "name": "Device Management", 
+      "icon": "fa fa-cogs", 
+      "badge": "New",
+      "subItems": [
+        { "name": "Devices", "link": "/app/devices" },
+        { "name": "Device Groups", "link": "javascript:void(0)" },
+        { "name": "Tags", "link": "javascript:void(0)" },
+        { "name": "Parameters", "link": "javascript:void(0)" }
+      ]
+    },
+    { 
+      "name": "User Management", 
+      "icon": "fa fa-users", 
+      "badge": "New",
+      "subItems": [
+        { "name": "Users", "link": "javascript:void(0)"},
+        { "name": "User Roles", "link": "javascript:void(0)"},
+      ]
+    },
+    { 
+      "name": "Logs", 
+      "icon": "fa fa-history", 
+      "link": "javascript:void(0)" 
+    }
+  ];
 
   constructor() { }
   
@@ -17,6 +50,13 @@ export class LandingComponent implements OnInit {
   
   toggleSidebar() {
     this.menuOpen = !this.menuOpen;
+    if (!this.menuOpen) {
+      document.body.classList.remove('sidebar-closed');
+      document.body.classList.add('sidebar-opened');
+    } else {
+      document.body.classList.remove('sidebar-opened');
+      document.body.classList.add('sidebar-closed');
+    }
     // this.updatePage();
   }
 

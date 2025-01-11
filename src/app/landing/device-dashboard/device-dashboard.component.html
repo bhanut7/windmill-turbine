@@ -1,0 +1,41 @@
+<div class="main-content">
+    <div class="row m-0 pr-2">
+        <div class="col-lg-6 col-xl-4 pr-0 pb-0 pl-3" *ngFor="let task of tasks">
+            <!-- .card -->
+            <div class="card card-fluid mb-3">
+                <!-- .card-header -->
+                <div class="card-header border-0">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <span class="badge bg-muted" data-toggle="tooltip" title="Deadline">
+                            <span class="sr-only">Deadline</span>
+                            <i class="fa fa-calendar-alt text-muted mr-1"></i>
+                            {{ task.deadline }}
+                        </span>
+                        <div class="dropdown">
+                            <button type="button" class="btn btn-icon btn-light" data-toggle="dropdown"
+                                aria-expanded="false">
+                                <i class="fa fa-ellipsis-v"></i>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <div class="dropdown-arrow"></div>
+                                <a href="#" class="dropdown-item">View Project</a>
+                                <a href="#" class="dropdown-item">Add Member</a>
+                                <a href="#" class="dropdown-item">Edit</a>
+                                <a href="#" class="dropdown-item">Remove</a>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.card-header -->
+                <!-- .card-body -->
+                <div class="card-body text-center px-0">
+                    <div style="height: 200px;">
+                        <wt-visual-charts [chartOptions]="task.options"></wt-visual-charts>
+                    </div>
+                    <p class="card-subtitle text-muted">
+                        Progress in {{ task.progress }}% - Last update {{ task.lastUpdate }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

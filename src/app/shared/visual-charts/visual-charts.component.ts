@@ -16,23 +16,23 @@ export class VisualChartsComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    if (this.chartOptions?.tooltip && this.chartOptions?.series?.[0]?.type === "scatter") {
-      this.chartOptions['tooltip']['trigger'] = 'item';
-    }
-    else if (this.chartOptions?.tooltip) {
-      this.chartOptions['tooltip']['trigger'] = 'axis';
-    }
+    // if (this.chartOptions?.tooltip && this.chartOptions?.series?.[0]?.type === "scatter") {
+    //   this.chartOptions['tooltip']['trigger'] = 'item';
+    // }
+    // else if (this.chartOptions?.tooltip) {
+    //   this.chartOptions['tooltip']['trigger'] = 'axis';
+    // }
     this.chartOptions = {...this.chartOptions}
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['chartOptions']) {
-      if (this.chartOptions?.tooltip && this.chartOptions?.series?.[0]?.type === "scatter") {
-        this.chartOptions['tooltip']['trigger'] = 'item';
-      }
-      else if (this.chartOptions?.tooltip) {
-        this.chartOptions['tooltip']['trigger'] = 'axis';
-      }
+      // if (this.chartOptions?.tooltip && this.chartOptions?.series?.[0]?.type === "scatter") {
+      //   this.chartOptions['tooltip']['trigger'] = 'item';
+      // }
+      // else if (this.chartOptions?.tooltip) {
+      //   this.chartOptions['tooltip']['trigger'] = 'axis';
+      // }
       this.chartOptions = {...this.chartOptions}
     }
   }
@@ -40,6 +40,7 @@ export class VisualChartsComponent implements OnInit {
   public chartInstance: any;
   initChart(event) {
     this.chartInstance = event;
+    return;
     this.chartInstance.on('magictypechanged', (params) => {
       if (params?.currentType) {
         this.typeEmitter.emit({chartType: params?.currentType || 'line'});

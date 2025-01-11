@@ -1,0 +1,30 @@
+<div class="main-content">
+    <div class="row m-0 pr-2">
+      <div class="col-12">
+        <!-- Date Range Picker -->
+        <div class="col-4 d-flex justify-content-between align-items-center mb-3">
+          <label for="dateRangePicker">Date Range:</label>
+          <input 
+          placeholder="Select Date Range" 
+          [(ngModel)]="dateRange['dateRange']" 
+          [owlDateTime]="dt2"
+          [max]="maxDate" 
+          class="form-control d-inline-block" 
+          [owlDateTimeTrigger]="dt2" 
+          [selectMode]="'range'" 
+          (ngModelChange)="changeDashboardRange();">
+        <owl-date-time #dt2></owl-date-time>
+        </div>
+  
+        <!-- EChart Card -->
+        <div class="card device-param-chart">
+          <div class="card-header d-flex justify-content-between">
+            <h5>Chart Visualization</h5>
+          </div>
+          <div class="card-body" *ngIf="chartOptions">
+            <wt-visual-charts [chartOptions]="chartOptions"></wt-visual-charts>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,80 @@
+<div class="main-content">
+    <div class="page-inner">
+      <header class="page-title-bar">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item active">
+              <a routerLink="/user-profile"><i class="breadcrumb-icon fa fa-angle-left mr-2"></i>Overview</a>
+            </li>
+          </ol>
+        </nav>
+      </header>
+      <div class="page-section">
+        <div class="section-block">
+          <div class="board board-list">
+            <div class="tasks">
+              <div class="task-header">
+                <h1 class="task-title mr-auto">On Going Tasks<small class="badge">(6)</small></h1>
+                <select class="custom-select" style="width:160px">
+                  <option value="">Filter project</option>
+                  <option value="1">Looper Admin Theme</option>
+                  <option value="2">Smart Paper</option>
+                  <option value="3">Booking Up</option>
+                  <option value="4">Online Store</option>
+                </select>
+              </div>
+              <div class="task-body">
+                <div class="task-issue" *ngFor="let task of tasks">
+                  <div class="card">
+                    <div class="card-header">
+                      <h4 class="card-title">
+                        <a href="#">{{ task.title }}</a>
+                      </h4>
+                      <h6 class="card-subtitle text-muted">
+                        <span class="text-muted">{{ task.startTime }}</span> / <span class="text-muted">{{ task.endTime }}</span>
+                        <span class="mx-1">·</span>
+                        <span class="due-date"><i class="far fa-fw fa-clock"></i> {{ task.dueDate }}</span>
+                      </h6>
+                    </div>
+                    <div class="card-body">
+                      <div class="list-group">
+                        <div class="list-group-item">
+                          <div class="list-group-item-body py-1 text-truncate">
+                            <a href="#" class="tile tile-sm bg-{{ task.projectColor }} text-white" data-toggle="tooltip" title="" [attr.data-original-title]="task.projectName">
+                              {{ task.projectAbbreviation }}
+                            </a>
+                            <span class="text-muted mx-2"><i class="fas fa-long-arrow-alt-right"></i></span>
+                            <div class="avatar-group">
+                              <a *ngFor="let member of task.members" href="#" class="user-avatar user-avatar-sm" data-toggle="tooltip" title="" [attr.data-original-title]="member.name">
+                                <img [src]="member.avatar" [alt]="member.name">
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="list-group-item pt-0">
+                          <a href="#" class="stretched-link"></a>
+                          <div class="list-group-item-body">
+                            <div class="progress progress-xs">
+                              <div class="progress-bar bg-success" role="progressbar" [style.width.%]="task.progress" [attr.aria-valuenow]="task.progress" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                          </div>
+                          <div class="list-group-item-figure">
+                            <span class="todos">{{ task.completedTodos }}/{{ task.totalTodos }}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="card-footer">
+                      <a href="#" class="card-footer-item card-footer-item-bordered text-muted"><i class="oi oi-comment-square mr-1"></i> {{ task.comments }}</a>
+                      <a href="#" class="card-footer-item card-footer-item-bordered text-muted"><i class="fa fa-pause"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

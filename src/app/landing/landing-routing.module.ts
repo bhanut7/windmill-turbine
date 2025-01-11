@@ -2,17 +2,21 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../guards/auth.guard';
 import { LandingComponent } from './landing.component';
-import { OrganizationComponent } from './organization/organization.component';
+import { DevicesComponent } from './devices/devices.component';
+import { DeviceDashboardComponent } from './device-dashboard/device-dashboard.component';
+import { DeviceParamComponent } from './device-param/device-param.component';
 
 const routes: Routes = [
   {
     path: '', component: LandingComponent, children: [
-      { path: '', redirectTo: '', pathMatch: 'full' },
+      { path: '', redirectTo: 'devices', pathMatch: 'full' },
+      { path: 'devices', component: DevicesComponent, canActivate: [AuthGuard] },
+      { path: 'devices/:id', component: DeviceDashboardComponent, canActivate: [AuthGuard] },
+      { path: 'devices/:id/:param', component: DeviceParamComponent, canActivate: [AuthGuard] },
       {
         path: '',
         loadChildren: () => import('./main-dashboard/main-dashboard.module').then(m => m.MainDashboardModule),
       },
-      { path: 'organization', component: OrganizationComponent, canActivate: [AuthGuard] },
       // {
       //   path: 'projects',
       //   loadChildren: () => import('./project-management/project-management.module').then(m => m.ProjectManagementModule),

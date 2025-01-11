@@ -9,11 +9,18 @@ import { SimpleTableModule } from '../shared/simple-table/simple-table.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserInputValidatorModule } from '../utilities/user-input-validator/user-input-validator.module';
 import { AgGridModule } from 'ag-grid-angular';
+import { DevicesComponent } from './devices/devices.component';
+import { DeviceDashboardComponent } from './device-dashboard/device-dashboard.component';
+import { DeviceParamComponent } from './device-param/device-param.component';
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
   declarations: [
     LandingComponent,
     OrganizationComponent,
+    DevicesComponent,
+    DeviceDashboardComponent,
+    DeviceParamComponent,
   ],
   imports: [
     CommonModule,
@@ -23,7 +30,9 @@ import { AgGridModule } from 'ag-grid-angular';
     FormsModule,
     ReactiveFormsModule,
     UserInputValidatorModule,
-    AgGridModule
+    AgGridModule,
+    OwlDateTimeModule,
+    OwlNativeDateTimeModule,
   ],
   exports: [
     LandingComponent,
