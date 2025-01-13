@@ -40,7 +40,55 @@ export class Config {
       }
       public static PROJECTCONSTANTS: any = {
         
-      }
+      };
+      public static HEADERCOMPCONSTANTS = {
+        THEMES: {
+          "dark-blue": {
+            bgColor: "#001d6c",
+          },
+          // 'light': {
+          //   "bgColor":"#DFE1E6"
+          // },
+          "high-contrast-dark": {
+            bgColor: "#000000",
+          },
+        },
+        SUBMENUTHEMES: {
+          "dark-blue": {
+            bgColor: "#002d9c",
+          },
+          // 'light': {
+          //   "bgColor":'#f0f0f0'
+          // },
+          "high-contrast-dark": {
+            bgColor: "#000000",
+          },
+        },
+        projectThemes: [
+          {
+            theme: 'default-skin',
+            tableClass: 'ag-theme-alphine',
+            label: 'Default'
+          },
+          {
+            theme: 'flourish-theme',
+            tableClass: 'ag-theme-flourish',
+            label: 'Flourish'
+          },
+          {
+            theme: 'indigo-theme',
+            tableClass: 'ag-theme-indigo',
+            label: 'Indigo Blue'
+          }
+        ],
+        defaultTheme: {
+          theme: 'flourish-theme',
+          tableClass: 'ag-theme-flourish',
+          label: 'Flourish'
+        },
+        CLASSNAMES: ["app-header", "mini-sidebar-menu"],
+        SUBCLASSNAMES: ["text-white", "indication", "each-item"],
+      };
       public static ALERT_MESSAGES: any = {
         CONFIRM_ALART_MESSAGE: 'Are you sure do you want to cancel? Any changes made cannot be saved.'
       }

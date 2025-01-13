@@ -30,6 +30,7 @@ import { DatePickerModule } from './date-picker/date-picker.module';
 import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
+import { LeftSideBarComponent } from './left-side-bar/left-side-bar.component';
 // import { MonacoEditorKitModule } from './monaco-editor-kit/monaco-editor-kit.module';
 
 @NgModule({
@@ -43,7 +44,8 @@ import { ComingSoonComponent } from './coming-soon/coming-soon.component';
     AutoRefreshComponent,
     HeaderComponent,
     SidebarComponent,
-    ComingSoonComponent
+    ComingSoonComponent,
+    LeftSideBarComponent
   ],
   imports: [
     InfiniteScrollModule,
@@ -79,7 +81,8 @@ import { ComingSoonComponent } from './coming-soon/coming-soon.component';
     VisualChartsComponent,
     HeaderComponent,
     SidebarComponent,
-    ComingSoonComponent
+    ComingSoonComponent,
+    LeftSideBarComponent
   ],
   providers: [ToastrService, ToasterService, CommonPopupService,
     { provide: DateTimeAdapter, useClass: MomentDateTimeAdapter, deps: [OWL_DATE_TIME_LOCALE] },

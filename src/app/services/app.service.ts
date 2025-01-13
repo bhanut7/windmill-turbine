@@ -98,4 +98,9 @@ export class AppService {
     return this.postService(Config.API.LOGOUT_USER, data);
   }
 
+
+  //-----------------------------------Side Menu-------------------------//
+  getSidebarMenusList(data: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/sidebar.json');
+  }
 }

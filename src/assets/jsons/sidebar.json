@@ -1,0 +1,107 @@
+{
+    "status": "success",
+    "data": [
+        {
+            "key": "home",
+            "name": "Home",
+            "route": "/app/dashboard",
+            "icon": "fa fa-home",
+            "access_level": ["machine", "assistant"],
+            "queryParams": {
+                "settings_sidebar": "disable"
+            }
+        },
+        {
+            "name": "Device Management",
+            "key": "deviceManagement",
+            "access_level": ["machine", "assistant"],
+            "icon": "fa fa-cogs",
+            "children": [
+                {
+                    "name": "Devices",
+                    "key": "devices",
+                    "parent_key": "deviceManagement",
+                    "route": "/app/devices",
+                    "_route": "/app/devices",
+                    "folder": "base",
+                    "queryParams": {
+                        "settings_sidebar": "disable"
+                    }
+                },
+                {
+                    "name": "Device Groups",
+                    "key": "deviceGroups",
+                    "parent_key": "deviceManagement",
+                    "route": "javascript:void(0)",
+                    "_route": "javascript:void(0)",
+                    "folder": "base",
+                    "queryParams": {
+                        "settings_sidebar": "disable"
+                    }
+                },
+                {
+                    "name": "Tags",
+                    "key": "tags",
+                    "parent_key": "deviceManagement",
+                    "route": "javascript:void(0)",
+                    "_route": "javascript:void(0)",
+                    "folder": "base",
+                    "queryParams": {
+                        "settings_sidebar": "disable"
+                    }
+                },
+                {
+                    "name": "Parameters",
+                    "key": "parameters",
+                    "parent_key": "deviceManagement",
+                    "route": "javascript:void(0)",
+                    "_route": "javascript:void(0)",
+                    "folder": "base",
+                    "queryParams": {
+                        "settings_sidebar": "disable"
+                    }
+                }
+            ]
+        },
+        {
+            "name": "User Management",
+            "key": "userManagement",
+            "access_level": ["machine", "assistant"],
+            "icon": "fa fa-users",
+            "children": [
+                {
+                    "name": "Users",
+                    "key": "users",
+                    "parent_key": "userManagement",
+                    "route": "javascript:void(0)",
+                    "_route": "javascript:void(0)",
+                    "folder": "base",
+                    "queryParams": {
+                        "settings_sidebar": "disable"
+                    }
+                },
+                {
+                    "name": "User Roles",
+                    "key": "userRoles",
+                    "parent_key": "userManagement",
+                    "route": "javascript:void(0)",
+                    "_route": "javascript:void(0)",
+                    "folder": "base",
+                    "queryParams": {
+                        "settings_sidebar": "disable"
+                    }
+                }
+            ]
+        },
+        {
+            "key": "logs",
+            "name": "Logs",
+            "route": "javascript:void(0)",
+            "icon": "fa fa-history",
+            "access_level": ["machine", "assistant"],
+            "queryParams": {
+                "settings_sidebar": "disable"
+            }
+        }
+    ]
+}

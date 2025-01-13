@@ -72,16 +72,24 @@ aside, aside:hover {
     }
 
     .collapsible-sub-menu {
-      position: absolute;
-      top: 0;
-      left: 100%; // Ensure it starts outside the parent container
+      position: fixed;
+      top: 0rem;
+      left: 5rem;
       padding-left: 1rem;
+      // visibility: visible;  
+      // opacity: 1;
+      // transform: translateX(-4rem);
       visibility: hidden;
       opacity: 0;
       background-color: #fff; // Optional: set a background for the sub-menu
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); // Optional: add shadow for better visibility
       z-index: 9999; // Ensure it appears above other elements
       transition: all 0.3s ease;
+      &::hover {
+visibility: visible;  
+      opacity: 1;
+      transform: translateX(-4rem);
+      }
 
       ul {
         list-style: none;
