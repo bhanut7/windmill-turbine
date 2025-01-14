@@ -45,18 +45,18 @@ export class LandingComponent implements OnInit {
   constructor() { }
   
   ngOnInit(): void {
-    this.toggleSidebar();
+    // this.toggleSidebar();
   }
   
   toggleSidebar() {
     this.menuOpen = !this.menuOpen;
-    if (!this.menuOpen) {
-      document.body.classList.remove('sidebar-closed');
-      document.body.classList.add('sidebar-opened');
-    } else {
-      document.body.classList.remove('sidebar-opened');
-      document.body.classList.add('sidebar-closed');
-    }
+    // if (!this.menuOpen) {
+    //   document.body.classList.remove('sidebar-closed');
+    //   document.body.classList.add('sidebar-opened');
+    // } else {
+    //   document.body.classList.remove('sidebar-opened');
+    //   document.body.classList.add('sidebar-closed');
+    // }
     // this.updatePage();
   }
 

@@ -1,6 +1,6 @@
 // tslint:disable:component-selector ter-indent ter-arrow-parens align max-line-length no-this-assignment prefer-template no-increment-decrement no-inferrable-types
 
-import { Component, OnInit, HostListener, OnDestroy } from '@angular/core';
+import { Component, OnInit, HostListener, OnDestroy, Input, SimpleChanges } from '@angular/core';
 import { Router, NavigationStart } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -15,6 +15,7 @@ import { Config } from 'src/app/config/config';
   styleUrls: ['./left-side-bar.component.scss'],
 })
 export class LeftSideBarComponent implements OnInit, OnDestroy {
+  @Input() menuOpen: any = true;
   public destroy$: Subject<boolean> = new Subject<boolean>();
   public menusList: any = [];
   public sidebarOpened = true;
@@ -63,6 +64,12 @@ export class LeftSideBarComponent implements OnInit, OnDestroy {
       this.updateBodyClass();
     }, 100);
     // this.setTheme();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if(changes['menuOpen']) {
+      this.toggleSidebar();
+    }
   }
 
   hoveredOnElement(e,ind) {

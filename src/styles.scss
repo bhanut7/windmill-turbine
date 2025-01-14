@@ -29,23 +29,24 @@ $navbarHeight            : var(--navbarHeight);
 
 body {
    background-color: #e7e7e7;
+   overflow-x: hidden;
 }
 
 .main-content {
     padding-top: var(--headerHeight);
 }
 
-.sidebar-closed {
-    .main-content {
-        padding-left: var(--sidebarWidth);
-    }
-}
+// .sidebar-closed {
+//     .main-content {
+//         padding-left: var(--sidebarWidth);
+//     }
+// }
 
-.sidebar-opened {
-    .main-content {
-        padding-left: 15rem;
-    }
-}
+// .sidebar-opened {
+//     .main-content {
+//         padding-left: 15rem;
+//     }
+// }
 
 // scrollbar
 ::-webkit-scrollbar {
@@ -284,47 +285,32 @@ button, a, .fa {
   
       .breadcrumb-content,
       .main-content {
-        width : calc(100vw - #{$expSidebarWidth}) !important;
-        margin-left: $expSidebarWidth !important;
+        width : calc(100vw) !important;
+        padding-left: $expSidebarWidth !important;
       }
   
-      &.no-sidebar {
+      // &.no-sidebar {
   
-        .breadcrumb-content,
-        .main-content {
-          width : calc(100vw - #{$expSidebarWidth}) !important;
-          margin-left: $expSidebarWidth !important;
-        }
-      }
+      //   .breadcrumb-content,
+      //   .main-content {
+      //     width : calc(100vw) !important;
+      //     padding-left: $expSidebarWidth !important;
+      //   }
+      // }
     }
   
-    #Config_window.container {
-      left : calc(#{$expSidebarWidth} + 8px) !important;
-      width: calc(100vw - var(--expSidebarWidth) - 17px) !important;
-    }
+    // #Config_window.container {
+    //   left : calc(#{$expSidebarWidth} + 8px) !important;
+    //   width: calc(100vw - var(--expSidebarWidth) - 17px) !important;
+    // }
   
-    .data-explorer-layer {
-      width: calc(100vw - var(--expSidebarWidth)) !important;
-    }
+    // .data-explorer-layer {
+    //   width: calc(100vw - var(--expSidebarWidth)) !important;
+    // }
   
-    .data-explorer.generic-tabs {
-      margin-left: var(--expSidebarWidth);
-    }
-  
-    .widgetConfigPannel {
-      left: $expSidebarWidth !important;
-      width: calc(100vW - var(--expSidebarWidth)) !important;
-    }
-  
-    &.pin-sidebar {
-      .generic-tabs.hierarchy-views {
-        margin-left: calc(var(--expSidebarWidth) + var(--sidebarWidth));
-      }
-    }
-  
-    .draggable-sidebar-conf {
-      margin-left: var(--sidebarWidth );
-    }
+    // .data-explorer.generic-tabs {
+    //   margin-left: var(--expSidebarWidth);
+    // }
   
     .left-side-bar {
       width: var(--sidebarWidth) !important;
@@ -333,55 +319,32 @@ button, a, .fa {
     .sidebar-toggle {
       width: $expSidebarWidth !important;
     }
-  
-    &.pin-sidebar {
-  
-      .breadcrumb-content,
-      .main-content {
-        width : calc(100vw - #{$expSidebarWidth} - #{$sidebarWidth}) !important;
-        margin-left: calc(#{$expSidebarWidth} + #{$sidebarWidth}) !important;
-      }
-  
-      .draggable-sidebar-conf {
-        margin-left: var(--sidebarWidth );
-      }
-    }
   }
   
   .coll-left-sidebar {
-    .slide-custom-node-custome-node {
-      left: var(--colSidebarWidth) !important
-    }
-    #Config_window.container {
-      left: calc(#{$colSidebarWidth} + 8px) !important;
-      width: calc(100vw - var(--colSidebarWidth) - 17px) !important;
-    }
+    // .slide-custom-node-custome-node {
+    //   left: var(--colSidebarWidth) !important
+    // }
+    // #Config_window.container {
+    //   left: calc(#{$colSidebarWidth} + 8px) !important;
+    //   width: calc(100vw - var(--colSidebarWidth) - 17px) !important;
+    // }
   
-    .data-explorer-layer {
-      width: calc(100vw - var(--colSidebarWidth)) !important;
-  }
-    .data-explorer.generic-tabs {
-      margin-left: var(--colSidebarWidth);
-    }
+  //   .data-explorer-layer {
+  //     width: calc(100vw - var(--colSidebarWidth)) !important;
+  // }
+  //   .data-explorer.generic-tabs {
+  //     margin-left: var(--colSidebarWidth);
+  //   }
   
-    &.pin-sidebar {
-      .generic-tabs.hierarchy-views {
-        margin-left: calc(var(--colSidebarWidth) + var(--sidebarWidth));
-      }
-    }
+    // .widgetConfigPannel {
+    //   left: $colSidebarWidth !important;
+    //   width: calc(100vW - var(--colSidebarWidth)) !important;
+    // }
   
-    .widgetConfigPannel {
-      left: $colSidebarWidth !important;
-      width: calc(100vW - var(--colSidebarWidth)) !important;
-    }
-  
-    .sidebar-toggle {
-      width:  var(--leftSideBarWidth) !important;
-    }
-  
-    .draggable-sidebar-conf {
-      margin-left: var(--leftSideBarWidth) !important;
-    }
+    // .sidebar-toggle {
+    //   width:  var(--leftSideBarWidth) !important;
+    // }
   
     .left-side-bar {
       width: var(--leftSideBarWidth)!important;
@@ -463,8 +426,8 @@ button, a, .fa {
     .breadcrumb-content,
     .main-content,
     .toolbar-external-act {
-      width : calc(100vw - #{$colSidebarWidth}) !important;
-      margin-left: var(--leftSideBarWidth) !important;
+      width : calc(100vw) !important;
+      padding-left: var(--leftSideBarWidth) !important;
     }
   
     &.no-sidebar {
@@ -472,17 +435,8 @@ button, a, .fa {
       .breadcrumb-content,
       .main-content,
       .toolbar-external-act {
-        width : calc(100vw - #{$colSidebarWidth}) !important;
-        margin-left: var(--leftSideBarWidth) !important;
-      }
-    }
-  
-    &.pin-sidebar {
-  
-      .breadcrumb-content,
-      .main-content {
-        width : calc(100vw - #{$colSidebarWidth} - #{$sidebarWidth}) !important;
-        margin-left: calc(#{$colSidebarWidth} + #{$sidebarWidth}) !important;
+        width : calc(100vw) !important;
+        padding-left: var(--leftSideBarWidth) !important;
       }
     }
   }
@@ -575,17 +529,17 @@ button, a, .fa {
         }
       }
   
-      .sidebar-toggle {
-        position: fixed;
-        bottom: 0;
-        cursor: pointer;
-        width: $expSidebarWidth;
+      // .sidebar-toggle {
+      //   position: fixed;
+      //   bottom: 0;
+      //   cursor: pointer;
+      //   width: $expSidebarWidth;
   
-        .fa-angle-double-left,
-        .fa-angle-double-right {
-          font-size: 1rem !important;
-        }
-      }
+      //   .fa-angle-double-left,
+      //   .fa-angle-double-right {
+      //     font-size: 1rem !important;
+      //   }
+      // }
     }
   }
 
@@ -665,17 +619,17 @@ button, a, .fa {
             }
           }
     
-          .sidebar-toggle {
-            position: fixed;
-            bottom: 0;
-            cursor: pointer;
-            width: $expSidebarWidth;
+          // .sidebar-toggle {
+          //   position: fixed;
+          //   bottom: 0;
+          //   cursor: pointer;
+          //   width: $expSidebarWidth;
     
-            .fa-angle-double-left,
-            .fa-angle-double-right {
-              font-size: 1rem !important;
-            }
-          }
+          //   .fa-angle-double-left,
+          //   .fa-angle-double-right {
+          //     font-size: 1rem !important;
+          //   }
+          // }
         }
     
       }
@@ -756,17 +710,17 @@ button, a, .fa {
             }
           }
     
-          .sidebar-toggle {
-            position: fixed;
-            bottom: 0;
-            cursor: pointer;
-            width: $expSidebarWidth;
+          // .sidebar-toggle {
+          //   position: fixed;
+          //   bottom: 0;
+          //   cursor: pointer;
+          //   width: $expSidebarWidth;
     
-            .fa-angle-double-left,
-            .fa-angle-double-right {
-              font-size: 1rem !important;
-            }
-          }
+          //   .fa-angle-double-left,
+          //   .fa-angle-double-right {
+          //     font-size: 1rem !important;
+          //   }
+          // }
         }
     
         kl-dahs-dashboard-overview,
@@ -882,17 +836,17 @@ button, a, .fa {
           }
         }
   
-        .sidebar-toggle {
-          position: fixed;
-          bottom: 0;
-          cursor: pointer;
-          width: $expSidebarWidth;
+        // .sidebar-toggle {
+        //   position: fixed;
+        //   bottom: 0;
+        //   cursor: pointer;
+        //   width: $expSidebarWidth;
   
-          .fa-angle-double-left,
-          .fa-angle-double-right {
-            font-size: 1rem !important;
-          }
-        }
+        //   .fa-angle-double-left,
+        //   .fa-angle-double-right {
+        //     font-size: 1rem !important;
+        //   }
+        // }
       }
     }
   }

@@ -11,8 +11,8 @@
           [class.active-item]="eachItem.route && router.url.includes(eachItem.route)" [class.parentMenuStyle]="eachItem?.children?.length && eachItem.expanded && sidebarOpened"
           [ngbTooltip]="!eachItem?.children?.length && !sidebarOpened ? eachItem.name : null" placement="right" >
           <div class="side-menu-item d-flex justify-content-center" [ngClass]="{'sidebar-opened':sidebarOpened}" (mouseover)="hoveredOnElement($event,ind)" >
-            <div class="side-menu-icons">
-              <span class="item-icon {{eachItem.icon}}" style="height: 20px;"></span>
+            <div class="side-menu-icons" style="padding-top: 0.125rem !important">
+              <span class="item-icon {{eachItem.icon}}" style="height: 18px; font-size: 1.25rem;"></span>
               <!-- <img height="20px" src="assets/images/sidebar-icons/{{eachItem.icon}}.svg" alt="" class="item-icon"> -->
             </div>
             <div class="item-label" title="{{eachItem?.name}}">{{eachItem.name}}</div>
@@ -34,13 +34,13 @@
           <div class="expand-sidebar" [ngbTooltip]="sidebarOpened ? null : 'Expand'">
             <div class="bar-icon" style="cursor:pointer; text-align:center" *ngIf="!sidebarOpened else sidebarCollapsed">            
               <span class="material-icons md-36 bar-icon-leftbar" style="cursor:pointer; text-align:center" height="16px" width="16px"
-                placement="right"  (click)="toggleSidebar()">menu</span>
+                placement="right"  (click)="toggleSidebar()">keyboard_double_arrow_right</span>
             </div>           
             <ng-template #sidebarCollapsed>         
               <span *ngIf="sidebarOpened" class="material-icons md-36 close-icon-leftbar"
                 [ngbTooltip]="sidebarOpened ? 'Collapse' : null" style="cursor:pointer; float:right"
-                height="16px" width="16px" placement="right"  (click)="toggleSidebar()">menu</span>            
-              <span *ngIf="sidebarOpened" class="item-label nav-menu-label">Collapse Menu</span>            
+                height="16px" width="16px" placement="right" (click)="toggleSidebar()">keyboard_double_arrow_left</span>            
+              <span *ngIf="sidebarOpened" class="item-label nav-menu-label" style="cursor:pointer" (click)="toggleSidebar()">Collapse Menu</span>            
             </ng-template>
           </div>
         </div>
@@ -54,7 +54,7 @@
        [ngClass]="{'selected-background-class': selectedItem?.key === eachItem?.key}"
           [class.active-item]="eachItem.route && router.url.includes(eachItem.route)" [class.parentMenuStyle]="eachItem?.children?.length && eachItem.expanded && sidebarOpened">
           <div class="side-menu-item child-menu">
-            <span *ngIf="eachItem?.icon" style="height: 18px;" class="item-icon {{eachItem.icon}}"></span>
+            <span *ngIf="eachItem?.icon" style="height: 18px; font-size: 1.25rem;" class="item-icon {{eachItem.icon}}"></span>
             <!-- <img *ngIf="eachItem?.icon" height="18px" src="assets/images/sidebar-icons/{{eachItem.icon}}.svg" alt="" class="item-icon"> -->
             <span class="item-label child-label" title="{{eachItem.name}}">{{eachItem.name}}</span>
             <div class="float-right" *ngIf="eachItem?.children?.length && sidebarOpened">

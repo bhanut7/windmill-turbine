@@ -35,12 +35,6 @@
   }
 }
 
-
-
-
-
-
-
 .dropdown-submenu {
   position: relative;
 }
@@ -139,7 +133,7 @@
 
 .nav-menu-label {
   font-family:'Roboto-Black',Arial, Helvetica, sans-serif !important;
-  font-weight: 900;
+  font-weight: bold;
   font-size: 14px;
   padding: 0px 12px 0px 9px;
 }
@@ -147,6 +141,8 @@
 .child-label {
   margin-left: 30px !important;
 }
-
+.left-side-bar {
+  transition: width 0.3s ease-in-out;
+}
 
 
