@@ -1,0 +1,98 @@
+<div class="main-content">
+  <div class="page-inner">
+    <!-- Loader -->
+    <div *ngIf="loader">
+      <div id="loader-wrapper-submaincontent">
+        <div class="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add New Tag Card -->
+    <div class="card add-tag-card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="title-container">
+          <i class="fa fa-plus-circle tag-icon"></i>
+          <h5 class="card-title mx-1">Add a New Tag</h5>
+        </div>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="tagForm">
+          <div class="form-group mb-0 d-flex justify-content-between">
+            <label for="tag_name" class="form-label">Tag Name</label>
+            <div class="input-group">
+                <input
+                  type="text"
+                  id="tag_name"
+                  formControlName="tag_name"
+                  class="form-control"
+                  placeholder="Enter tag name"
+                />
+            </div>
+          </div>
+          <div *ngIf="tagForm.get('tag_name')?.invalid && tagForm.get('tag_name')?.touched" class="error-message text-danger">
+            Tag name is required.
+          </div>
+          <div class="form-actions">
+            <button
+              type="button"
+              class="btn btn-primary"
+              [disabled]="tagForm.invalid"
+              (click)="createTag()"
+            >
+              Create Tag
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <!-- Tags Table Card -->
+    <div class="card mt-4">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="title-container">
+          <i class="fa fa-tag tag-icon"></i>
+          <h5 class="card-title mx-1">Tags</h5>
+        </div>
+        <div class="actions">
+          <div class="search-container py-0">
+            <i class="fa fa-search search-icon"></i>
+            <input
+              type="text"
+              class="form-control search-input"
+              placeholder="Search..."
+              (input)="onSearch($event)"
+            />
+          </div>
+          <button
+            class="btn btn-danger remove-btn"
+            [disabled]="!selectedRows.length"
+            (click)="deleteTags()"
+          >
+            <i class="fa fa-trash"></i> Remove
+          </button>
+        </div>
+      </div>
+
+      <div class="card-body">
+        <ag-grid-angular
+          style="width: 100%; height: 500px;"
+          class="ag-theme-alpine"
+          [rowData]="rowData"
+          [columnDefs]="columnDefs"
+          rowSelection="multiple"
+          (selectionChanged)="onSelectionChanged($event)"
+          [pagination]="true"
+          [domLayout]="'autoHeight'"
+          [defaultColDef]="{ sortable: true, filter: true, flex: 1 }"
+          (gridReady)="onGridReady($event)"
+        >
+        </ag-grid-angular>
+      </div>
+    </div>
+  </div>
+</div>

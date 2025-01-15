@@ -43,8 +43,7 @@
                     "name": "Tags",
                     "key": "tags",
                     "parent_key": "deviceManagement",
-                    "route": "javascript:void(0)",
-                    "_route": "javascript:void(0)",
+                    "route": "/app/tags",
                     "folder": "base",
                     "queryParams": {
                         "settings_sidebar": "disable"
@@ -54,8 +53,7 @@
                     "name": "Parameters",
                     "key": "parameters",
                     "parent_key": "deviceManagement",
-                    "route": "javascript:void(0)",
-                    "_route": "javascript:void(0)",
+                    "route": "/app/parameters",
                     "folder": "base",
                     "queryParams": {
                         "settings_sidebar": "disable"

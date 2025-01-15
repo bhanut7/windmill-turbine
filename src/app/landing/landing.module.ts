@@ -13,6 +13,8 @@ import { DevicesComponent } from './devices/devices.component';
 import { DeviceDashboardComponent } from './device-dashboard/device-dashboard.component';
 import { DeviceParamComponent } from './device-param/device-param.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { ParametersComponent } from './parameters/parameters.component';
+import { TagsComponent } from './tags/tags.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +23,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
     DevicesComponent,
     DeviceDashboardComponent,
     DeviceParamComponent,
+    ParametersComponent,
+    TagsComponent,
   ],
   imports: [
     CommonModule,

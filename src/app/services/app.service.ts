@@ -103,4 +103,18 @@ export class AppService {
   getSidebarMenusList(data: any): Observable<any> {
     return this._httplayer.get('assets/jsons/sidebar.json');
   }
+
+  //------------------------------------Tags--------------------------------//
+  fetchTags(): Observable<any> {
+    return this._httplayer.get('assets/jsons/tags.json');
+  }
+
+  createTag(payload: any): Observable<any> {
+    return this._httplayer.post('assets/jsons/create_tag.json', payload);
+  }
+
+  deleteTags(payload: any): Observable<any> {
+    return this._httplayer.post('assets/jsons/delete_tags.json', payload);
+  }
+  
 }
