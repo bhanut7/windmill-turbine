@@ -7,12 +7,14 @@ import { DeviceDashboardComponent } from './device-dashboard/device-dashboard.co
 import { DeviceParamComponent } from './device-param/device-param.component';
 import { TagsComponent } from './tags/tags.component';
 import { ParametersComponent } from './parameters/parameters.component';
+import { DeviceGroupsComponent } from './device-groups/device-groups.component';
 
 const routes: Routes = [
   {
     path: '', component: LandingComponent, children: [
       { path: '', redirectTo: 'devices', pathMatch: 'full' },
       { path: 'devices', component: DevicesComponent, canActivate: [AuthGuard] },
+      { path: 'device-groups', component: DeviceGroupsComponent, canActivate: [AuthGuard] },
       { path: 'tags', component: TagsComponent, canActivate: [AuthGuard] },
       { path: 'parameters', component: ParametersComponent, canActivate: [AuthGuard] },
       { path: 'devices/:id', component: DeviceDashboardComponent, canActivate: [AuthGuard] },
@@ -21,6 +23,10 @@ const routes: Routes = [
         path: '',
         loadChildren: () => import('./main-dashboard/main-dashboard.module').then(m => m.MainDashboardModule),
       },
+      {
+        path: 'user-mt',
+        loadChildren: () => import('./user-management/user-management.module').then(m => m.UserManagementModule)
+      }
       // {
       //   path: 'projects',
       //   loadChildren: () => import('./project-management/project-management.module').then(m => m.ProjectManagementModule),

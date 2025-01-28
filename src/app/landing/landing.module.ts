@@ -15,6 +15,7 @@ import { DeviceParamComponent } from './device-param/device-param.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { ParametersComponent } from './parameters/parameters.component';
 import { TagsComponent } from './tags/tags.component';
+import { DeviceGroupsComponent } from './device-groups/device-groups.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { TagsComponent } from './tags/tags.component';
     DeviceParamComponent,
     ParametersComponent,
     TagsComponent,
+    DeviceGroupsComponent,
   ],
   imports: [
     CommonModule,

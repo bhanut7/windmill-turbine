@@ -13,11 +13,11 @@
     </div>
 
     <!-- Add New Tag Card -->
-    <div class="card add-tag-card">
+    <div class="card mb-0 add-tag-card">
       <div class="card-header d-flex justify-content-between align-items-center">
         <div class="title-container">
           <i class="fa fa-plus-circle tag-icon"></i>
-          <h5 class="card-title mx-1">Add a New Tag</h5>
+          <h4 class="card-title mx-1">Add a New Tag</h4>
         </div>
       </div>
       <div class="card-body">
@@ -30,12 +30,12 @@
                   id="tag_name"
                   formControlName="tag_name"
                   class="form-control"
-                  placeholder="Enter tag name"
+                  placeholder="Enter Tag Name"
                 />
             </div>
           </div>
           <div *ngIf="tagForm.get('tag_name')?.invalid && tagForm.get('tag_name')?.touched" class="error-message text-danger">
-            Tag name is required.
+            Tag Name is required.
           </div>
           <div class="form-actions">
             <button
@@ -52,11 +52,11 @@
     </div>
 
     <!-- Tags Table Card -->
-    <div class="card mt-4">
+    <div class="card mt-3 mb-0">
       <div class="card-header d-flex justify-content-between align-items-center">
         <div class="title-container">
           <i class="fa fa-tag tag-icon"></i>
-          <h5 class="card-title mx-1">Tags</h5>
+          <h4 class="card-title mx-1">Tags</h4>
         </div>
         <div class="actions">
           <div class="search-container py-0">
@@ -80,7 +80,7 @@
 
       <div class="card-body">
         <ag-grid-angular
-          style="width: 100%; height: 500px;"
+          style="width: 100%;"
           class="ag-theme-alpine"
           [rowData]="rowData"
           [columnDefs]="columnDefs"

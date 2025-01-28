@@ -110,11 +110,61 @@ export class AppService {
   }
 
   createTag(payload: any): Observable<any> {
-    return this._httplayer.post('assets/jsons/create_tag.json', payload);
+    return this._httplayer.get('assets/jsons/create_tag.json', payload);
   }
 
   deleteTags(payload: any): Observable<any> {
-    return this._httplayer.post('assets/jsons/delete_tags.json', payload);
+    return this._httplayer.get('assets/jsons/delete_tags.json', payload);
+  }
+
+  //-------------------------------Parameters--------------------------------//
+  fetchParameters(): Observable<any> {
+    return this._httplayer.get('assets/jsons/parameters.json');
+  }
+
+  createParameter(payload: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/create_parameter.json', payload);
+  }
+
+  deleteParameters(payload: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/delete_parameters.json', payload);
+  }
+
+  // ----------------------------User Role Component-------------------------//
+  fetchUserAccessPermissions(): Observable<any> {
+    return this._httplayer.get('assets/jsons/fetch_user_access_permissions.json');
+  }
+
+  fetchUserRole(payload: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/fetch_user_role.json', payload);
+  }
+
+  saveUserRole(payload: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/save_user_role.json', payload);
+  }
+  // ----------------------------User Component-------------------------//
+  fetchUser(payload: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/fetch_user.json', payload);
+  }
+
+  saveUser(payload: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/save_user.json', payload);
   }
   
+   // -----------------User Related Table Component---------------------//
+  getUserDetails(payload: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/get_user_details.json', payload);
+  }
+
+  getUserRoleDetails(payload: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/get_user_role_details.json', payload);
+  }
+
+  deleteUser(payload: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/delete_user.json', payload);
+  }
+
+  deleteUserRole(payload: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/delete_user_role.json', payload);
+  }
 }

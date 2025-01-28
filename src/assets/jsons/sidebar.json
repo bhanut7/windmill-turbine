@@ -32,12 +32,8 @@
                     "name": "Device Groups",
                     "key": "deviceGroups",
                     "parent_key": "deviceManagement",
-                    "route": "javascript:void(0)",
-                    "_route": "javascript:void(0)",
-                    "folder": "base",
-                    "queryParams": {
-                        "settings_sidebar": "disable"
-                    }
+                    "route": "/app/device-groups",
+                    "folder": "base"
                 },
                 {
                     "name": "Tags",
@@ -71,23 +67,14 @@
                     "name": "Users",
                     "key": "users",
                     "parent_key": "userManagement",
-                    "route": "javascript:void(0)",
-                    "_route": "javascript:void(0)",
-                    "folder": "base",
-                    "queryParams": {
-                        "settings_sidebar": "disable"
-                    }
+                    "route": "app/user-mt/user-table/users"
                 },
                 {
                     "name": "User Roles",
                     "key": "userRoles",
                     "parent_key": "userManagement",
-                    "route": "javascript:void(0)",
-                    "_route": "javascript:void(0)",
-                    "folder": "base",
-                    "queryParams": {
-                        "settings_sidebar": "disable"
-                    }
+                    "route": "app/user-mt/user-table/user-roles",
+                    "folder": "base"
                 }
             ]
         },

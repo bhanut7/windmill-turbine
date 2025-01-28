@@ -31,8 +31,15 @@ import { HeaderComponent } from './header/header.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ComingSoonComponent } from './coming-soon/coming-soon.component';
 import { LeftSideBarComponent } from './left-side-bar/left-side-bar.component';
-// import { MonacoEditorKitModule } from './monaco-editor-kit/monaco-editor-kit.module';
-
+import { AgGridTableComponent } from './ag-grid-table/ag-grid-table.component';
+import { BtnCellRendererComponent } from './btn-cell-renderer/btn-cell-renderer.component';
+import { InputfieldRendererComponent } from './inputfield-renderer/inputfield-renderer.component';
+import { SelectRendererComponent } from './select-renderer/select-renderer.component';
+import { SwitchInputBtnCellRendererComponent } from './switch-input-btn-cell-renderer/switch-input-btn-cell-renderer.component';
+import { ModuleRegistry } from '@ag-grid-community/core';
+import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
+import { InfiniteRowModelModule } from '@ag-grid-community/infinite-row-model';
+import { AgGridModule } from '@ag-grid-community/angular';
 @NgModule({
   declarations: [
     CommonPopupComponent,
@@ -45,7 +52,12 @@ import { LeftSideBarComponent } from './left-side-bar/left-side-bar.component';
     HeaderComponent,
     SidebarComponent,
     ComingSoonComponent,
-    LeftSideBarComponent
+    LeftSideBarComponent,
+    AgGridTableComponent,
+    BtnCellRendererComponent,
+    InputfieldRendererComponent,
+    SelectRendererComponent,
+    SwitchInputBtnCellRendererComponent,
   ],
   imports: [
     InfiniteScrollModule,
@@ -73,7 +85,8 @@ import { LeftSideBarComponent } from './left-side-bar/left-side-bar.component';
     }),
     PopoverModule.forRoot(),
     SimpleTableModule,
-    DatePickerModule
+    DatePickerModule,
+    AgGridModule
   ],
   exports: [
     CommonPopupComponent,
@@ -82,7 +95,8 @@ import { LeftSideBarComponent } from './left-side-bar/left-side-bar.component';
     HeaderComponent,
     SidebarComponent,
     ComingSoonComponent,
-    LeftSideBarComponent
+    LeftSideBarComponent,
+    AgGridTableComponent
   ],
   providers: [ToastrService, ToasterService, CommonPopupService,
     { provide: DateTimeAdapter, useClass: MomentDateTimeAdapter, deps: [OWL_DATE_TIME_LOCALE] },
@@ -102,5 +116,10 @@ import { LeftSideBarComponent } from './left-side-bar/left-side-bar.component';
 })
 export class SharedModule {
   constructor() {
+    const modules = [
+      ClientSideRowModelModule,
+      InfiniteRowModelModule
+    ];
+    ModuleRegistry.registerModules(modules);
   }
 }
