@@ -9,6 +9,7 @@ import { TagsComponent } from './tags/tags.component';
 import { ParametersComponent } from './parameters/parameters.component';
 import { DeviceGroupsComponent } from './device-groups/device-groups.component';
 import { AssetsComponent } from './assets/assets.component';
+import { LogsComponent } from './logs/logs.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,7 @@ const routes: Routes = [
       { path: 'parameters', component: ParametersComponent, canActivate: [AuthGuard] },
       { path: 'devices/:id/assets/:assetId', component: DeviceDashboardComponent, canActivate: [AuthGuard] },
       { path: 'devices/:id/assets/:assetId/:param', component: DeviceParamComponent, canActivate: [AuthGuard] },
+      { path: 'logs', component: LogsComponent, canActivate: [AuthGuard] },
       {
         path: '',
         loadChildren: () => import('./main-dashboard/main-dashboard.module').then(m => m.MainDashboardModule),

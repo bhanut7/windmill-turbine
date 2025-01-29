@@ -18,6 +18,7 @@ import { TagsComponent } from './tags/tags.component';
 import { DeviceGroupsComponent } from './device-groups/device-groups.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AssetsComponent } from './assets/assets.component';
+import { LogsComponent } from './logs/logs.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { AssetsComponent } from './assets/assets.component';
     TagsComponent,
     DeviceGroupsComponent,
     AssetsComponent,
+    LogsComponent,
   ],
   imports: [
     CommonModule,

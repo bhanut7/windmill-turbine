@@ -81,7 +81,7 @@
         {
             "key": "logs",
             "name": "Logs",
-            "route": "javascript:void(0)",
+            "route": "/app/logs",
             "icon": "fa fa-history",
             "access_level": ["machine", "assistant"],
             "queryParams": {
