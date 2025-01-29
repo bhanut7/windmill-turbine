@@ -157,7 +157,8 @@ export class AppService {
   }
 
   getUserRoleDetails(payload: any): Observable<any> {
-    return this._httplayer.get('assets/jsons/get_user_role_details.json', payload);
+    // return this._httplayer.get('assets/jsons/get_user_role_details.json', payload);
+    return this._httplayer.get('assets/jsons/aggrid-ref.json', payload);
   }
 
   deleteUser(payload: any): Observable<any> {

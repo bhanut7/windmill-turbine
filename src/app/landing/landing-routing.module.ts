@@ -8,17 +8,19 @@ import { DeviceParamComponent } from './device-param/device-param.component';
 import { TagsComponent } from './tags/tags.component';
 import { ParametersComponent } from './parameters/parameters.component';
 import { DeviceGroupsComponent } from './device-groups/device-groups.component';
+import { AssetsComponent } from './assets/assets.component';
 
 const routes: Routes = [
   {
     path: '', component: LandingComponent, children: [
       { path: '', redirectTo: 'devices', pathMatch: 'full' },
       { path: 'devices', component: DevicesComponent, canActivate: [AuthGuard] },
+      { path: 'devices/:id/assets', component: AssetsComponent, canActivate: [AuthGuard] },
       { path: 'device-groups', component: DeviceGroupsComponent, canActivate: [AuthGuard] },
       { path: 'tags', component: TagsComponent, canActivate: [AuthGuard] },
       { path: 'parameters', component: ParametersComponent, canActivate: [AuthGuard] },
-      { path: 'devices/:id', component: DeviceDashboardComponent, canActivate: [AuthGuard] },
-      { path: 'devices/:id/:param', component: DeviceParamComponent, canActivate: [AuthGuard] },
+      { path: 'devices/:id/assets/:assetId', component: DeviceDashboardComponent, canActivate: [AuthGuard] },
+      { path: 'devices/:id/assets/:assetId/:param', component: DeviceParamComponent, canActivate: [AuthGuard] },
       {
         path: '',
         loadChildren: () => import('./main-dashboard/main-dashboard.module').then(m => m.MainDashboardModule),

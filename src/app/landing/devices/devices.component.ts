@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'wt-devices',
@@ -6,62 +7,86 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./devices.component.scss']
 })
 export class DevicesComponent implements OnInit {
-  public filterOptions: any = [
-    { value: '', label: 'Filter project' },
-    { value: '1', label: 'Looper Admin Theme' },
-    { value: '2', label: 'Smart Paper' },
-    { value: '3', label: 'Booking Up' },
-    { value: '4', label: 'Online Store' }
-  ];
 
-  public tasks: any = [
-    {
-      title: 'Make lemonade from scratch',
-      startTime: '16:36',
-      endTime: '24:00',
-      dueDate: 'Apr 02',
-      project: 'Smart Paper',
-      progress: 66.67,
-      todos: '4/6',
-      comments: 12,
-      members: [
-        { name: 'Johnny Day', avatar: 'assets/images/avatars/uifaces2.jpg' },
-        { name: 'Sarah Bishop', avatar: 'assets/images/avatars/uifaces3.jpg' },
-        { name: 'Craig Hansen', avatar: 'assets/images/avatars/uifaces5.jpg' }
+  public loader: any = false;
+  public agGridOptions: any = {
+    "title": "Devices",
+    "defaultColDef": {
+      "flex": 1,
+      "resizable": false,
+      "sortable": true,
+      "filter": true
+    },
+    "pagination": true,
+    "clickableColumns": ["device_name"],
+    "columnDefs": [
+      {
+        "headerName": "Device Name",
+        "field": "device_name",
+        "action": {
+          action: 'view',
+          type: 'view',
+        }
+      },
+      {
+        "headerName": "Device Count",
+        "field": "environments_count"
+      },
+      {
+        "headerName": "Group Type",
+        "field": "group_type"
+      }
+    ],
+    "rowData": [
+      {
+        "device_id": "device_01",
+        "device_name": "Windmill 1",
+        "environments_count": "5",
+        "group_type": "Static"
+      },
+      {
+        "device_id": "device_02",
+        "device_name": "Windmill 2",
+        "environments_count": "5",
+        "group_type": "Static"
+      },
+    ],
+    "tableActions": {
+      "actions": [
+        {
+          "label": "Edit",
+          "action": "edit",
+          "type": "edit",
+          "icon-class": "edit"
+        },
+        {
+          "label": "Delete",
+          "action": "delete",
+          "type": "delete",
+          "icon-class": "delete"
+        }
+      ],
+      "externalActions": [
+        {
+          "label": "Create New",
+          "action": "addnew",
+          "type": "addnew",
+          "icon-class": "fa fa-plus mr-2"
+        }
       ]
     },
-    {
-      title: 'Mix up a pitcher of sangria',
-      startTime: '03:36',
-      endTime: '04:00',
-      dueDate: 'In 3 days',
-      project: 'Looper Admin Theme',
-      progress: 0,
-      todos: '0/0',
-      comments: 0,
-      members: [
-        { name: 'Johnny Day', avatar: 'assets/images/avatars/uifaces2.jpg' }
-      ]
-    },
-    {
-      title: 'Ride a roller coaster',
-      startTime: '50:02',
-      endTime: '48:00',
-      dueDate: 'Tomorrow',
-      project: 'Online Store',
-      progress: 90.48,
-      todos: '19/21',
-      comments: 36,
-      members: [
-        { name: 'Johnny Day', avatar: 'assets/images/avatars/uifaces2.jpg' },
-        { name: 'Sarah Bishop', avatar: 'assets/images/avatars/uifaces3.jpg' }
-      ]
-    }
-    // Add more tasks as required
-  ];
-  constructor() { }
+    "enableActions": true
+  }
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  aggridEmitter(event) {
+    if (event?.action?.action === 'view') {
+      this.router.navigate(['/app/devices/1/assets']);
+    }
   }
 
 }

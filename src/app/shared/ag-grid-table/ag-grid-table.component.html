@@ -43,7 +43,7 @@
         [gridOptions]="agGridOptions" (gridReady)="onGridReady($event)" [rowModelType]="rowModelType" [overlayLoadingTemplate]="overlayLoadingTemplate"
         [overlayNoRowsTemplate]="overlayNoRowsTemplate" (firstDataRendered)="onFirstDataRendered($event)"
         (cellClicked)="onCellClicked($event)" (modelUpdated)="onModelUpdated()" [cacheBlockSize]="1000000"
-        [pagination]="agGridOptions?.pagination"
+        [pagination]="agGridOptions?.pagination" [rowSelection]="agGridOptions?.rowSelection"
         (cellMouseOver)="onCellMouseOver($event)" (cellMouseOut)="onCellMouseOut($event)">
     </ag-grid-angular>
     </div>

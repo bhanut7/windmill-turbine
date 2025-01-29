@@ -16,6 +16,8 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { ParametersComponent } from './parameters/parameters.component';
 import { TagsComponent } from './tags/tags.component';
 import { DeviceGroupsComponent } from './device-groups/device-groups.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { AssetsComponent } from './assets/assets.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { DeviceGroupsComponent } from './device-groups/device-groups.component';
     ParametersComponent,
     TagsComponent,
     DeviceGroupsComponent,
+    AssetsComponent,
   ],
   imports: [
     CommonModule,
@@ -39,6 +42,7 @@ import { DeviceGroupsComponent } from './device-groups/device-groups.component';
     AgGridModule,
     OwlDateTimeModule,
     OwlNativeDateTimeModule,
+    NgSelectModule
   ],
   exports: [
     LandingComponent,

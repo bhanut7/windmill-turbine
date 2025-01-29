@@ -3,6 +3,7 @@
     "message": "",
     "data": {
       "title": "User Roles",
+      "rowSelection": "multiple",
       "defaultColDef": {
         "flex": 1,
         "resizable": false,

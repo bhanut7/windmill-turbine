@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'wt-device-dashboard',
@@ -75,9 +76,17 @@ export class DeviceDashboardComponent implements OnInit {
     return options;
   }
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  openAssetAnalysis(analysisId: any) {
+    try {
+      this.router.navigate(['/app/devices/1/assets/1/1']);
+    } catch (analysisErr) {
+      console.error(analysisErr)
+    }
   }
 
 }

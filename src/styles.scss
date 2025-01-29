@@ -36,6 +36,10 @@ body {
    overflow-x: hidden;
 }
 
+.cursor-pointer {
+    cursor: pointer;
+}
+
 .main-content {
     padding-top: var(--navbarHeight);
 }
