@@ -1,0 +1,13 @@
+.accordion-btn {
+    min-width: 100%;
+    text-align: left;
+}
+.asset-info-border {
+    &:first-child {
+        border-top: var(--bs-card-border-width) solid var(--bs-card-border-color);
+        border-bottom: var(--bs-card-border-width) solid var(--bs-card-border-color)
+    }
+}
+.fault-status-title {
+    font-weight: bold;
+}

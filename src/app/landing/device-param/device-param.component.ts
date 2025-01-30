@@ -7,6 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeviceParamComponent implements OnInit {
 
+  public meta: any = {
+    deviceName: 'Windmill 1',
+    assetName: 'Bearing 1',
+    assetInformation: [
+      { "label": "Site", "value": "Hamburg" },
+      { "label": "Location", "value": "" },
+      { "label": "Line", "value": "Sector 32" },
+      { "label": "Make", "value": "SKF" },
+      { "label": "Equipment", "value": "Windmill" },
+      { "label": "Model", "value": "2307 EKTN9" },
+      { "label": "Asset", "value": "Bearing 1" },
+      { "label": "Downtime cost", "value": "€ 30.000" }
+    ]
+  };
   public dateRange: any = [];
   public maxDate: any = new Date();
   defaultStartDate: Date = this.dateRange.start;

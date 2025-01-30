@@ -1,6 +1,72 @@
 <div class="main-content">
   <div class="page-inner">
-  <div class="" *ngIf="!loader">
+    <div class="card mb-0 add-tag-card">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="title-container">
+          <i class="fa fa-plus-circle tag-icon"></i>
+          <h5 class="card-title mx-1">Add a New Device</h5>
+        </div>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="deviceForm">
+          <div class="form-group mb-0 d-flex justify-content-between">
+            <label for="device_name" class="form-label">Device Name</label>
+            <div class="input-group">
+                <input
+                  type="text"
+                  id="device_name"
+                  formControlName="device_name"
+                  [(ngModel)]="deviceData['device_name']"
+                  class="form-control"
+                  placeholder="Enter Device Name"
+                />
+            </div>
+          </div>
+          <div *ngIf="deviceForm.get('device_name')?.invalid && deviceForm.get('device_name')?.touched" class="error-message text-danger">
+            Device Name is required.
+          </div>
+          <div class="form-group mt-2 mb-0 d-flex justify-content-between">
+            <label for="device_type" class="form-label">Device Type</label>
+            <div class="input-group">
+              <select class="custom-select" style="width: 160px;" formControlName="device_type"
+              [(ngModel)]="deviceData['device_type']">
+              <option *ngFor="let option of dropdownData.types" [value]="option.value">
+                {{ option.label }}
+              </option>
+            </select>
+            </div>
+          </div>
+          <div *ngIf="deviceForm.get('device_type')?.invalid && deviceForm.get('device_type')?.touched" class="error-message text-danger">
+            Device Type is required.
+          </div>
+          <div class="form-group mt-2 mb-0 d-flex justify-content-between">
+            <label for="device_group_name" class="form-label">Device Group Name</label>
+            <div class="input-group">
+              <select class="custom-select" style="width: 160px;" formControlName="device_group_name"
+              [(ngModel)]="deviceData['device_group_name']">
+              <option *ngFor="let option of dropdownData.device_groups" [value]="option.device_group_id">
+                {{ option.device_group_name }}
+              </option>
+            </select>
+            </div>
+          </div>
+          <div *ngIf="deviceForm.get('device_group_name')?.invalid && deviceForm.get('device_group_name')?.touched" class="error-message text-danger">
+            Device Group Name is required.
+          </div>
+          <div class="form-actions">
+            <button
+              type="button"
+              class="btn btn-primary"
+              [disabled]="deviceForm.invalid"
+              (click)="createDevice()"
+            >
+              Create Device
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  <div class="mt-3 mb-0" *ngIf="!loader">
       <wt-ag-grid-table [agGridOptions]="agGridOptions" [clickableColumns]="agGridOptions?.clickableColumns || []" (aggridEmitter)="aggridEmitter($event)"  ></wt-ag-grid-table>
   </div>
   <ng-container *ngIf="loader">

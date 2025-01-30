@@ -7,7 +7,33 @@ import { Router } from '@angular/router';
   styleUrls: ['./device-dashboard.component.scss']
 })
 export class DeviceDashboardComponent implements OnInit {
-  public tasks: any = Array.from({ length: 10 }).map((_, index) => ({
+  public meta: any = {
+    deviceName: 'Windmill 1',
+    assetName: 'Bearing 1',
+    assetInformation: [
+      { "label": "Site", "value": "Hamburg" },
+      { "label": "Location", "value": "" },
+      { "label": "Line", "value": "Sector 32" },
+      { "label": "Make", "value": "SKF" },
+      { "label": "Equipment", "value": "Windmill" },
+      { "label": "Model", "value": "2307 EKTN9" },
+      { "label": "Asset", "value": "Bearing 1" },
+      { "label": "Downtime cost", "value": "€ 30.000" }
+    ],
+    faultStatus: {
+      title: 'Fault Status'
+    },
+    conditions: {
+      title: 'Condition and RUL',
+      conditionRul: [
+        { "label": "Overall Health", "value": "Outer Race with severe defect", "status": "danger"},
+        { "label": "Remaining Useful Life", "value": "21 days of operations" },
+        { "label": "Alert", "value": "Anomaly detected on 17-01-2025" }
+      ]
+      
+    }
+  }
+  public tasks: any = Array.from({ length: 4 }).map((_, index) => ({
     deadline: `07 Aug 20${18 + index}`,
     projectInitials: `P${index + 1}`,
     progress: Math.floor(Math.random() * 100),
@@ -19,12 +45,11 @@ export class DeviceDashboardComponent implements OnInit {
   getOptions(progress, name) {
     const options = {
       tooltip: {
-        formatter: '{a} <br/>{b} : {c}%'
+        formatter: '{b} : {c}%'
       },
       type: 'gauge',
       series: [
         {
-          name: name,
           type: 'gauge',
           progress: {
             show: true
@@ -66,8 +91,7 @@ export class DeviceDashboardComponent implements OnInit {
           },
           data: [
             {
-              value: progress,
-              name: name
+              value: progress
             }
           ]
         }
