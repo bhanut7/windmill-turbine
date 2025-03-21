@@ -2,7 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { AppService } from '../../services/app.service';
+import { AppService } from '../../../services/app.service';
 
 @Component({
   selector: 'wt-parameters',

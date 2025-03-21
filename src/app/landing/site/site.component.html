@@ -1,0 +1,19 @@
+<div class="main-content">
+    <div class="page-inner">
+    <div class="" *ngIf="!loader?.table">
+        <wt-ag-grid-table [agGridOptions]="agGridOptions" [clickableColumns]="agGridOptions?.clickableColumns || []" (aggridEmitter)="aggridEmitter($event)"  ></wt-ag-grid-table>
+    </div>
+    <ng-container *ngIf="loader?.table">
+        <div>
+            <div id="loader-wrapper-submaincontent">
+                <div class="lds-ring">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    </div>
+</div>

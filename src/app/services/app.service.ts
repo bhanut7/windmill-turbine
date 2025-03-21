@@ -152,11 +152,11 @@ export class AppService {
   }
   
    // -----------------User Related Table Component---------------------//
-  getUserDetails(payload: any): Observable<any> {
+  getUserDetails(payload?: any): Observable<any> {
     return this._httplayer.get('assets/jsons/get_user_details.json', payload);
   }
 
-  getUserRoleDetails(payload: any): Observable<any> {
+  getUserRoleDetails(payload?: any): Observable<any> {
     // return this._httplayer.get('assets/jsons/get_user_role_details.json', payload);
     return this._httplayer.get('assets/jsons/aggrid-ref.json', payload);
   }
@@ -167,5 +167,16 @@ export class AppService {
 
   deleteUserRole(payload: any): Observable<any> {
     return this._httplayer.get('assets/jsons/delete_user_role.json', payload);
+  }
+
+  // Hierarchy
+  getSites(payload?: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/sites.json', payload);
+  }
+  getLines(payload?: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/lines.json', payload);
+  }
+  getEquipments(payload?: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/equipments.json', payload);
   }
 }

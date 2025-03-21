@@ -161,7 +161,6 @@ export class UserTablesComponent implements OnInit {
 
   aggridEmitter(event: any) {
     try {
-      console.log(event);
       if (!event || !event?.action?.type || !this.selectedView) {
         return;
       }

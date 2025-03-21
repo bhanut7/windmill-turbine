@@ -1,0 +1,85 @@
+<div class="main-content">
+    <div class="page-inner">
+        <div>
+            <select class="custom-select" style="width: 160px;" [(ngModel)]="filteredData['site_id']"
+                (change)="onFilterChange()">
+                <option *ngFor="let option of dropdownData.sites" [value]="option.site_id">
+                  {{ option.site_name }}
+                </option>
+              </select>
+              <select class="custom-select" style="width: 160px;" [(ngModel)]="filteredData['line_id']"
+                (change)="onFilterChange()">
+                <option *ngFor="let option of dropdownData.lines" [value]="option.line_id">
+                  {{ option.line_name }}
+                </option>
+              </select>
+        </div>
+        <div class="card mb-0 add-tag-card">
+            <div class="card-header d-flex justify-content-between align-items-center">
+              <div class="title-container">
+                <i class="fa fa-plus-circle tag-icon"></i>
+                <h5 class="card-title mx-1">Add a New Equipment</h5>
+              </div>
+            </div>
+            <div class="card-body">
+              <form [formGroup]="equipmentForm">
+                <div class="form-group mb-2 d-flex justify-content-between">
+                  <label for="equipment_name" class="form-label">Equipment Name</label>
+                  <div class="input-group ml-2">
+                      <input
+                        type="text"
+                        id="equipment_name"
+                        formControlName="equipment_name"
+                        [(ngModel)]="equipmentData['equipment_name']"
+                        class="form-control"
+                        placeholder="Enter Equipment Name"
+                      />
+                  </div>
+                </div>
+                <div *ngIf="equipmentForm.get('equipment_name')?.invalid && equipmentForm.get('equipment_name')?.touched" class="error-message text-danger">
+                  Equipment Name is required.
+                </div>
+                <div class="form-group mb-0 d-flex justify-content-between">
+                    <label for="description" class="form-label">Description</label>
+                    <div class="input-group ml-2">
+                        <textarea
+                          type="text"
+                          id="description"
+                          formControlName="description"
+                          class="form-control"
+                          placeholder="Enter Description"></textarea>
+                    </div>
+                  </div>
+                  <div *ngIf="equipmentForm.get('description')?.invalid && equipmentForm.get('description')?.touched" class="error-message text-danger">
+                   Description is required.
+                  </div>
+                <div class="form-actions">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    [disabled]="equipmentForm.invalid"
+                    (click)="createEquipment()"
+                  >
+                    Create Equipment
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+    <div class="" *ngIf="!loader?.table">
+        <wt-ag-grid-table [agGridOptions]="agGridOptions" [clickableColumns]="agGridOptions?.clickableColumns || []" (aggridEmitter)="aggridEmitter($event)"  ></wt-ag-grid-table>
+    </div>
+    <ng-container *ngIf="loader?.table">
+        <div>
+            <div id="loader-wrapper-submaincontent">
+                <div class="lds-ring">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    </div>
+</div>

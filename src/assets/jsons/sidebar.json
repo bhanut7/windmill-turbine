@@ -12,10 +12,68 @@
             }
         },
         {
+            "name": "Hierarchy",
+            "key": "hierarchy",
+            "access_level": ["machine", "assistant"],
+            "icon": "fa fa-sitemap",
+            "children": [
+                {
+                    "name": "Sites",
+                    "key": "site",
+                    "parent_key": "hierarchy",
+                    "route": "/app/sites",
+                    "folder": "base",
+                    "queryParams": {
+                        "settings_sidebar": "disable"
+                    }
+                },
+                {
+                    "name": "Lines",
+                    "key": "line",
+                    "parent_key": "hierarchy",
+                    "route": "/app/lines",
+                    "folder": "base",
+                    "queryParams": {
+                        "settings_sidebar": "disable"
+                    }
+                },
+                {
+                    "name": "Equipments",
+                    "key": "equipment",
+                    "parent_key": "hierarchy",
+                    "route": "/app/equipments",
+                    "folder": "base",
+                    "queryParams": {
+                        "settings_sidebar": "disable"
+                    }
+                },
+                {
+                    "name": "Assets",
+                    "key": "asset",
+                    "parent_key": "hierarchy",
+                    "route": "/app/assets",
+                    "folder": "base",
+                    "queryParams": {
+                        "settings_sidebar": "disable"
+                    }
+                },
+                {
+                    "name": "Parameters",
+                    "key": "parameters",
+                    "parent_key": "hierarchy",
+                    "route": "/app/parameters",
+                    "folder": "base",
+                    "queryParams": {
+                        "settings_sidebar": "disable"
+                    }
+                }
+            ]
+        },
+        {
             "name": "Device Management",
             "key": "deviceManagement",
             "access_level": ["machine", "assistant"],
-            "icon": "fa fa-cogs",
+            "icon": "fa fa-microchip",
             "children": [
                 {
                     "name": "Devices",
@@ -40,16 +98,6 @@
                     "key": "tags",
                     "parent_key": "deviceManagement",
                     "route": "/app/tags",
-                    "folder": "base",
-                    "queryParams": {
-                        "settings_sidebar": "disable"
-                    }
-                },
-                {
-                    "name": "Parameters",
-                    "key": "parameters",
-                    "parent_key": "deviceManagement",
-                    "route": "/app/parameters",
                     "folder": "base",
                     "queryParams": {
                         "settings_sidebar": "disable"
@@ -82,7 +130,7 @@
             "key": "logs",
             "name": "Logs",
             "route": "/app/logs",
-            "icon": "fa fa-history",
+            "icon": "fa fa-file-text-o",
             "access_level": ["machine", "assistant"],
             "queryParams": {
                 "settings_sidebar": "disable"

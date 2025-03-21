@@ -277,7 +277,8 @@ export class LeftSideBarComponent implements OnInit, OnDestroy {
     if (eachItem.route) {
       this.selectedItem = eachItem;
       this.getParentItem(eachItem,this.menusList, eachItem.key)
-      this.router.navigate([eachItem.route], eachItem.queryParams ? { queryParams: eachItem.queryParams } : undefined);
+      this.router.navigate([eachItem.route]);
+      // this.router.navigate([eachItem.route], eachItem.queryParams ? { queryParams: eachItem.queryParams } : undefined);
       this.collapseMenuItems(menusList);
       if (window.innerWidth > 992) {
         sideMenu[0].setAttribute('style', 'display:block;');

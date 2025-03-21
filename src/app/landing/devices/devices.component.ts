@@ -19,7 +19,6 @@ export class DevicesComponent implements OnInit {
       "filter": true
     },
     "pagination": true,
-    "clickableColumns": ["device_name"],
     "columnDefs": [
       {
         "headerName": "Name",

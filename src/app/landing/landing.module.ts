@@ -13,12 +13,15 @@ import { DevicesComponent } from './devices/devices.component';
 import { DeviceDashboardComponent } from './device-dashboard/device-dashboard.component';
 import { DeviceParamComponent } from './device-param/device-param.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
-import { ParametersComponent } from './parameters/parameters.component';
-import { TagsComponent } from './tags/tags.component';
-import { DeviceGroupsComponent } from './device-groups/device-groups.component';
+import { ParametersComponent } from './site/parameters/parameters.component';
+import { TagsComponent } from './devices/tags/tags.component';
+import { DeviceGroupsComponent } from './devices/device-groups/device-groups.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { AssetsComponent } from './assets/assets.component';
+import { AssetsComponent } from './site/assets/assets.component';
 import { LogsComponent } from './logs/logs.component';
+import { SiteComponent } from './site/site.component';
+import { LineComponent } from './site/line/line.component';
+import { EquipmentComponent } from './site/equipment/equipment.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { LogsComponent } from './logs/logs.component';
     DeviceGroupsComponent,
     AssetsComponent,
     LogsComponent,
+    SiteComponent,
+    LineComponent,
+    EquipmentComponent,
   ],
   imports: [
     CommonModule,
