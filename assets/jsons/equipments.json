@@ -40,15 +40,9 @@
       "rowData": [
         {
           "equipment_id": "equipment_0",
-          "equipment_name": "Laptop 1",
-          "description": "Three assets it consists.",
+          "equipment_name": "Fan",
+          "description": "Two or more assets it consists.",
           "created_on": "31 Oct 2024"
-        },
-        {
-            "equipment_id": "equipment_0",
-            "equipment_name": "Laptop 2",
-            "description": "Two or more assets it consists.",
-            "created_on": "31 Oct 2024"
         }
       ],
       "tableActions": {

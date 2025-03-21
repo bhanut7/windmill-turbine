@@ -40,14 +40,14 @@
       "rowData": [
         {
           "site_id": "site_0",
-          "site_name": "Banglore",
-          "description": "Three lines it consists.",
+          "site_name": "Hamburg",
+          "description": "HVAC plant with fan.",
           "created_on": "31 Oct 2024"
         },
         {
-            "site_id": "site_0",
-            "site_name": "Chennai",
-            "description": "Two or more lines it consists.",
+            "site_id": "site_1",
+            "site_name": "Rostock",
+            "description": "HVAC plant with fan.",
             "created_on": "31 Oct 2024"
         }
       ],

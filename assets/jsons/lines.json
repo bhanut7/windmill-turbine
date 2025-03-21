@@ -40,13 +40,13 @@
       "rowData": [
         {
           "line_id": "line_0",
-          "line_name": "Electronic city Office",
+          "line_name": "Server cooling room",
           "description": "Three equipments it may consists.",
           "created_on": "31 Oct 2024"
         },
         {
-            "line_id": "line_q",
-            "line_name": "White Field Office",
+            "line_id": "line_1",
+            "line_name": "Chiller room",
             "description": "one or more qquipments it consists.",
             "created_on": "31 Oct 2024"
         }
