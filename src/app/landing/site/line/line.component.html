@@ -1,5 +1,13 @@
 <div class="main-content">
     <div class="page-inner">
+        <div class="mb-2">
+            <select class="custom-select" style="width: 160px;" [(ngModel)]="filteredData['site_id']"
+                (change)="onFilterChange()">
+                <option *ngFor="let option of dropdownData.sites" [value]="option.site_id">
+                  {{ option.site_name }}
+                </option>
+              </select>
+        </div>
     <div class="" *ngIf="!loader?.table">
         <wt-ag-grid-table [agGridOptions]="agGridOptions" [clickableColumns]="agGridOptions?.clickableColumns || []" (aggridEmitter)="aggridEmitter($event)"  ></wt-ag-grid-table>
     </div>

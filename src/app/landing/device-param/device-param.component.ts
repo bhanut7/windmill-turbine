@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { AppService } from 'src/app/services/app.service';
+import { ToasterService } from 'src/app/shared/toastr/toaster.service';
 
 @Component({
   selector: 'wt-device-param',
@@ -26,7 +30,27 @@ export class DeviceParamComponent implements OnInit {
   defaultStartDate: Date = this.dateRange.start;
   defaultEndDate: Date = this.dateRange.end;
 
-  public chartOptions: any;
+  public chartOptions1: any;
+  public chartOptions2: any;
+  public chartOptions3: any;
+  public chartOptions4: any;
+  public titles: any = {
+    chart1: null,
+    chart2: null,
+    chart3: null,
+    chart4: null,
+  }
+  public loader: any = {
+    chart1: false,
+    chart2: false,
+    chart3: false,
+    chart4: false,
+  }
+  public destroy$: Subject<boolean> = new Subject<boolean>();
+  
+  constructor(private appservice: AppService, private toaster: ToasterService) {
+
+  }
 
   ngOnInit(): void {
     this.initializeChart();
@@ -41,41 +65,49 @@ export class DeviceParamComponent implements OnInit {
   }
 
   initializeChart(): void {
-    this.chartOptions = {
-      tooltip: {
-        trigger: 'axis'
-      },
-      "toolbox": {
-          "show": true,
-          "feature": {
-              // "dataView": {
-              //     "readOnly": false
-              // },
-              "magicType": {
-                  "type": [
-                      "line",
-                      "bar"
-                  ]
-              },
-              "saveAsImage": {}
-          }
-      },
-      xAxis: {
-        type: 'category',
-        data: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
-      },
-      yAxis: {
-        type: 'value'
-      },
-      series: [
-        {
-          name: 'Data',
-          type: 'bar',
-          data: [120, 200, 150, 80, 70, 110, 130],
-          barWidth: '25%'
-        }
-      ]
-    };
+    this.loadData(1);
+    this.loadData(2);
+    this.loadData(3);
+    this.loadData(4);
   }
+
+
+    loadData(chartno: any) {
+        try {
+          this.loader['chart'+chartno] = true;
+          this.appservice.getDeviceParamChartData({chNo: chartno}).pipe(takeUntil(this.destroy$)).subscribe(respData => {
+            if (respData && respData['status'] === 'success') {
+              this.titles['chart'+chartno] = respData?.title || 'Chart Visualization';
+              let tempChartOpt: any = respData?.data || {};
+              if (tempChartOpt?.xAxis?.axisLabel?.formatter) {
+                tempChartOpt.xAxis.axisLabel.formatter = eval(tempChartOpt.xAxis.axisLabel.formatter);
+              }
+              if (tempChartOpt?.yAxis?.axisLabel?.formatter) {
+                tempChartOpt.yAxis.axisLabel.formatter = eval(tempChartOpt.yAxis.axisLabel.formatter);
+              }
+              if (tempChartOpt?.series?.[0]?.data?.length) {
+                tempChartOpt.series[0].data = respData.data.series[0].data.map((y, index) => [(index / (respData?.data.series[0].data.length/10)), y])
+              }
+              this['chartOptions'+chartno] = tempChartOpt;
+              this.loader['chart'+chartno] = false;
+            } else {
+              this.loader['chart'+chartno] = false;
+              this.toaster.toast('error', 'Error', respData['message'] || 'Error while fetching data.');
+            }
+          }, (error) => {
+            this.loader['chart'+chartno] = false;
+            this.toaster.toast('error', 'Error', 'Error while fetching data.');
+            console.error(error);
+          });
+        } catch (table_error) {
+          this.loader['chart'+chartno] = false;
+          console.error(table_error)
+        }
+      }
+
+      ngOnDestroy(): void {
+        this.destroy$.next();
+        this.destroy$.complete();
+      }
 
 }

@@ -1,20 +1,20 @@
 <div class="main-content">
     <div class="page-inner">
-        <div>
+        <div class="mb-2">
             <select class="custom-select" style="width: 160px;" [(ngModel)]="filteredData['site_id']"
                 (change)="onFilterChange()">
                 <option *ngFor="let option of dropdownData.sites" [value]="option.site_id">
                   {{ option.site_name }}
                 </option>
               </select>
-              <select class="custom-select" style="width: 160px;" [(ngModel)]="filteredData['line_id']"
+              <select class="custom-select ml-2" style="width: 160px;" [(ngModel)]="filteredData['line_id']"
                 (change)="onFilterChange()">
                 <option *ngFor="let option of dropdownData.lines" [value]="option.line_id">
                   {{ option.line_name }}
                 </option>
               </select>
         </div>
-        <div class="card mb-0 add-tag-card">
+        <div class="card mb-2 add-tag-card">
             <div class="card-header d-flex justify-content-between align-items-center">
               <div class="title-container">
                 <i class="fa fa-plus-circle tag-icon"></i>

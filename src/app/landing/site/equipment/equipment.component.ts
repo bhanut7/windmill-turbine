@@ -25,14 +25,14 @@ export class EquipmentComponent implements OnInit {
     public destroy$: Subject<boolean> = new Subject<boolean>();
     public dropdownData: any = {
       sites: [
-        { site_id: '', site_name: 'Site' },
-        { site_id: 'offline', site_name: 'Offline' },
-        { site_id: 'online', site_name: 'Online' }
+        { site_id: '', site_name: 'Select Site' },
+        { site_id: 'site_0', site_name: 'Hamburg' },
+        { site_id: 'site_1', site_name: 'Rostock' }
       ],
       lines: [
-        { line_id: '', line_name: 'Line' },
-        { line_id: 'offline', line_name: 'Offline' },
-        { line_id: 'online', line_name: 'Online' }
+        { line_id: '', line_name: 'Select Line' },
+        { line_id: 'line_0', line_name: 'Server cooling room' },
+        { line_id: 'line_1', line_name: 'Chiller room' },
       ],
     };
     public filteredData: any = {

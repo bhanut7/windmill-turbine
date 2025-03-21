@@ -17,7 +17,17 @@ export class LineComponent implements OnInit {
     delete: false,
   };
   public agGridOptions : any ;
-    public destroy$: Subject<boolean> = new Subject<boolean>();
+  public destroy$: Subject<boolean> = new Subject<boolean>();
+  public dropdownData: any = {
+    sites: [
+      { site_id: '', site_name: 'Select Site' },
+      { site_id: 'site_0', site_name: 'Hamburg' },
+      { site_id: 'site_1', site_name: 'Rostock' }
+    ]
+  };
+  public filteredData: any = {
+    site_id: '',
+  };
 
   constructor(private appservice: AppService, private toaster: ToasterService, private router: Router) { }
 
@@ -95,5 +105,7 @@ export class LineComponent implements OnInit {
         console.error(aggridErr);
       }
     }
+
+    onFilterChange() {}
 
 }

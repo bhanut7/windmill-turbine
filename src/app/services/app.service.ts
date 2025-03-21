@@ -179,4 +179,9 @@ export class AppService {
   getEquipments(payload?: any): Observable<any> {
     return this._httplayer.get('assets/jsons/equipments.json', payload);
   }
+
+  // Device Param Components
+  getDeviceParamChartData(payload?: any): Observable<any> {
+    return this._httplayer.get(`assets/jsons/device-param-chart${payload['chNo']}.json`, payload);
+  }
 }

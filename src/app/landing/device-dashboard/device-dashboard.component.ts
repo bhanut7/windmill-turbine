@@ -32,13 +32,14 @@ export class DeviceDashboardComponent implements OnInit {
       ]
       
     }
-  }
-  public tasks: any = Array.from({ length: 4 }).map((_, index) => ({
+  };
+  public parameterNames: any = ['Temperature (°c)', 'RPM (hz)', 'Acceleration (m/s²)' ];
+  public tasks: any = Array.from({ length: 3 }).map((_, index) => ({
     deadline: `07 Aug 20${18 + index}`,
     projectInitials: `P${index + 1}`,
     progress: Math.floor(Math.random() * 100),
     lastUpdate: `${Math.floor(Math.random() * 10)}d`,
-    name: `Parameter ${Math.floor(Math.random() * 10)}`,
+    name: this.parameterNames[index],
     options: this.getOptions(Math.floor(Math.random() * 100), `Parameter ${Math.floor(Math.random() * 10)}`)
   }));
 
