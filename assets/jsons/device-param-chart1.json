@@ -18,11 +18,24 @@
             }
         },
         "xAxis": {
-          "type": "category"
-        },
-        "yAxis": {
-          "type": "value"
-        },
+          "type": "value",
+          "min": 0,
+          "max": 10,
+          "name": "Time (s)",
+          "axisLabel": {
+              "formatter": "(value) => value.toFixed(2)"
+          },
+          "axisLine": {
+            "onZero": false
+          }
+      },
+      "yAxis": {
+        "type": "value",
+        "name": "Amplitude (m)",
+        "axisLabel": {
+            "formatter": "(value) => value.toFixed(2)"
+        }
+    },
         "dataZoom": [{
             "type": "inside"
           }],
@@ -30,6 +43,10 @@
             {
             "name": "Data",
             "type": "line",
+            "showSymbol": false,
+            "itemStyle": {
+              "color": "#28a745"
+            },
             "data": [
                 1214.433670,
                 -1484.558710,

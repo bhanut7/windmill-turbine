@@ -2,35 +2,52 @@
     "status": "success",
     "title": "Major Defect",
     "data": {
-        "tooltip": {
-          "trigger": "axis"
+      "tooltip": {
+        "trigger": "axis"
+      },
+      "toolbox": {
+          "show": true,
+          "feature": {
+              "magicType": {
+                  "type": [
+                      "bar",
+                      "line"
+                  ]
+              },
+              "saveAsImage": {}
+          }
+      },
+      "xAxis": {
+        "type": "value",
+        "min": 0,
+        "max": 10,
+        "name": "Time (s)",
+        "axisLabel": {
+            "formatter": "(value) => value.toFixed(2)"
         },
-        "toolbox": {
-            "show": true,
-            "feature": {
-                "magicType": {
-                    "type": [
-                        "line",
-                        "bar"
-                    ]
-                },
-                "saveAsImage": {}
-            }
-        },
-        "xAxis": {
-          "type": "category"
-        },
-        "yAxis": {
-          "type": "value"
-        },
-        "dataZoom": [{
-            "type": "inside"
-          }],
-        "series": [
-            {
-            "name": "Data",
-            "type": "line",
-            "data": [
+        "axisLine": {
+          "onZero": false
+        }
+    },
+    "yAxis": {
+      "type": "value",
+      "name": "Amplitude (m)",
+      "axisLabel": {
+          "formatter": "(value) => value.toFixed(2)"
+      }
+  },
+      "dataZoom": [{
+          "type": "inside"
+        }],
+      "series": [
+          {
+          "name": "Data",
+          "type": "line",
+          "showSymbol": false,
+          "itemStyle": {
+            "color": "#ff0000"
+          },
+          "data": [
                 970.858343,
                 3450.620118,
                 1142.217697,
