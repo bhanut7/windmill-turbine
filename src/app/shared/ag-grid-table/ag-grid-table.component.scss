@@ -40,7 +40,13 @@
             background-color: #4e73df;
             border: none;
             font-size: 0.75rem;
-            padding: 0.3rem 0.75rem;
+            padding: 0.25rem 0.75rem;
+            height: 22px;
+            border-radius: 0.25rem;
+            border-bottom-right-radius: 0rem;
+            border-top-left-radius: 0rem;
+            display: flex;
+            align-items: center;
 
             &:disabled {
                 background-color: #d1d3e2;
@@ -53,39 +59,6 @@
             align-items: center;
             gap: 0.75rem;
     
-            .search-container {
-                display: flex;
-                align-items: center;
-                border: 1px solid #ced4da;
-                border-radius: 0.25rem;
-                padding: 0.2rem 0.4rem;
-                background-color: #ffffff;
-                transition: border-color 0.2s, box-shadow 0.2s;
-    
-                .search-icon {
-                    color: #6c757d;
-                    font-size: 0.875rem;
-                    margin-right: 0.3rem;
-                }
-    
-                .search-input {
-                    border: none;
-                    outline: none;
-                    width: 120px;
-                    font-size: 0.875rem;
-                    color: #495057;
-    
-                    &:focus {
-                        outline: none;
-                    }
-                }
-    
-                &:focus-within {
-                    border-color: #00c2ff;
-                    box-shadow: 0 0 4px #00c2ff;
-                }
-            }
-    
             .remove-btn {
                 font-size: 0.75rem;
                 display: flex;
@@ -94,9 +67,13 @@
                 padding: 0.25rem 0.5rem;
                 background-color: #ff6f61;
                 border-color: #ff6f61;
+                height: 22px;
+                border-radius: 0.25rem;
+                border-bottom-right-radius: 0rem;
+                border-top-left-radius: 0rem;
     
                 i {
-                    font-size: 0.875rem;
+                    font-size: 0.75rem;
                 }
     
                 &:hover {
@@ -114,3 +91,34 @@
         }
     }
 }
+
+.search-input-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 280px;
+  
+    .search-icon {
+      position: absolute;
+      top: 50%;
+      left: 0.75rem;
+      transform: translateY(-50%);
+      color: #6c757d;
+      font-size: 0.6rem;
+    }
+  
+    .search-input {
+        padding-left: 1.75rem;
+        border-radius: 0.5rem;
+        height: 22px;
+        font-size: 0.75rem;
+        border: 1px solid #dee2e6;
+        box-shadow: none;
+  
+      &:focus {
+        outline: none;
+        box-shadow: 0 0 0 0.2rem rgba(31, 99, 175, 0.25);
+      }
+    }
+  }
+  

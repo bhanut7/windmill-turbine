@@ -17,3 +17,150 @@
     </ng-container>
     </div>
 </div>
+
+<!-- Trigger Button -->
+<button type="button" id="siteModalBtn" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#siteModal">
+    Add/Edit Site
+  </button>
+  
+<div class="modal fade" id="siteModal" tabindex="-1" aria-labelledby="siteModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" *ngIf="siteForm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="siteModalLabel">Site Configuration</h5>
+          <button type="button" id="closeSiteBtn" class="btn-close" (click)="closeSiteModal()" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="siteForm">
+            <div class="modal-body">
+                  <!-- General Information Section -->
+                  <h6 class="section-title p-0">General Information</h6>
+                  <div class="col-md-12 row m-0 px-0">
+              
+                    <div class="form-group col-4 pl-0 m-0">
+                      <label for="site_name" class="required">Site Name</label>
+                      <input wtUserInputValidator
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="siteData['site_name']"
+                        formControlName="site_name"
+                        name="siteName"
+                        placeholder="Enter Site Name"
+                        [ngClass]="{ 'is-invalid': f['site_name'].dirty && f['site_name']['errors'] }"
+                      />
+                      <div *ngIf="f['site_name']['errors'] && f['site_name'].dirty" class="invalid-feedback pt-1">
+                        <span *ngIf="f['site_name']['errors']['required']">
+                          Site Name is required.
+                        </span>
+                      </div>
+                    </div>
+              
+                    <div class="form-group col-4 pl-0 m-0">
+                      <label for="description">Description</label>
+                      <textarea wtUserInputValidator
+                        class="form-control"
+                        [(ngModel)]="siteData['description']"
+                        formControlName="description"
+                        name="description"
+                        placeholder="Enter Description"
+                      ></textarea>
+                    </div>
+              
+                    <div class="form-group col-4 pl-0 m-0">
+                      <label for="longitude">Longitude</label>
+                      <input wtUserInputValidator
+                        type="number"
+                        name="longitude"
+                        class="form-control"
+                        [(ngModel)]="siteData['longitude']"
+                        formControlName="longitude"
+                        placeholder="Enter Longitude"
+                      />
+                    </div>
+              
+                    <div class="form-group col-4 pl-0 m-0">
+                      <label for="lattitude">Lattitude</label>
+                      <input wtUserInputValidator
+                        type="number"
+                        name="lattitude"
+                        class="form-control"
+                        [(ngModel)]="siteData['lattitude']"
+                        formControlName="lattitude"
+                        placeholder="Enter Lattitude"
+                      />
+                    </div>
+                  </div>
+              
+                  <!-- Address Information Section -->
+                  <h6 class="section-title p-0 mt-3">Address Information</h6>
+                  <div class="col-md-12 row m-0 px-0">
+              
+                    <div class="form-group col-4 pl-0 m-0">
+                      <label for="address">Address</label>
+                      <input wtUserInputValidator
+                        type="text"
+                        name="address"
+                        class="form-control"
+                        [(ngModel)]="siteData['address']"
+                        formControlName="address"
+                        placeholder="Enter Address"
+                      />
+                    </div>
+              
+                    <div class="form-group col-4 pl-0 m-0">
+                      <label for="city">City</label>
+                      <input wtUserInputValidator
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="siteData['city']"
+                        formControlName="city"
+                        name="city"
+                        placeholder="Enter City"
+                      />
+                    </div>
+              
+                    <div class="form-group col-4 pl-0 m-0">
+                      <label for="state">State</label>
+                      <input wtUserInputValidator
+                        type="text"
+                        name="state"
+                        class="form-control"
+                        [(ngModel)]="siteData['state']"
+                        formControlName="state"
+                        placeholder="Enter State"
+                      />
+                    </div>
+              
+                    <div class="form-group col-4 pl-0 m-0">
+                      <label for="country">Country</label>
+                      <input wtUserInputValidator
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="siteData['country']"
+                        formControlName="country"
+                        name="country"
+                        placeholder="Enter Country"
+                      />
+                    </div>
+              
+                    <div class="form-group col-4 pl-0 m-0">
+                      <label for="pincode">Pincode</label>
+                      <input wtUserInputValidator
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="siteData['pincode']"
+                        formControlName="pincode"
+                        name="pincode"
+                        placeholder="Enter Pincode"
+                      />
+                    </div>
+                  </div>
+              </div>
+              
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary m-0" (click)="configureSite()">Save</button>
+              <button type="button" class="btn btn-dark m-0" (click)="openModal('closeSiteBtn')">Close</button>
+            </div>
+          </form>          
+      </div>
+    </div>
+  </div>

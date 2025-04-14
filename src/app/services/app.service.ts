@@ -173,6 +173,11 @@ export class AppService {
   getSites(payload?: any): Observable<any> {
     return this._httplayer.get('assets/jsons/sites.json', payload);
   }
+
+  deleteSite(payload: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/delete_user.json', payload);
+  }
+
   getLines(payload?: any): Observable<any> {
     return this._httplayer.get('assets/jsons/lines.json', payload);
   }

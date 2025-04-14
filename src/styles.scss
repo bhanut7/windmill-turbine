@@ -5,6 +5,7 @@
 @import "./assets/styles/left-side-bar.scss";
 @import "./assets/styles/loader.scss";
 @import "./assets/styles/button.scss";
+@import "./assets/styles/modal.scss";
 @import "./assets/styles/card.scss";
 //============== External file imports ==============//
 
@@ -48,6 +49,13 @@ body {
     padding-top: var(--navbarHeight);
 }
 
+h5 {
+    font-size: 0.875rem;
+}
+
+h6, label {
+    font-size: 0.75rem;
+}
 // .sidebar-closed {
 //     .main-content {
 //         padding-left: var(--sidebarWidth);
@@ -108,10 +116,10 @@ button, a, .fa {
 .app-aside {}
 
 // modal centered
-.modal-body {
-    height: calc(100vh - 200px);
-    overflow-y: auto;
-}
+// .modal-body {
+//     height: calc(100vh - 200px);
+//     overflow-y: auto;
+// }
 
 // Component Level
 .app-page {
