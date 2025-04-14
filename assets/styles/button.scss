@@ -32,3 +32,55 @@ button.btn {
     overflow: hidden;
     max-width: 150px;
 }
+
+.modal-header {
+    .btn-close, .close {
+        width: 12px;
+        height: 12px;
+        padding: 0px;
+        margin-right: 0.5rem;
+    }
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: flex-start;
+    border-top: 1px solid #dee2e6;
+    gap: 0.75rem;
+  
+    .btn {
+        padding: 0.15625rem 1rem;
+        height: 22px;
+        border-radius: 0.25rem;
+        border-bottom-right-radius: 0rem;
+        border-top-left-radius: 0rem;
+        padding: 0.125rem 1.5rem;
+        font-size: 0.75rem;
+    }
+  
+    .btn-primary {
+      background-color: #1f63af;
+      border-color: #1f63af;
+      color: #fff;
+  
+      &:hover {
+        background-color: #195393;
+        border-color: #195393;
+      }
+    }
+  
+    .btn-outline-primary {
+      color: #1f63af;
+      border-color: #1f63af;
+      background-color: transparent;
+  
+      &:hover {
+        background-color: #1f63af;
+        color: #fff;
+      }
+    }
+  }
+
+  .material-icons-outlined {
+    font-size: 1rem;
+  }
