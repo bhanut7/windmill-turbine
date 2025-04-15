@@ -40,6 +40,7 @@ import { ModuleRegistry } from '@ag-grid-community/core';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 import { InfiniteRowModelModule } from '@ag-grid-community/infinite-row-model';
 import { AgGridModule } from '@ag-grid-community/angular';
+import { CsvExportModule } from '@ag-grid-community/csv-export';
 @NgModule({
   declarations: [
     CommonPopupComponent,
@@ -118,6 +119,7 @@ export class SharedModule {
   constructor() {
     const modules = [
       ClientSideRowModelModule,
+      CsvExportModule,
       InfiniteRowModelModule
     ];
     ModuleRegistry.registerModules(modules);

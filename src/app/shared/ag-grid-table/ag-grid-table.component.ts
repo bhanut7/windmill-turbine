@@ -232,7 +232,13 @@ export class AgGridTableComponent implements OnInit, OnChanges {
 
 	changeActions(eachData: any) {
 		if (eachData?.type === 'download') {
-			this.gridApi.exportDataAsExcel(this.getDownloadParams(eachData));
+			const allColumns = this.gridColumnApi.getAllGridColumns();
+			const exportableColumnKeys = allColumns.filter(col =>
+				col.getColDef().headerName &&
+				col.getColDef().headerName.trim() !== '' &&
+				col.getColDef().headerName !== 'Actions'
+			).map(col => col.getColId());
+			this.gridApi.exportDataAsCsv(this.getDownloadParams(eachData, exportableColumnKeys));
 			return;
 		}
 		this.aggridEmitter.emit({
@@ -240,9 +246,10 @@ export class AgGridTableComponent implements OnInit, OnChanges {
 		})
 	}
 
-	getDownloadParams(eachData: any) {
+	getDownloadParams(eachData: any, exportableColumnKeys: any) {
 		return {
 			fileName: eachData?.fileName || 'export',
+			columnKeys: exportableColumnKeys
 		};
 	}
 

@@ -8,7 +8,8 @@
         "flex": 1,
         "resizable": false,
         "sortable": true,
-        "filter": true
+        "filter": true,
+        "suppressSizeToFit": true
       },
       "pagination": true,
       "columnDefs": [
@@ -21,8 +22,7 @@
           "sortable": false,
           "width": 50,
           "maxWidth": 50,
-          "minWidth": 50,
-          "suppressSizeToFit": true
+          "minWidth": 50
         },
         {
           "headerName": "Site Name",
@@ -67,6 +67,12 @@
           }
         ],
         "externalActions": [
+          {
+            "label": "Download",
+            "action": "download",
+            "type": "download",
+            "icon-class": "fa fa-download"
+          },
           {
             "label": "Remove",
             "action": "multiDelete",

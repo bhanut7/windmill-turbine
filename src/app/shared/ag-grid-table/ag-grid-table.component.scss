@@ -59,23 +59,24 @@
             align-items: center;
             gap: 0.75rem;
     
-            .remove-btn {
+            .btn {
                 font-size: 0.75rem;
                 display: flex;
                 align-items: center;
                 gap: 0.25rem;
                 padding: 0.25rem 0.5rem;
-                background-color: #ff6f61;
-                border-color: #ff6f61;
                 height: 22px;
                 border-radius: 0.25rem;
                 border-bottom-right-radius: 0rem;
                 border-top-left-radius: 0rem;
     
                 i {
-                    font-size: 0.75rem;
+                    font-size: 0.6rem;
                 }
-    
+            }
+            .remove-btn {
+                background-color: #ff6f61;
+                border-color: #ff6f61;
                 &:hover {
                     background-color: #ff4e42;
                     border-color: #ff4e42;

@@ -46,7 +46,7 @@ export class SiteComponent implements OnInit {
       address: new FormControl('', Validators.nullValidator),
       city: new FormControl('', Validators.nullValidator),
       country: new FormControl('', Validators.nullValidator),
-      pincode: new FormControl('', [Validators.nullValidator, Validators.pattern(/^\d{5,6}$/)])
+      pincode: new FormControl('', [Validators.nullValidator])
     });
     this.subscription = this.commonPopup.loaderState.pipe(takeUntil(this.destroy$)).subscribe((data) => {
       if (data['confirmation'] === 'Yes') {
@@ -113,7 +113,6 @@ export class SiteComponent implements OnInit {
 
   aggridEmitter(event: any) {
     try {
-      console.log(event);
       if (!event || !event?.action?.type) {
         return;
       }
@@ -130,11 +129,10 @@ export class SiteComponent implements OnInit {
           this.siteData = event.data;
           this.openModal('siteModalBtn');
           break;
-        case 'delete': {
+        case 'delete': 
           const message = `Are you sure you want to delete the site?`;
           this.commonPopup.triggerPopup('deletion', 'Confirm Deletion', message, true, 'deleteOrganization', event);
           break;
-          }
       }
     } catch (aggridErr) {
       console.error(aggridErr);

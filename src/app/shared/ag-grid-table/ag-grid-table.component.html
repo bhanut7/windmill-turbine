@@ -32,10 +32,9 @@
     </div>
 
     <div class="card-body">
-        
     <ag-grid-angular class="w-100" [class.enable-row-hover]="rowHoverSub" 
     [ngStyle]="{height: ((!agGridOptions?.enableActions && Height) || (agGridOptions?.enableActions && Height)) ? Height : 'calc(100vh - 225px)'}"
-     *ngIf="agGridOptions?.columnDefs" [style.height]="agGridOptions?.height" [ngClass]="theme || 'ag-theme-alpine'"
+     *ngIf="agGridOptions?.columnDefs" [style.height]="agGridOptions?.height" [ngClass]="theme || 'ag-theme-balham'"
         [gridOptions]="agGridOptions" (gridReady)="onGridReady($event)" [rowModelType]="rowModelType" [overlayLoadingTemplate]="overlayLoadingTemplate"
         [overlayNoRowsTemplate]="overlayNoRowsTemplate" (firstDataRendered)="onFirstDataRendered($event)"
         (cellClicked)="onCellClicked($event)" (modelUpdated)="onModelUpdated()" [cacheBlockSize]="1000000"
