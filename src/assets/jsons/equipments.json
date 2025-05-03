@@ -48,6 +48,12 @@
       "tableActions": {
         "actions": [
           {
+            "label": "View",
+            "action": "view",
+            "type": "view",
+            "icon-class": "visibility"
+          },
+          {
             "label": "Edit",
             "action": "edit",
             "type": "edit",

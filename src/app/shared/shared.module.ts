@@ -41,6 +41,7 @@ import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-mod
 import { InfiniteRowModelModule } from '@ag-grid-community/infinite-row-model';
 import { AgGridModule } from '@ag-grid-community/angular';
 import { CsvExportModule } from '@ag-grid-community/csv-export';
+import { TreeViewComponent } from './tree-view/tree-view.component';
 @NgModule({
   declarations: [
     CommonPopupComponent,
@@ -59,6 +60,7 @@ import { CsvExportModule } from '@ag-grid-community/csv-export';
     InputfieldRendererComponent,
     SelectRendererComponent,
     SwitchInputBtnCellRendererComponent,
+    TreeViewComponent,
   ],
   imports: [
     InfiniteScrollModule,
@@ -71,8 +73,9 @@ import { CsvExportModule } from '@ag-grid-community/csv-export';
     ToastrModule.forRoot({
       timeOut: 3000,
       progressBar: true,
-      positionClass: 'toast-bottom-right',
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
+      closeButton: false
     }),
     TreeModule,
     NgSelectModule,
@@ -97,7 +100,8 @@ import { CsvExportModule } from '@ag-grid-community/csv-export';
     SidebarComponent,
     ComingSoonComponent,
     LeftSideBarComponent,
-    AgGridTableComponent
+    AgGridTableComponent,
+    TreeViewComponent
   ],
   providers: [ToastrService, ToasterService, CommonPopupService,
     { provide: DateTimeAdapter, useClass: MomentDateTimeAdapter, deps: [OWL_DATE_TIME_LOCALE] },

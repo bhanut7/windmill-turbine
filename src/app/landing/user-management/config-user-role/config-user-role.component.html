@@ -35,9 +35,19 @@
                     </div>
                 </div>
 
+                <div class="form-group col-4 pl-0">
+                    <label class="form-design">Projects</label>
+                    <ng-select placeholder="Select Project" bindLabel="role"
+                    [multiple]="true" bindValue="key" bindLabel="label" class="form-control p-0"
+                    [items]="projectData" [(ngModel)]="userRoleData.projects"
+                    [ngClass]="{ 'is-invalid': f['projects'].dirty && f['projects']['errors'] }"
+                    formControlName="projects">
+                    </ng-select>
+                </div>
+
             </div>
             <div *ngIf="accessPermission && accordionView?.length">
-                <div class="accordionLine col-md-12 mt-2 pl-0" (click)="openAccessTab()">
+                <div class="accordionLine col-md-12 mt-2 pl-0 cursor-pointer" (click)="openAccessTab()">
                     <h5 class="vDataLabel d-flex accor_dian">
                         <span class="material-icons-outlined" *ngIf="!openTab">chevron_right</span>
                         <span class="material-icons-outlined" *ngIf="openTab">expand_more</span>
@@ -47,7 +57,7 @@
                 <ng-container *ngIf="accordionView && openTab">
                     <div class="pl-0 accordionLine" *ngFor="let activeAccordianTab of accordionView ; let i=index">
                         <ng-container *ngIf="!activeAccordianTab?.parent || (activeAccordianTab?.parent && accessPermission[activeAccordianTab?.parent]?.view)">
-                            <div class="col-md-12 mt-2" [ngClass]="{'ml-3': activeAccordianTab?.parent}" (click)="changeactiveTab(activeAccordianTab)">
+                            <div class="col-md-12 mt-2 cursor-pointer" [ngClass]="{'ml-3': activeAccordianTab?.parent}" (click)="changeactiveTab(activeAccordianTab)">
                                 <h6 class="vDataLabel d-flex accor_dian">
                                     <span class="material-icons-outlined"
                                         *ngIf="activeTab !== activeAccordianTab.value">chevron_right</span>
@@ -70,7 +80,7 @@
                                             </label>
                                         </div>
                                         <div class="col-md-6 px-0 mx-0 float-left">
-                                            <span>Can {{eachItem?.label}} Setup</span>
+                                            <span class="normal-text">Can {{eachItem?.label}} Setup</span>
                                         </div>
                                     </div>
                                 </ng-container>

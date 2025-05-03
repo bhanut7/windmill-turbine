@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   encryptionEnabled: false,
-  BASE_API: 'https://1916-2409-40f0-103-ec25-9952-5b25-2a19-f99a.ngrok-free.app/'
+  BASE_API: 'https://9ce3-27-4-57-197.ngrok-free.app/'
 };
 
 /*

@@ -1,8 +1,9 @@
 <div *ngIf="userForm">
+    <h6 class="section-title p-0 mb-0">General Information</h6>
     <div class="row m-0 user-access-fields">
         <form [formGroup]="userForm" class="pl-0">
             <div class="row col-12 m-0 p-0">
-                <div class="form-group col-4 pl-0">
+                <div class="form-group col-4 pl-0 mb-0">
                     <label class="form-design required">Name</label>
                     <input type="text" class="form-control" placeholder="Enter Name" [(ngModel)]="userData['name']"
                         formControlName="name" ucpWhiteSpaceRestrictor [ngClass]="{ 'is-invalid': f['name'].dirty && f['name']['errors'] }">
@@ -12,20 +13,20 @@
                         </span>
                     </div>
                 </div>
-                <div class="form-group col-4 pl-0" *ngIf="pageconf?.id">
+                <div class="form-group col-4 pl-0 mb-0" *ngIf="pageconf?.id">
                     <label class="form-design required">User ID</label>
-                    <input type="text" class="form-control" ucpWhiteSpaceRestrictor placeholder="Enter User ID" [(ngModel)]="userData['username']"
-                        formControlName="username" [ngClass]="{ 'is-invalid': f['username'].dirty && f['username']['errors'] }">
-                    <div *ngIf="f['username']['errors'] && f['username'].dirty" class="invalid-feedback pt-1">
-                        <span *ngIf="f['username']['errors']['required']">
+                    <input type="text" class="form-control" ucpWhiteSpaceRestrictor placeholder="Enter User ID" [(ngModel)]="userData['user_name']"
+                        formControlName="user_name" [ngClass]="{ 'is-invalid': f['user_name'].dirty && f['user_name']['errors'] }">
+                    <div *ngIf="f['user_name']['errors'] && f['user_name'].dirty" class="invalid-feedback pt-1">
+                        <span *ngIf="f['user_name']['errors']['required']">
                             User ID is required.
                         </span>
-                        <span *ngIf="f?.username?.errors?.minlength">
+                        <span *ngIf="f?.user_name?.errors?.minlength">
                             User ID Must be Atleast 5 Characters Long.
                         </span>
                     </div>
                 </div>
-                <div class="form-group col-4 pl-0">
+                <div class="form-group col-4 pl-0 mb-0">
                     <label class="form-design required">Email</label>
                     <input type="email" class="form-control" ucpWhiteSpaceRestrictor placeholder="Enter Email" [(ngModel)]="userData['email']"
                         formControlName="email" [ngClass]="{ 'is-invalid': f['email'].dirty && f['email']['errors'] }">
@@ -38,55 +39,63 @@
                         </span>
                     </div>
                 </div>
-                <div class="form-group col-4 pl-0">
+                <div class="form-group col-4 pl-0 mb-0">
                     <label class="form-design required">Phone Number</label>
-                    <input type="number" class="form-control" ucpWhiteSpaceRestrictor placeholder="Enter Phone Number" [(ngModel)]="userData['phonenumber']"
-                        formControlName="phonenumber" [ngClass]="{ 'is-invalid': f['phonenumber'].dirty && f['phonenumber']['errors'] }">
-                    <div *ngIf="f['phonenumber']['errors'] && f['phonenumber'].dirty" class="invalid-feedback pt-1">
-                        <span *ngIf="f['phonenumber']['errors']['required']">
+                    <input type="text" class="form-control" ucpWhiteSpaceRestrictor placeholder="Enter Phone Number" [(ngModel)]="userData['phone_number']"
+                        formControlName="phone_number" [ngClass]="{ 'is-invalid': f['phone_number'].dirty && f['phone_number']['errors'] }">
+                    <div *ngIf="f['phone_number']['errors'] && f['phone_number'].dirty" class="invalid-feedback pt-1">
+                        <span *ngIf="f['phone_number']['errors']['required']">
                             Phone Number is required.
                         </span>
                     </div>
                 </div>
-                <div class="form-group col-4 pl-0">
+                <div class="form-group col-4 pl-0 mb-0">
                     <label class="form-design required">User Role</label>
                     <ng-select placeholder="Select User Role" bindLabel="role"
-                    [multiple]="false" bindValue="user_role_id" bindLabel="role" class="form-control p-0"
-                    [items]="dropdownData['user-roles']" [(ngModel)]="userData.userrole"
-                    [ngClass]="{ 'is-invalid': f['userrole'].dirty && f['userrole']['errors'] }"
-                    formControlName="userrole">
-                </ng-select>
-                    <div *ngIf="f['userrole']['errors'] && f['userrole'].dirty" class="invalid-feedback pt-1">
-                        <span *ngIf="f['userrole']['errors']['required']">
+                    [multiple]="false" bindValue="value" bindLabel="label" class="form-control p-0"
+                    [items]="dropdownData['user-roles']" [(ngModel)]="userData.user_role_id"
+                    [ngClass]="{ 'is-invalid': f['user_role_id'].dirty && f['user_role_id']['errors'] }"
+                    formControlName="user_role_id">
+                    </ng-select>
+                    <!-- <select class="form-control p-0" formControlName="user_role_id" [(ngModel)]="userData.user_role_id"
+                        [ngClass]="{ 'is-invalid': f['user_role_id'].dirty && f['user_role_id']['errors'] }">
+                        <option value="" disabled selected>Select User Role</option>
+                        <option *ngFor="let role of dropdownData['user-roles']" [value]="role.user_role_id">
+                            {{ role.role }}
+                        </option>
+                    </select> -->
+                    <div *ngIf="f['user_role_id']['errors'] && f['user_role_id'].dirty" class="invalid-feedback pt-1">
+                        <span *ngIf="f['user_role_id']['errors']['required']">
                             User Role is required.
                         </span>
                     </div>
                 </div>
-                <div class="form-group col-4 pl-0">
+                <!-- <div class="form-group col-4 pl-0">
                     <label class="form-design">User Group</label>
                     <ng-select placeholder="Select User Group" bindLabel="access_group"
                     [multiple]="true" bindValue="access_group_id" class="form-control p-0"
                     [items]="dropdownData['user-access-groups']" [(ngModel)]="userData.access_group_ids"
                     formControlName="access_group_ids">
                 </ng-select>
-                </div>
+                </div> -->
             </div>
+            <h6 class="section-title p-0 mb-0 mt-3" *ngIf="!pageconf?.id">Login Information</h6>
             <div class="row col-12 m-0 p-0">
-                <div class="form-group col-4 pl-0" *ngIf="!pageconf?.id">
+                <div class="form-group col-4 pl-0 mb-0" *ngIf="!pageconf?.id">
                     <label class="form-design required">User ID</label>
-                    <input type="text" class="form-control" ucpWhiteSpaceRestrictor placeholder="Enter User ID" [(ngModel)]="userData['username']"
-                        formControlName="username" [ngClass]="{ 'is-invalid': f['username'].dirty && f['username']['errors'] }">
-                    <div *ngIf="f['username']['errors'] && f['username'].dirty" class="invalid-feedback pt-1">
-                        <span *ngIf="f['username']['errors']['required']">
+                    <input type="text" class="form-control" ucpWhiteSpaceRestrictor placeholder="Enter User ID" [(ngModel)]="userData['user_name']"
+                        formControlName="user_name" [ngClass]="{ 'is-invalid': f['user_name'].dirty && f['user_name']['errors'] }">
+                    <div *ngIf="f['user_name']['errors'] && f['user_name'].dirty" class="invalid-feedback pt-1">
+                        <span *ngIf="f['user_name']['errors']['required']">
                             User ID is required.
                         </span>
-                        <span *ngIf="f?.username?.errors?.minlength">
+                        <span *ngIf="f?.user_name?.errors?.minlength">
                             User ID Must be Atleast 5 Characters Long.
                         </span>
                     </div>
                 </div>
                 <ng-container *ngIf="!this.pageconf?.id">
-                    <div class="form-group col-4 pl-0">
+                    <div class="form-group col-4 pl-0 mb-0">
                         <label class="form-design required">Password</label>
                         <input type="password" class="form-control" ucpWhiteSpaceRestrictor placeholder="Enter Password" [(ngModel)]="userData['password']"
                             formControlName="password" [ngClass]="{ 'is-invalid': f['password'].dirty && f['password']['errors'] }">
@@ -101,7 +110,7 @@
                         <div *ngIf="passwordValidator?.length > 0">
                         <ul class="validator-list row m-0 pl-0">
                             <ng-container *ngFor="let eachField of passwordValidator; let ind = index">
-                                <li class="validator-item col-md-6 pl-0 mt-1 d-flex" [ngClass]="{ 'is-present': eachField['isPresent'] }">
+                                <li class="validator-item col-md-6 pl-0 mt-1 d-flex {{isregexSatisfies(eachField?.regex) ? 'valid-feedback' : 'invalid-feedback'}}" [ngClass]="{ 'is-present': eachField['isPresent'] }">
                                     <span class="material-icons-outlined pr-1 mt-1 color-green fz-1rem" *ngIf="isregexSatisfies(eachField?.regex)">
                                         done
                                     </span>
@@ -114,7 +123,7 @@
                         </ul>
                         </div>
                     </div>
-                    <div class="form-group col-4 pl-0">
+                    <div class="form-group col-4 pl-0 mb-0">
                         <label class="form-design required">Confirm Password</label>
                         <input type="password" class="form-control" ucpWhiteSpaceRestrictor placeholder="Enter Confirm Password" [(ngModel)]="userData['confirmPassword']"
                             formControlName="confirmPassword" [ngClass]="{ 'is-invalid': f['confirmPassword'].dirty && f['confirmPassword']['errors'] }">

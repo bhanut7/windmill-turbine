@@ -1,5 +1,30 @@
 <div class="main-content">
     <div class="page-inner">
+      <div class="d-flex w-100 mb-2">
+        <div class="w-90">
+          <select class="custom-select" style="width: 160px;" [(ngModel)]="filteredData['site_id']"
+              (change)="onFilterChange()">
+              <option *ngFor="let option of dropdownData.sites" [value]="option.site_id">
+                {{ option.site_name }}
+              </option>
+            </select>
+            <select class="custom-select ml-2" style="width: 160px;" [(ngModel)]="filteredData['line_id']"
+              (change)="onFilterChange()">
+              <option *ngFor="let option of dropdownData.lines" [value]="option.line_id">
+                {{ option.line_name }}
+              </option>
+            </select>
+            <select class="custom-select ml-2" style="width: 160px;" [(ngModel)]="filteredData['equipment_id']"
+              (change)="onFilterChange()">
+              <option *ngFor="let option of dropdownData.equipments" [value]="option.equipment_id">
+                {{ option.equipment_name }}
+              </option>
+            </select>
+        </div>
+          <div class="w-10">
+            <button class="btn btn-primary" (click)="openModal('assetModalBtn')">Create New</button>
+          </div>
+        </div>
       <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
           <div class="title-container">
@@ -58,3 +83,101 @@
       </div>
     </div>
   </div>
+
+  <!-- Trigger Button -->
+<button type="button" id="assetModalBtn" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#assetModal">
+  Add/Edit Asset
+</button>
+
+<div class="modal fade" id="assetModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="assetModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" *ngIf="assetForm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="assetModalLabel">Asset Configuration</h5>
+        <button type="button" id="closeAssetBtn" class="btn-close" (click)="closeAssetModal()" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="assetForm">
+          <div class="modal-body">
+                <div class="col-md-12 row m-0 px-0">
+            
+                  <div class="form-group col-4 pl-0 m-0">
+                    <label for="asset_name" class="required">Asset Name</label>
+                    <input wtUserInputValidator
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="assetData['asset_name']"
+                      formControlName="asset_name"
+                      name="assetName"
+                      placeholder="Enter Asset Name"
+                      [ngClass]="{ 'is-invalid': f['asset_name'].dirty && f['asset_name']['errors'] }"
+                    />
+                    <div *ngIf="f['asset_name']['errors'] && f['asset_name'].dirty" class="invalid-feedback pt-1">
+                      <span *ngIf="f['asset_name']['errors']['required']">
+                        Asset Name is required.
+                      </span>
+                    </div>
+                  </div>
+            
+                  <div class="form-group col-4 pl-0 m-0">
+                    <label for="description">Description</label>
+                    <textarea wtUserInputValidator
+                      class="form-control"
+                      [(ngModel)]="assetData['description']"
+                      formControlName="description"
+                      name="description"
+                      placeholder="Enter Description"
+                    ></textarea>
+                  </div>
+
+                  <div class="form-group col-4 pl-0 m-0">
+                    <label for="asset_type" class="required">Asset Type</label>
+                    <input wtUserInputValidator
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="assetData['asset_type']"
+                      name="assetName"
+                      placeholder="Enter Asset Type" />
+                  </div>
+
+                  <div class="form-group col-4 pl-0 m-0">
+                    <label for="asset_type" class="required">Parameters</label>
+                    <input wtUserInputValidator
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="assetData['parameters']"
+                      name="parameters"
+                      placeholder="Select Parameters" />
+                  </div>
+
+                  <div class="form-group col-4 pl-0 m-0">
+                    <label for="asset_type" class="required">Make</label>
+                    <input wtUserInputValidator
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="assetData['make']"
+                      name="make"
+                      placeholder="Enter Make" />
+                  </div>
+
+                  <div class="form-group col-4 pl-0 m-0">
+                    <label for="asset_type" class="required">Model</label>
+                    <input wtUserInputValidator
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="assetData['model']"
+                      name="model"
+                      placeholder="Select Model" />
+                  </div>
+              </div>
+            
+                  
+            </div>
+            
+          <div class="modal-footer">
+              <button type="button" class="btn btn-primary m-0" (click)="configureAsset()">Save</button>
+            <button type="button" class="btn btn-dark m-0" (click)="openModal('closeAssetBtn')">Close</button>
+          </div>
+        </form>          
+    </div>
+  </div>
+</div>

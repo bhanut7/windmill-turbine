@@ -99,7 +99,56 @@ export class DeviceDashboardComponent implements OnInit {
       ]
     };
     return options;
+  };
+
+  public hierachy: any = [
+    {
+      name: 'Plant A',
+      type: 'site',
+      children: [
+        {
+          name: 'Unit 1',
+          type: 'equipment',
+          children: [
+            { name: 'Sensor A1', type: 'ast' },
+            { name: 'Sensor A2', type: 'ast' }
+          ]
+        },
+        {
+          name: 'Unit 2',
+          type: 'equipment',
+          children: [
+            { name: 'Sensor B1', type: 'ast' }
+          ]
+        }
+      ]
+    },
+    {
+      name: 'Plant B',
+      type: 'site',
+      children: [
+        {
+          name: 'Unit 3',
+          type: 'equipment',
+          children: [
+            { name: 'Sensor C1', type: 'ast' }
+          ]
+        }
+      ]
+    }
+  ];
+  
+  public treeOptions: any = {
+    useVirtualScroll: true,
+    nodeHeight: 24,
+    allowDrag: false,
+    animateExpand: true
+  };
+  
+  onTreeNodeSelected(event: any) {
+    console.log('Selected Node:', event.data);
   }
+  
 
   constructor(private router: Router) { }
 

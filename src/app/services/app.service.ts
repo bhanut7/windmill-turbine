@@ -38,20 +38,6 @@ export class AppService {
     return mainUrl[0] + '/#/' + route;
   }
 
-  // Organizations
-  getOrganizations(payload: any): Observable<any> {
-    return this._httplayer.post(Config.API.GET_ORGANIZATIONS, payload);
-  }
-  addOrganization(payload: any): Observable<any> {
-    return this._httplayer.post(Config.API.ADD_ORGANIZATION, payload);
-  }
-  editOrganization(payload: any): Observable<any> {
-    return this._httplayer.post(Config.API.EDIT_ORGANIZATION, payload);
-  }
-  deleteOrganization(payload: any): Observable<any> {
-    return this._httplayer.post(Config.API.DELETE_ORGANIZATION, payload);
-  }
-
   // -----------------------------MQTT Functions-----------------------------------------//
   getMqttConfigDetails(payload: any): Observable<any> {
     return this.postService(Config.API.GET_MQTT_CONFIG_DETAILS, payload);
@@ -62,6 +48,171 @@ export class AppService {
   }
 
   // Service call Functions
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//-----------------------------------Side Menu-------------------------//
+getSidebarMenusList(data: any): Observable<any> {
+  // return this._httplayer.get('assets/jsons/sidebar.json');
+  return this._httplayer.post(Config.API.LEFT_SIDE_BAR, data);
+}
+
+// Hierarchy
+
+fetchLevels(payload?: any): Observable<any> {
+  return this._httplayer.post(Config.API.FETCH_LEVELS, payload);
+}
+
+getHierarchyTable(payload?: any): Observable<any> {
+  // return this._httplayer.get('assets/jsons/sites.json');
+  return this._httplayer.post(Config.API.FETCH_LEVEL_TABLE, payload);
+}
+
+fetchLevelTemplate(payload?: any): Observable<any> {
+  return this._httplayer.post(Config.API.FETCH_LEVEL_TEMPLATE, payload);
+}
+
+createHierarchyItem(payload?: any): Observable<any> {
+  return this._httplayer.post(Config.API.CREATE_HIERARCHY_ITEM, payload);
+}
+
+updateHierarchyItem(payload?: any): Observable<any> {
+  return this._httplayer.post(Config.API.UPDATE_HIERARCHY_ITEM, payload);
+}
+
+fetchHierarchyItem(payload?: any): Observable<any> {
+  return this._httplayer.post(Config.API.FETCH_HIEARARCHY_LEVEL, payload);
+}
+
+deleteHierarchyItem(payload?: any): Observable<any> {
+  return this._httplayer.post(Config.API.DELETE_HIERARCHY_ITEM, payload);
+}
+
+// Parameters
+
+fetchParameters(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.FETCH_PARAMETERS, payload);
+}
+
+createParameter(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.CREATE_PARAMETER, payload);
+}
+
+updateParameter(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.UPDATE_PARAMETER, payload);
+}
+
+deleteParameter(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.DELETE_PARAMETER, payload);
+}
+
+// User & User roles Table 
+
+getUserDetails(payload?: any): Observable<any> {
+  return this._httplayer.post(Config.API.FETCH_USERS, payload);
+  // return this._httplayer.get('assets/jsons/get_user_details.json', payload);
+}
+
+deleteUser(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.DELETE_USER, payload);
+  // return this._httplayer.get('assets/jsons/delete_user.json', payload);
+}
+
+fetchUser(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.FETCH_USER, payload);
+  // return this._httplayer.get('assets/jsons/fetch_user.json', payload);
+}
+
+createUser(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.CREATE_USER, payload);
+  // return this._httplayer.get('assets/jsons/save_user.json', payload);
+}
+
+updateUser(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.UPDATE_USER, payload);
+  // return this._httplayer.get('assets/jsons/save_user.json', payload);
+}
+
+fetchUserRolesDropdown(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.FETCH_USER_ROLES_DROPDOWN, payload);
+}
+
+getUserRoleDetails(payload?: any): Observable<any> {
+  return this._httplayer.post(Config.API.FETCH_USER_ROLES, payload);
+  // return this._httplayer.get('assets/jsons/get_user_role_details.json', payload);
+}
+
+deleteUserRole(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.DELETE_USER_ROLE, payload);
+  // return this._httplayer.get('assets/jsons/delete_user_role.json', payload);
+}
+
+fetchUserAccessPermissions(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.FETCH_USER_ACCESS_PERMISSIONS, payload);
+  // return this._httplayer.get('assets/jsons/fetch_user_access_permissions.json');
+}
+
+fetchUserRole(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.FETCH_USER_ROLE, payload);
+  // return this._httplayer.get('assets/jsons/fetch_user_role.json', payload);
+}
+
+createUserRole(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.CREATE_USER_ROLE, payload);
+  // return this._httplayer.get('assets/jsons/save_user_role.json', payload);
+}
+
+updateUserRole(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.UPDATE_USER_ROLE, payload);
+  // return this._httplayer.get('assets/jsons/save_user_role.json', payload);
+}
+
+// Projects
+loadProjects(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.FETCH_PROJECTS, payload);
+  // return this._httplayer.get('assets/jsons/save_user_role.json', payload);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   // ----------------------------App Component-------------------------------------------//
   getConfigurationJSON() {
@@ -98,12 +249,6 @@ export class AppService {
     return this.postService(Config.API.LOGOUT_USER, data);
   }
 
-
-  //-----------------------------------Side Menu-------------------------//
-  getSidebarMenusList(data: any): Observable<any> {
-    return this._httplayer.get('assets/jsons/sidebar.json');
-  }
-
   //------------------------------------Tags--------------------------------//
   fetchTags(): Observable<any> {
     return this._httplayer.get('assets/jsons/tags.json');
@@ -117,61 +262,33 @@ export class AppService {
     return this._httplayer.get('assets/jsons/delete_tags.json', payload);
   }
 
-  //-------------------------------Parameters--------------------------------//
-  fetchParameters(): Observable<any> {
-    return this._httplayer.get('assets/jsons/parameters.json');
+  // header
+
+  getProfileImage(): Observable<any> {
+    return this.getService(Config.API.GET_PROFILE_IMAGE);
   }
 
-  createParameter(payload: any): Observable<any> {
-    return this._httplayer.get('assets/jsons/create_parameter.json', payload);
+  fetchProjects(): Observable<any> {
+    return this.getService(Config.API.FETCH_PROJECT_LIST);
+    // return this.getService('assets/jsons/view-all-projects.json');
   }
 
-  deleteParameters(payload: any): Observable<any> {
-    return this._httplayer.get('assets/jsons/delete_parameters.json', payload);
+  updatePassword(data): Observable<any> {
+    return this.postService(Config.API.UPDATE_PASSWORD, data);
   }
 
-  // ----------------------------User Role Component-------------------------//
-  fetchUserAccessPermissions(): Observable<any> {
-    return this._httplayer.get('assets/jsons/fetch_user_access_permissions.json');
+  saveUser(data): Observable<any> {
+    return this.postService(Config.API.CREATE_USER, data);
   }
 
-  fetchUserRole(payload: any): Observable<any> {
-    return this._httplayer.get('assets/jsons/fetch_user_role.json', payload);
+  saveProfileImage(data): Observable<any> {
+    return this.postService(Config.API.SAVE_PROFILE_IMAGE, data);
   }
 
-  saveUserRole(payload: any): Observable<any> {
-    return this._httplayer.get('assets/jsons/save_user_role.json', payload);
-  }
-  // ----------------------------User Component-------------------------//
-  fetchUser(payload: any): Observable<any> {
-    return this._httplayer.get('assets/jsons/fetch_user.json', payload);
-  }
 
-  saveUser(payload: any): Observable<any> {
-    return this._httplayer.get('assets/jsons/save_user.json', payload);
-  }
-  
-   // -----------------User Related Table Component---------------------//
-  getUserDetails(payload?: any): Observable<any> {
-    return this._httplayer.get('assets/jsons/get_user_details.json', payload);
-  }
-
-  getUserRoleDetails(payload?: any): Observable<any> {
-    // return this._httplayer.get('assets/jsons/get_user_role_details.json', payload);
-    return this._httplayer.get('assets/jsons/aggrid-ref.json', payload);
-  }
-
-  deleteUser(payload: any): Observable<any> {
-    return this._httplayer.get('assets/jsons/delete_user.json', payload);
-  }
-
-  deleteUserRole(payload: any): Observable<any> {
-    return this._httplayer.get('assets/jsons/delete_user_role.json', payload);
-  }
-
-  // Hierarchy
-  getSites(payload?: any): Observable<any> {
-    return this._httplayer.get('assets/jsons/sites.json', payload);
+  // to be deleted
+  getSites(): Observable<any> {
+    return this._httplayer.get('assets/jsons/delete_user.json');
   }
 
   deleteSite(payload: any): Observable<any> {
@@ -181,8 +298,29 @@ export class AppService {
   getLines(payload?: any): Observable<any> {
     return this._httplayer.get('assets/jsons/lines.json', payload);
   }
+
+  deleteLine(payload: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/delete_user.json', payload);
+  }
+
   getEquipments(payload?: any): Observable<any> {
     return this._httplayer.get('assets/jsons/equipments.json', payload);
+  }
+
+  deleteEquipment(payload: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/delete_user.json', payload);
+  }
+
+  getAssets(payload?: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/equipments.json', payload);
+  }
+
+  deleteAsset(payload: any): Observable<any> {
+    return this._httplayer.get('assets/jsons/delete_user.json', payload);
+  }
+
+  getTemplate(id): Observable<any> {
+    return this._httplayer.get(`assets/jsons/level${id}_template.json`);
   }
 
   // Device Param Components

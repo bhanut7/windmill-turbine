@@ -21,7 +21,7 @@ export class ConfigUserComponent implements OnInit, OnChanges {
   @Output() userEmitter = new EventEmitter();
   public passwordValidator = [
     {
-      label: 'One lowecase letter',
+      label: 'One lowercase letter',
       value: 'lowerCase',
       regex: /^(?=.*[a-z])/,
       isPresent: false,
@@ -54,16 +54,18 @@ export class ConfigUserComponent implements OnInit, OnChanges {
   public userForm: FormGroup;
   public userData: any = {
     name: '',
-    username: '',
+    user_name: '',
     password: '',
     confirmPassword: '',
     email: '',
-    phonenumber: [],
-    userrole: null,
+    phone_number: null,
+    user_role_id: null,
     user_id: '',
-    access_group_ids: [], 
+    // access_group_ids: [], 
   };
-  public allFields: any = ['name', 'username', 'password', 'confirmPassword', 'email', 'phonenumber', 'userrole', 'access_group_ids'];
+  public allFields: any = ['name', 'user_name', 'password', 'confirmPassword', 'email', 'phone_number', 'user_role_id', 
+    // 'access_group_ids'
+  ];
   public loader: any = {
     saveUser: false,
     fetch: false,
@@ -72,7 +74,7 @@ export class ConfigUserComponent implements OnInit, OnChanges {
   public subscription: Subscription;
   public dropdownData: any = {
     'user-roles': [],
-    'user-access-groups': [],
+    // 'user-access-groups': [],
   }
   constructor(private appservice: AppService, private toaster: ToasterService, private _util: UtilityFunctions) { 
     if (this.pageconf?.id) {
@@ -84,7 +86,7 @@ export class ConfigUserComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.loadData('user-roles');
-    this.loadData('user-access-groups');
+    // this.loadData('user-access-groups');
   }
 
   confirmPasswordValidator(control: FormControl): { [key: string]: boolean } | null {
@@ -123,13 +125,15 @@ export class ConfigUserComponent implements OnInit, OnChanges {
             { value: null, disabled: false }, [Validators.required, Validators.minLength(8)],
           );
         }
-      } else if (this.allFields[ind] === 'username') {
+      } else if (this.allFields[ind] === 'user_name') {
         validateObject[this.allFields[ind]] = new FormControl(
           { value: null, disabled: this.pageconf?.id }, [Validators.required, Validators.minLength(5)],
         );
       } else {
         validateObject[this.allFields[ind]] = new FormControl(
-          { value: null, disabled: false }, [(this.pageconf?.id && (this.allFields[ind] === 'confirmPassword' || this.allFields[ind] === 'password')) || (this.allFields[ind] === 'access_group_ids') ?  Validators.nullValidator : Validators.required],
+          { value: null, disabled: false }, [(this.pageconf?.id && (this.allFields[ind] === 'confirmPassword' || this.allFields[ind] === 'password')) 
+          // || (this.allFields[ind] === 'access_group_ids')
+           ?  Validators.nullValidator : Validators.required],
         );
       }
     }
@@ -172,19 +176,19 @@ export class ConfigUserComponent implements OnInit, OnChanges {
       let serviceCall: any;
       switch (type) {
         case 'user-roles':
-          serviceCall = 'getUserRoleDetails'
+          serviceCall = 'fetchUserRolesDropdown'
           break;
-        case 'user-access-groups':
-          serviceCall = 'getUserAccessGroupDetails'
-          break;
+        // case 'user-access-groups':
+        //   serviceCall = 'getUserAccessGroupDetails'
+        //   break;
       }
       if (!serviceCall) {
         return;
       }
       this.loader.table = true;
-      this.appservice[serviceCall]().pipe(takeUntil(this.destroy$)).subscribe(respData => {
+      this.appservice[serviceCall]({}).pipe(takeUntil(this.destroy$)).subscribe(respData => {
         if (respData && respData['status'] === 'success') {
-          this.dropdownData[type] = respData?.data?.rowData || [];
+          this.dropdownData[type] = respData?.data || [];
           this.loader.table = false;
         } else {
           this.loader.table = false;
@@ -228,7 +232,9 @@ export class ConfigUserComponent implements OnInit, OnChanges {
         return;
       }
       const savePayload: any = JSON.parse(JSON.stringify(this.userData));
+      let serviceCall: any = 'createUser';
       if (this.pageconf?.id) {
+        serviceCall = 'updateUser'
         savePayload['user_id'] = this.pageconf['id'];
         delete savePayload['password'];
       } else {
@@ -244,11 +250,11 @@ export class ConfigUserComponent implements OnInit, OnChanges {
             return;
           }
         }
-        savePayload['password'] = this._util.encryptPasswordWithUsername(savePayload['password'], savePayload['username']);
+        savePayload['password'] = this._util.encryptPasswordWithUsername(savePayload['password'], savePayload['user_name']);
       }
       delete savePayload['confirmPassword'];
       this.loader.saveUser = true;
-      this.appservice.saveUser(savePayload).pipe(takeUntil(this.destroy$)).subscribe((respData: any) => {
+      this.appservice[serviceCall](savePayload).pipe(takeUntil(this.destroy$)).subscribe((respData: any) => {
         if (respData && respData['status'] === 'success') {
           this.toaster.toast('success', 'Success', respData['message'] || 'User saved successfully.');
           this.loader.saveUser = false;

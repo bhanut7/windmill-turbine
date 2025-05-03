@@ -1,92 +1,80 @@
 {
-    "status": "success",
-    "message": "",
-    "data": {
-      "title": "Sites",
-      "rowSelection": "multiple",
+  "status": "success",
+  "message": "Data retrieved successfully.",
+  "data": {
+      "title": "Lines",
+      "rowSelection": false,
       "defaultColDef": {
-        "flex": 1,
-        "resizable": false,
-        "sortable": true,
-        "filter": true,
-        "suppressSizeToFit": true
+          "flex": 1,
+          "resizable": false,
+          "sortable": true,
+          "filter": true,
+          "suppressSizeToFit": true
       },
       "pagination": true,
       "columnDefs": [
-        {
-          "headerCheckboxSelection": true,
-          "checkboxSelection": true,
-          "headerName": "",
-          "resizable": false,
-          "filter": false,
-          "sortable": false,
-          "width": 50,
-          "maxWidth": 50,
-          "minWidth": 50
-        },
-        {
-          "headerName": "Site Name",
-          "field": "site_name"
-        },
-        {
-          "headerName": "Description",
-          "field": "description"
-        },
-        {
-          "headerName": "Created On",
-          "field": "created_on"
-        }
+          {
+              "headerName": "Name",
+              "field": "name"
+          },
+          {
+              "headerName": "Description",
+              "field": "description"
+          },
+          {
+              "headerName": "Created On",
+              "field": "created_on"
+          }
       ],
       "rowData": [
-        {
-          "site_id": "site_0",
-          "site_name": "Hamburg",
-          "description": "HVAC plant with fan.",
-          "created_on": "31 Oct 2024"
-        },
-        {
-            "site_id": "site_1",
-            "site_name": "Rostock",
-            "description": "HVAC plant with fan.",
-            "created_on": "31 Oct 2024"
-        }
+          {
+            "hierarchy": true,
+              "hierarchy_id": "hierarchy_126",
+              "project_id": "project_100",
+              "level_id": "levels_6f4da10b540d48b2bf0d168a9bd2b9e4",
+              "level_name": "Lines",
+              "parent_id": "hierarchy_113",
+              "name": "res",
+              "description": "res des",
+              "created_on": "2025-04-20 15:00:33+05:30"
+          }
       ],
       "tableActions": {
-        "actions": [
-          {
-            "label": "Edit",
-            "action": "edit",
-            "type": "edit",
-            "icon-class": "edit"
-          },
-          {
-            "label": "Delete",
-            "action": "delete",
-            "type": "delete",
-            "icon-class": "delete"
-          }
-        ],
-        "externalActions": [
-          {
-            "label": "Download",
-            "action": "download",
-            "type": "download",
-            "icon-class": "fa fa-download"
-          },
-          {
-            "label": "Remove",
-            "action": "multiDelete",
-            "type": "multiDelete",
-            "icon-class": "fa fa-trash",
-            "class": "btn-danger remove-btn"
-          },
-          {
-            "label": "Create New",
-            "action": "addnew",
-            "type": "addnew"
-          }
-        ]
+          "actions": [
+              {
+                  "label": "Hierarchy",
+                  "action": "hierarchy",
+                  "type": "view",
+                  "icon-class": "lan"
+              },
+              {
+                  "label": "Edit",
+                  "action": "edit",
+                  "type": "edit",
+                  "icon-class": "edit"
+              },
+              {
+                  "label": "Delete",
+                  "action": "delete",
+                  "type": "delete",
+                  "icon-class": "delete"
+              }
+          ],
+          "externalActions": [
+              {
+                  "label": "Download",
+                  "action": "download",
+                  "type": "download",
+                  "icon-class": "fa fa-download",
+                  "class": "btn-dark"
+              },
+              {
+                  "label": "Create New",
+                  "action": "addnew",
+                  "type": "addnew"
+              }
+          ]
       },
       "enableActions": true
-    }
   }
+}

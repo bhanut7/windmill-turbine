@@ -25,3 +25,61 @@
     </ng-container>
     </div>
 </div>
+
+<!-- Trigger Button -->
+<button type="button" id="lineModalBtn" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#lineModal">
+    Add/Edit Line
+  </button>
+  
+<div class="modal fade" id="lineModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="lineModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered" *ngIf="lineForm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="lineModalLabel">Line Configuration</h5>
+          <button type="button" id="closeLineBtn" class="btn-close" (click)="closeLineModal()" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form [formGroup]="lineForm">
+            <div class="modal-body">
+                  <div class="col-md-12 row m-0 px-0">
+              
+                    <div class="form-group col-4 pl-0 m-0">
+                      <label for="line_name" class="required">Line Name</label>
+                      <input wtUserInputValidator
+                        type="text"
+                        class="form-control"
+                        [(ngModel)]="lineData['line_name']"
+                        formControlName="line_name"
+                        name="lineName"
+                        placeholder="Enter Line Name"
+                        [ngClass]="{ 'is-invalid': f['line_name'].dirty && f['line_name']['errors'] }"
+                      />
+                      <div *ngIf="f['line_name']['errors'] && f['line_name'].dirty" class="invalid-feedback pt-1">
+                        <span *ngIf="f['line_name']['errors']['required']">
+                          Line Name is required.
+                        </span>
+                      </div>
+                    </div>
+              
+                    <div class="form-group col-4 pl-0 m-0">
+                      <label for="description">Description</label>
+                      <textarea wtUserInputValidator
+                        class="form-control"
+                        [(ngModel)]="lineData['description']"
+                        formControlName="description"
+                        name="description"
+                        placeholder="Enter Description"
+                      ></textarea>
+                    </div>
+                </div>
+              
+                    
+              </div>
+              
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary m-0" (click)="configureLine()">Save</button>
+              <button type="button" class="btn btn-dark m-0" (click)="openModal('closeLineBtn')">Close</button>
+            </div>
+          </form>          
+      </div>
+    </div>
+  </div>

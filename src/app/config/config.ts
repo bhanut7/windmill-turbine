@@ -6,11 +6,43 @@ export class Config {
     public static get BASE_API(): string { return environment.BASE_API; }
     public static get COLOR_LIST(): any { return this.ColorCodesList; }
     public static API: any = {
-      //  Organization component
-      GET_ORGANIZATIONS: Config.BASE_API + 'org_mgmt/fetch_org',
-      ADD_ORGANIZATION: Config.BASE_API + 'org_mgmt/create_org',
-      EDIT_ORGANIZATION: Config.BASE_API + 'org_mgmt/update_org',
-      DELETE_ORGANIZATION: Config.BASE_API + 'org_mgmt/delete_org',
+
+      // LEFT_SIDE_BAR
+      LEFT_SIDE_BAR:  Config.BASE_API + 'projects/fetch_sidebar',
+
+      // Hierarchy
+      FETCH_LEVELS: Config.BASE_API + 'projects/fetch_levels',
+      FETCH_LEVEL_TABLE: Config.BASE_API + 'levels/fetch_level',
+      FETCH_LEVEL_TEMPLATE: Config.BASE_API + 'projects/fetch_level_template',
+      CREATE_HIERARCHY_ITEM: Config.BASE_API + 'levels/create_level',
+      UPDATE_HIERARCHY_ITEM: Config.BASE_API + 'levels/update_level',
+      FETCH_HIEARARCHY_LEVEL: Config.BASE_API + 'levels/edit_fetch_level',
+      DELETE_HIERARCHY_ITEM: Config.BASE_API + 'levels/delete_level',
+
+      // Parameter
+      FETCH_PARAMETERS: Config.BASE_API + 'levels/fetch_parameters',
+      CREATE_PARAMETER: Config.BASE_API + 'levels/create_parameter',
+      UPDATE_PARAMETER: Config.BASE_API + 'levels/update_parameter',
+      DELETE_PARAMETER: Config.BASE_API + 'levels/delete_parameter',
+
+      // Users
+      FETCH_USERS: Config.BASE_API + 'users/fetch_users',
+      CREATE_USER: Config.BASE_API + 'users/create_user',
+      UPDATE_USER: Config.BASE_API + 'users/update_user',
+      FETCH_USER: Config.BASE_API + 'users/edit_fetch_user',
+      DELETE_USER: Config.BASE_API + 'users/delete_user',
+      
+      // User Roles
+      FETCH_USER_ROLES_DROPDOWN : Config.BASE_API + 'users/user_role_dropdown',
+      FETCH_USER_ROLES: Config.BASE_API + 'users/fetch_user_roles',
+      CREATE_USER_ROLE: Config.BASE_API + 'users/create_user_role',
+      UPDATE_USER_ROLE: Config.BASE_API + 'users/update_user_role',
+      FETCH_USER_ROLE: Config.BASE_API + 'users/edit_fetch_user_roles',
+      DELETE_USER_ROLE: Config.BASE_API + 'users/delete_user_role',
+      FETCH_USER_ACCESS_PERMISSIONS: Config.BASE_API + 'users/user_modules_json',
+
+      // Project
+      FETCH_PROJECTS: Config.BASE_API + 'projects/fetch_project_dropdown',
 
          // App Component
         //  GET_TOKEN: Config.BASE_API + 'get_token',
@@ -37,6 +69,25 @@ export class Config {
           port: domain === 'http' ? '8982' : '8982',
           ws: domain === 'http' ? 'ws://' : 'wss://'
         },
+        userLabels: {
+          users: {
+              label: 'Users',
+              configRoute: 'app/user-mt/user-table/users',
+              messageLabel: 'User',
+              errorLabel: 'user',
+              permissionKey: 'users',
+              titleKey: 'username',
+          },
+          'user-roles': {
+              label: 'User Roles',
+              configRoute: 'app/user-mt/user-table/user-roles',
+              messageLabel: 'User Role',
+              errorLabel: 'user role',
+              permissionKey: 'user_roles',
+              titleKey: 'role',
+          }
+        },
+        headerTabs: []
       }
       public static PROJECTCONSTANTS: any = {
         

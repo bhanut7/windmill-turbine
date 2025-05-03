@@ -1,0 +1,49 @@
+<div class="modal-header">
+    <h5 class="modal-title" id="siteModalLabel">{{formConfig?.title || 'Configuration'}}</h5>
+    <button type="button" id="closeSiteBtn" class="btn-close" (click)="closeFormModal()" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <form [formGroup]="formGroup">
+      <div class="modal-body pt-0">
+        <ng-container *ngFor="let section of formConfig?.data">
+          <h6 class="section-title p-0 mb-0 pt-2" *ngIf="section.section">{{ section.section }}</h6>
+    
+          <div class="col-md-12 row m-0 px-0">
+            <ng-container *ngFor="let field of section.fields">
+              <div class="form-group col-4 pl-0 m-0">
+                <label [for]="field.key">
+                  {{ field.label }}
+                  <span *ngIf="field.required" class="text-danger">*</span>
+                </label>
+    
+                <!-- Textarea -->
+                <textarea *ngIf="field.type === 'textarea'"
+                  class="form-control"
+                  [formControlName]="field.key"
+                  [placeholder]="'Enter ' + field.label">
+                </textarea>
+    
+                <!-- Input -->
+                <input *ngIf="field.type !== 'textarea'"
+                  [type]="field.type"
+                  class="form-control"
+                  [formControlName]="field.key"
+                  [placeholder]="'Enter ' + field.label" />
+    
+                <!-- Validation -->
+                <div *ngIf="formGroup.get(field.key)?.invalid && formGroup.get(field.key)?.touched"
+                  class="invalid-feedback d-block pt-0 mt-0">
+                  <span *ngIf="formGroup.get(field.key)?.errors?.required">
+                    {{ field.label }} is required.
+                  </span>
+                </div>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+      </div>
+    
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary m-0" (click)="submit()">Save<i *ngIf="loader" class=" ml-2 fa fa-spinner fa-spin"></i></button>
+        <button type="button" class="btn btn-dark m-0" (click)="openModal('closeSiteBtn')">Close</button>
+      </div>
+    </form>

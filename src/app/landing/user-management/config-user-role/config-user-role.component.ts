@@ -22,15 +22,18 @@ export class ConfigUserRoleComponent implements OnInit {
   public userRoleForm: FormGroup = new FormGroup({
     user_role_name: new FormControl({ value: null, disabled: false }, [Validators.required]),
     user_role_description: new FormControl({ value: null, disabled: false }, [Validators.required]),
+    projects: new FormControl({ value: null, disabled: false }, [Validators.nullValidator]),
   });
   public userRoleData: any = {
     user_role_name: null,
     user_role_description: null,
+    projects: [],
   };
   public loader: any = {
     saveRole: false,
     fetch: false,
   };
+  public projectData: any = [];
   public destroy$: Subject<boolean> = new Subject<boolean>();
   public activeTab: any;
   public openTab: any = true;
@@ -41,6 +44,7 @@ export class ConfigUserRoleComponent implements OnInit {
   public defaultParams: any = ['create', 'edit', 'delete', 'view'];
   constructor(private appservice: AppService, private toaster: ToasterService, private _auth: AuthService) {
     this.fetchUserAccessPermissions();
+    this.fetchProjects();
   }
 
   ngOnInit(): void {
@@ -49,7 +53,7 @@ export class ConfigUserRoleComponent implements OnInit {
   fetchUserAccessPermissions() {
     try {
       this.loader.fetchPerm = true;
-      this.appservice.fetchUserAccessPermissions().pipe(takeUntil(this.destroy$)).subscribe(respData => {
+      this.appservice.fetchUserAccessPermissions({}).pipe(takeUntil(this.destroy$)).subscribe(respData => {
         if (respData && respData['status'] === 'success') {
           this.accordionView = respData?.data?.items;
           this.allPermList = respData?.data?.allPermissionList;
@@ -94,6 +98,29 @@ export class ConfigUserRoleComponent implements OnInit {
       });
     } catch (fetchErr) {
       this.loader.fetch = false;
+      console.error(fetchErr);
+    }
+  }
+
+  fetchProjects() {
+    try {
+      this.loader.fetchProjects = true;
+      this.appservice.loadProjects({}).pipe(takeUntil(this.destroy$)).subscribe(respData => {
+        if (respData && respData['status'] === 'success') {
+          this.projectData = respData['data'] || [];
+          this.loader.fetchProjects = false;
+        } else {
+          this.loader.fetchProjects = false;
+          this.toaster.toast('error', 'Error', respData['message'] || 'Error while fetching projects.');
+        }
+      }, (error) => {
+        this.loader.fetchProjects = false;
+        this.toaster.toast('error', 'Error', 'Error while fetching projects.');
+        console.error(error);
+      });
+    } catch (fetchErr) {
+      this.loader.fetchProjects = false;
+      this.toaster.toast('error', 'Error', 'Error while fetching projects.');
       console.error(fetchErr);
     }
   }
@@ -181,11 +208,13 @@ export class ConfigUserRoleComponent implements OnInit {
       }
       this.accessPermission = this.setPermissions();
       const savePayload: any = { ...this.userRoleData, user_role_permissions: this.accessPermission};
+      let serviceCall: any = 'createUserRole';
       if (this.pageconf?.id) {
+        serviceCall = 'updateUserRole';
         savePayload['user_role_id'] = this.pageconf['id'];
       }
       this.loader.saveRole = true;
-      this.appservice.saveUserRole(savePayload).pipe(takeUntil(this.destroy$)).subscribe((respData: any) => {
+      this.appservice[serviceCall](savePayload).pipe(takeUntil(this.destroy$)).subscribe((respData: any) => {
         if (respData && respData['status'] === 'success') {
           if (this.pageconf?.id) {
             this._auth.logout()

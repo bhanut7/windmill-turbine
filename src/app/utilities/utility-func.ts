@@ -46,11 +46,11 @@ export class UtilityFunctions {
   };
 
   public uuid = {
-    'QVY': 1,
-    '1b': null,
-    'W': 'a',
-    'dMQ0': '',
-    'Zxc': undefined,
+    'OKAl': 1,
+    'lGood': null,
+    'NoNeed': 'a',
+    'ToRemem': '',
+    'berThis': undefined,
   };
   returnK() {
     let k = '';

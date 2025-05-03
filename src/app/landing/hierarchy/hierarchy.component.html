@@ -1,0 +1,42 @@
+<div class="main-content">
+    <div class="page-inner">
+        <div class="d-flex mb-2">
+            <ng-container *ngFor="let eachLevel of hierarchyLevels; let ind = index;" >
+                <span (click)="changeHierarchy(eachLevel, ind)" 
+                class="{{currentHierarchyLevel?.id === eachLevel.id ? 'highlight' : ''}} {{currentLevelIndex < ind ? '' : 'cursor-pointer'}}">
+                {{eachLevel?.name}}</span> {{(ind === hierarchyLevels.length - 1 ? '' : '&nbsp;>&nbsp;')}}
+            </ng-container>
+            <!-- {{currentLevel?.parent_val}} -->
+        </div>
+    <div class="" *ngIf="!loader?.list && agGridOptions?.columnDefs?.length">
+        <wt-ag-grid-table [agGridOptions]="agGridOptions" [clickableColumns]="agGridOptions?.clickableColumns || []" (aggridEmitter)="aggridEmitter($event)"  ></wt-ag-grid-table>
+    </div>
+    <ng-container *ngIf="loader?.list || loader?.conf || loader?.delete || loader?.fetch">
+        <div>
+            <div id="loader-wrapper-submaincontent">
+                <div class="lds-ring">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+            </div>
+        </div>
+    </ng-container>
+    </div>
+    {{formConfig?.data?.length}}
+</div>
+
+<!-- Trigger Button -->
+<button type="button" id="hierarchyModalBtn" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#hierarchyModal">
+    Add/Edit hierarchy
+  </button>
+  
+<div class="modal fade" id="hierarchyModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="hierarchyModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <wt-hierarchy-fields *ngIf="formConfig?.data?.length" [formConfig]="formConfig" [loader]= "loader['conf']" [formData]="formData['item_values']" (closeForm)="closeForm()"
+        (formSubmit)="formSubmitEmitter($event)"></wt-hierarchy-fields>               
+      </div>
+    </div>
+  </div>

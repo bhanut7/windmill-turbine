@@ -24,9 +24,9 @@
     data-backdrop="static" data-keyboard="false"></button>
 
 <!-- User Modal -->
-<div class="modal right fade" id="usersModal" tabindex="-1" role="dialog" aria-labelledby="usersModalTitle"
+<div class="modal fade" id="usersModal" tabindex="-1" role="dialog" aria-labelledby="usersModalTitle"
   aria-hidden="true">
-  <div class="modal-dialog modal-min-width-slider" wtGlobalSlider [wtSliderType]="'right-to-left'" role="document">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">{{(meta?.id ? 'Edit ' : 'Add ') + userLabels?.[selectedView]?.messageLabel}}</h5>

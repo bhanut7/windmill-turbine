@@ -12,7 +12,7 @@
           [ngbTooltip]="!eachItem?.children?.length && !sidebarOpened ? eachItem.name : null" placement="right" >
           <div class="side-menu-item d-flex justify-content-center" [ngClass]="{'sidebar-opened':sidebarOpened}" (mouseover)="hoveredOnElement($event,ind)" >
             <div class="side-menu-icons" style="padding-top: 0.125rem !important">
-              <span class="item-icon {{eachItem.icon}}" style="height: 18px; font-size: 1.25rem;"></span>
+              <span class="item-icon {{eachItem.icon}}" title="{{eachItem?.name}}" style="height: 18px; font-size: 1.25rem;"></span>
               <!-- <img height="20px" src="assets/images/sidebar-icons/{{eachItem.icon}}.svg" alt="" class="item-icon"> -->
             </div>
             <div class="item-label" title="{{eachItem?.name}}">{{eachItem.name}}</div>

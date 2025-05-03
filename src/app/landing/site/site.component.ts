@@ -201,25 +201,6 @@ export class SiteComponent implements OnInit {
     }
   }
 
-  closeOrgModal() {
-    try {
-      this.siteData = {
-        site_name: null,
-        description: null,
-        langitude: null,
-        lattitude: null,
-        state: null,
-        address: null,
-        city: null,
-        country: null,
-        pincode: null
-      };
-      this.viewMode = false;
-    } catch (orgErr) {
-      console.error(orgErr);
-    }
-  }
-
   deleteSite(data: any) {
     try {
       const deletePayload: any = {

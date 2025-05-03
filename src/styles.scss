@@ -7,6 +7,8 @@
 @import "./assets/styles/button.scss";
 @import "./assets/styles/modal.scss";
 @import "./assets/styles/card.scss";
+@import "./assets/styles/select.scss";
+@import "./assets/styles/toaster.scss";
 //============== External file imports ==============//
 
 //============== SCSS Variables ==============//
@@ -55,6 +57,12 @@ h5 {
 
 h6, label {
     font-size: 0.75rem;
+}
+.w-10 {
+    width: 10%;
+}
+.w-90 {
+    width: 90%;
 }
 // .sidebar-closed {
 //     .main-content {

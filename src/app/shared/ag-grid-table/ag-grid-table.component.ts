@@ -279,7 +279,7 @@ export class AgGridTableComponent implements OnInit, OnChanges {
 		if (params.value === undefined || params.value === null || !params?.data) {
 			return '';
 		}
-		return `<a href="javascript:void(0)" class="${(params?.data?.disabledActions?.length && params?.data?.disabledActions?.includes(params?.colDef?.['action']?.['action'] || 'edit')) ? 'color-black no-decoration cursor-unset' : ''}" title="${params.value}">${params.value}</a>`;
+		return `<a href="javascript:void(0)" class="${(params?.data?.disabledActions?.length && params?.data?.disabledActions?.includes(params?.colDef?.['action']?.['action'] || 'edit')) ? 'color-black no-decoration cursor-unset' : ''}" title="${params.value}">${params.value} ${ params?.colDef?.fieldIcon ? '<i class="mr-2 '+params?.colDef?.fieldIcon + '"></i>':''}</a>`;
 	}
 
 	cellStyleData(params: any) {

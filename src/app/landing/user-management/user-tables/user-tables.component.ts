@@ -116,7 +116,7 @@ export class UserTablesComponent implements OnInit {
           break;
       }
       this.loader.table = true;
-      this.appservice[serviceCall]().pipe(takeUntil(this.destroy$)).subscribe(respData => {
+      this.appservice[serviceCall]({}).pipe(takeUntil(this.destroy$)).subscribe(respData => {
         if (respData && respData['status'] === 'success') {
           this.agGridOptions = respData.data;
           // this.agGridOptions['tableActions'] = this._util.updateActions(this.agGridOptions['tableActions'], this.userRolePermissions);

@@ -1,85 +1,91 @@
 <div class="main-content">
-    <div class="page-inner">
-        <div class="mb-2">
-            <select class="custom-select" style="width: 160px;" [(ngModel)]="filteredData['site_id']"
-                (change)="onFilterChange()">
-                <option *ngFor="let option of dropdownData.sites" [value]="option.site_id">
-                  {{ option.site_name }}
-                </option>
-              </select>
-              <select class="custom-select ml-2" style="width: 160px;" [(ngModel)]="filteredData['line_id']"
-                (change)="onFilterChange()">
-                <option *ngFor="let option of dropdownData.lines" [value]="option.line_id">
-                  {{ option.line_name }}
-                </option>
-              </select>
-        </div>
-        <div class="card mb-2 add-tag-card">
-            <div class="card-header d-flex justify-content-between align-items-center">
-              <div class="title-container">
-                <i class="fa fa-plus-circle tag-icon"></i>
-                <h5 class="card-title mx-1">Add a New Equipment</h5>
+  <div class="page-inner">
+    <div class="mb-2">
+      <select class="custom-select" style="width: 160px;" [(ngModel)]="filteredData['site_id']"
+          (change)="onFilterChange()">
+          <option *ngFor="let option of dropdownData.sites" [value]="option.site_id">
+            {{ option.site_name }}
+          </option>
+        </select>
+        <select class="custom-select ml-2" style="width: 160px;" [(ngModel)]="filteredData['line_id']"
+          (change)="onFilterChange()">
+          <option *ngFor="let option of dropdownData.lines" [value]="option.line_id">
+            {{ option.line_name }}
+          </option>
+        </select>
+  </div>
+  <div class="" *ngIf="!loader?.table">
+      <wt-ag-grid-table [agGridOptions]="agGridOptions" [clickableColumns]="agGridOptions?.clickableColumns || []" (aggridEmitter)="aggridEmitter($event)"  ></wt-ag-grid-table>
+  </div>
+  <ng-container *ngIf="loader?.table">
+      <div>
+          <div id="loader-wrapper-submaincontent">
+              <div class="lds-ring">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
               </div>
-            </div>
-            <div class="card-body">
-              <form [formGroup]="equipmentForm">
-                <div class="form-group mb-2 d-flex justify-content-between">
-                  <label for="equipment_name" class="form-label">Equipment Name</label>
-                  <div class="input-group ml-2">
-                      <input
-                        type="text"
-                        id="equipment_name"
-                        formControlName="equipment_name"
-                        [(ngModel)]="equipmentData['equipment_name']"
-                        class="form-control"
-                        placeholder="Enter Equipment Name"
-                      />
-                  </div>
-                </div>
-                <div *ngIf="equipmentForm.get('equipment_name')?.invalid && equipmentForm.get('equipment_name')?.touched" class="error-message text-danger">
-                  Equipment Name is required.
-                </div>
-                <div class="form-group mb-0 d-flex justify-content-between">
-                    <label for="description" class="form-label">Description</label>
-                    <div class="input-group ml-2">
-                        <textarea
-                          type="text"
-                          id="description"
-                          formControlName="description"
-                          class="form-control"
-                          placeholder="Enter Description"></textarea>
+          </div>
+      </div>
+  </ng-container>
+  </div>
+</div>
+
+<!-- Trigger Button -->
+<button type="button" id="equipmentModalBtn" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#equipmentModal">
+  Add/Edit Equipment
+</button>
+
+<div class="modal fade" id="equipmentModal" tabindex="-1" data-bs-backdrop="static" aria-labelledby="equipmentModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered" *ngIf="equipmentForm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="equipmentModalLabel">Equipment Configuration</h5>
+        <button type="button" id="closeEquipmentBtn" class="btn-close" (click)="closeEquipmentModal()" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <form [formGroup]="equipmentForm">
+          <div class="modal-body">
+                <div class="col-md-12 row m-0 px-0">
+            
+                  <div class="form-group col-4 pl-0 m-0">
+                    <label for="equipment_name" class="required">Equipment Name</label>
+                    <input wtUserInputValidator
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="equipmentData['equipment_name']"
+                      formControlName="equipment_name"
+                      name="equipmentName"
+                      placeholder="Enter Equipment Name"
+                      [ngClass]="{ 'is-invalid': f['equipment_name'].dirty && f['equipment_name']['errors'] }"
+                    />
+                    <div *ngIf="f['equipment_name']['errors'] && f['equipment_name'].dirty" class="invalid-feedback pt-1">
+                      <span *ngIf="f['equipment_name']['errors']['required']">
+                        Equipment Name is required.
+                      </span>
                     </div>
                   </div>
-                  <div *ngIf="equipmentForm.get('description')?.invalid && equipmentForm.get('description')?.touched" class="error-message text-danger">
-                   Description is required.
+            
+                  <div class="form-group col-4 pl-0 m-0">
+                    <label for="description">Description</label>
+                    <textarea wtUserInputValidator
+                      class="form-control"
+                      [(ngModel)]="equipmentData['description']"
+                      formControlName="description"
+                      name="description"
+                      placeholder="Enter Description"
+                    ></textarea>
                   </div>
-                <div class="form-actions">
-                  <button
-                    type="button"
-                    class="btn btn-primary"
-                    [disabled]="equipmentForm.invalid"
-                    (click)="createEquipment()"
-                  >
-                    Create Equipment
-                  </button>
-                </div>
-              </form>
+              </div>
+            
+                  
             </div>
+            
+          <div class="modal-footer">
+              <button type="button" class="btn btn-primary m-0" (click)="configureEquipment()">Save</button>
+            <button type="button" class="btn btn-dark m-0" (click)="openModal('closeEquipmentBtn')">Close</button>
           </div>
-    <div class="" *ngIf="!loader?.table">
-        <wt-ag-grid-table [agGridOptions]="agGridOptions" [clickableColumns]="agGridOptions?.clickableColumns || []" (aggridEmitter)="aggridEmitter($event)"  ></wt-ag-grid-table>
+        </form>          
     </div>
-    <ng-container *ngIf="loader?.table">
-        <div>
-            <div id="loader-wrapper-submaincontent">
-                <div class="lds-ring">
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                    <div></div>
-                </div>
-            </div>
-        </div>
-    </ng-container>
-    </div>
+  </div>
 </div>
