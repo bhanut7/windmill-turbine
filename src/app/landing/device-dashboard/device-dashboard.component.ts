@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppService } from '../../services/app.service';
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { ToasterService } from '../../shared/toastr/toaster.service';
 
 @Component({
   selector: 'wt-device-dashboard',
@@ -101,42 +105,7 @@ export class DeviceDashboardComponent implements OnInit {
     return options;
   };
 
-  public hierachy: any = [
-    {
-      name: 'Plant A',
-      type: 'site',
-      children: [
-        {
-          name: 'Unit 1',
-          type: 'equipment',
-          children: [
-            { name: 'Sensor A1', type: 'ast' },
-            { name: 'Sensor A2', type: 'ast' }
-          ]
-        },
-        {
-          name: 'Unit 2',
-          type: 'equipment',
-          children: [
-            { name: 'Sensor B1', type: 'ast' }
-          ]
-        }
-      ]
-    },
-    {
-      name: 'Plant B',
-      type: 'site',
-      children: [
-        {
-          name: 'Unit 3',
-          type: 'equipment',
-          children: [
-            { name: 'Sensor C1', type: 'ast' }
-          ]
-        }
-      ]
-    }
-  ];
+  public hierachy: any = [];
   
   public treeOptions: any = {
     useVirtualScroll: true,
@@ -144,15 +113,38 @@ export class DeviceDashboardComponent implements OnInit {
     allowDrag: false,
     animateExpand: true
   };
+  public destroy$: Subject<boolean> = new Subject<boolean>();
   
   onTreeNodeSelected(event: any) {
     console.log('Selected Node:', event.data);
   }
   
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private appservice: AppService, private toaster: ToasterService) { 
+    this.getHiearchyTree();
+  }
 
   ngOnInit(): void {
+  }
+
+  getHiearchyTree() {
+    try {
+      const fetchPayload: any = {}
+      this.appservice.getHierarchyTree(fetchPayload).pipe(takeUntil(this.destroy$)).subscribe((treeRes: any) => {
+        if (treeRes && treeRes['status'] === 'success') {
+          this.hierachy = treeRes['data'] || [];
+          // this.loadData({parent_id: null});
+        } else {
+          this.toaster.toast('error', 'Error', treeRes['message'] || 'Please try again later.', true);
+        }
+      }, (treeResErr) => {
+        console.error(treeResErr);
+        this.toaster.toast('error', 'Error', 'Please try again later.', true);
+      });
+    } catch (treeErr) {
+      this.toaster.toast('error', 'Error', 'Please try again later.', true);
+      console.error(treeErr);
+    }
   }
 
   openAssetAnalysis(analysisId: any) {
@@ -161,6 +153,11 @@ export class DeviceDashboardComponent implements OnInit {
     } catch (analysisErr) {
       console.error(analysisErr)
     }
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
 }

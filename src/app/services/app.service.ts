@@ -67,8 +67,8 @@ export class AppService {
 
 //-----------------------------------Side Menu-------------------------//
 getSidebarMenusList(data: any): Observable<any> {
-  // return this._httplayer.get('assets/jsons/sidebar.json');
-  return this._httplayer.post(Config.API.LEFT_SIDE_BAR, data);
+  return this._httplayer.get('assets/jsons/sidebar.json');
+  // return this._httplayer.post(Config.API.LEFT_SIDE_BAR, data);
 }
 
 // Hierarchy
@@ -185,6 +185,13 @@ updateUserRole(payload: any): Observable<any> {
 loadProjects(payload: any): Observable<any> {
   return this._httplayer.post(Config.API.FETCH_PROJECTS, payload);
   // return this._httplayer.get('assets/jsons/save_user_role.json', payload);
+}
+
+// Asset Dashboard
+
+getHierarchyTree(payload: any): Observable<any> {
+  return this._httplayer.get('assets/jsons/hierarchy-tree.json', payload);
+  // return this._httplayer.post(Config.API.GET_HIERARCHY_TREE, payload);
 }
 
 

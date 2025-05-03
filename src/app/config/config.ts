@@ -44,6 +44,9 @@ export class Config {
       // Project
       FETCH_PROJECTS: Config.BASE_API + 'projects/fetch_project_dropdown',
 
+      // Asset Dashboard
+      GET_HIERARCHY_TREE: Config.BASE_API + 'levels/fetch_hierarchy'
+
          // App Component
         //  GET_TOKEN: Config.BASE_API + 'get_token',
 

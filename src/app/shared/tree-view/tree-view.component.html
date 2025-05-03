@@ -18,7 +18,7 @@
                 <!-- <span *ngIf="!['equipment', 'ast'].includes(node.data?.type)" class="fa fa-folder icon"></span>
                 <span *ngIf="['equipment', 'ast'].includes(node.data?.type)" class="fa fa-device icon"></span> -->
 
-                <span class="node-label" (click)="node.toggleExpanded(); $event.stopPropagation()">{{ node.data.name }}</span>
+                <span class="node-label" (click)="nodeLabelClick(node)">{{ node.data.name }}</span>
             </div>
 
         </ng-template>

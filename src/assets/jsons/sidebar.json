@@ -2,139 +2,134 @@
     "status": "success",
     "data": [
         {
-            "key": "home",
-            "name": "Home",
-            "route": "/app/dashboard",
-            "icon": "fa fa-home",
-            "access_level": ["machine", "assistant"],
-            "queryParams": {
+          "key": "home",
+          "name": "Home",
+          "route": "/app/dashboard",
+          "icon": "fa fa-home",
+          "access_level": [
+            "machine",
+            "assistant"
+          ],
+          "queryParams": {
+            "settings_sidebar": "disable"
+          }
+        },
+        {
+          "name": "Hierarchy",
+          "key": "hierarchy",
+          "access_level": [
+            "machine",
+            "assistant"
+          ],
+          "icon": "fa fa-sitemap",
+          "children": [
+            {
+              "name": "Hierarchy",
+              "key": "hierarchy",
+              "parent_key": "hierarchy",
+              "route": "/app/hierarchy",
+              "folder": "base",
+              "queryParams": {
                 "settings_sidebar": "disable"
-            }
-        },
-        {
-            "name": "Hierarchy",
-            "key": "hierarchy",
-            "access_level": ["machine", "assistant"],
-            "icon": "fa fa-sitemap",
-            "children": [
-                {
-                    "name": "Sites",
-                    "key": "site",
-                    "parent_key": "hierarchy",
-                    "route": "/app/sites",
-                    "folder": "base",
-                    "queryParams": {
-                        "settings_sidebar": "disable"
-                    }
-                },
-                {
-                    "name": "Lines",
-                    "key": "line",
-                    "parent_key": "hierarchy",
-                    "route": "/app/lines",
-                    "folder": "base",
-                    "queryParams": {
-                        "settings_sidebar": "disable"
-                    }
-                },
-                {
-                    "name": "Equipments",
-                    "key": "equipment",
-                    "parent_key": "hierarchy",
-                    "route": "/app/equipments",
-                    "folder": "base",
-                    "queryParams": {
-                        "settings_sidebar": "disable"
-                    }
-                },
-                {
-                    "name": "Assets",
-                    "key": "asset",
-                    "parent_key": "hierarchy",
-                    "route": "/app/assets",
-                    "folder": "base",
-                    "queryParams": {
-                        "settings_sidebar": "disable"
-                    }
-                },
-                {
-                    "name": "Parameters",
-                    "key": "parameters",
-                    "parent_key": "hierarchy",
-                    "route": "/app/parameters",
-                    "folder": "base",
-                    "queryParams": {
-                        "settings_sidebar": "disable"
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Device Management",
-            "key": "deviceManagement",
-            "access_level": ["machine", "assistant"],
-            "icon": "fa fa-microchip",
-            "children": [
-                {
-                    "name": "Devices",
-                    "key": "devices",
-                    "parent_key": "deviceManagement",
-                    "route": "/app/devices",
-                    "_route": "/app/devices",
-                    "folder": "base",
-                    "queryParams": {
-                        "settings_sidebar": "disable"
-                    }
-                },
-                {
-                    "name": "Device Groups",
-                    "key": "deviceGroups",
-                    "parent_key": "deviceManagement",
-                    "route": "/app/device-groups",
-                    "folder": "base"
-                },
-                {
-                    "name": "Tags",
-                    "key": "tags",
-                    "parent_key": "deviceManagement",
-                    "route": "/app/tags",
-                    "folder": "base",
-                    "queryParams": {
-                        "settings_sidebar": "disable"
-                    }
-                }
-            ]
-        },
-        {
-            "name": "User Management",
-            "key": "userManagement",
-            "access_level": ["machine", "assistant"],
-            "icon": "fa fa-users",
-            "children": [
-                {
-                    "name": "Users",
-                    "key": "users",
-                    "parent_key": "userManagement",
-                    "route": "app/user-mt/user-table/users"
-                },
-                {
-                    "name": "User Roles",
-                    "key": "userRoles",
-                    "parent_key": "userManagement",
-                    "route": "app/user-mt/user-table/user-roles",
-                    "folder": "base"
-                }
-            ]
-        },
-        {
-            "key": "logs",
-            "name": "Logs",
-            "route": "/app/logs",
-            "icon": "fa fa-file-text-o",
-            "access_level": ["machine", "assistant"],
-            "queryParams": {
+              }
+            },
+            {
+              "name": "Asset Dashboard",
+              "key": "assetDashboard",
+              "parent_key": "hierarchy",
+              "route": "/app/asset-dashboard",
+              "folder": "base",
+              "queryParams": {
                 "settings_sidebar": "disable"
+              }
+            },
+            {
+              "name": "Parameters",
+              "key": "parameters",
+              "parent_key": "hierarchy",
+              "route": "/app/parameters",
+              "folder": "base",
+              "queryParams": {
+                "settings_sidebar": "disable"
+              }
             }
+          ]
+        },
+        {
+          "name": "Device Management",
+          "key": "deviceManagement",
+          "access_level": [
+            "machine",
+            "assistant"
+          ],
+          "icon": "fa fa-microchip",
+          "children": [
+            {
+              "name": "Devices",
+              "key": "devices",
+              "parent_key": "deviceManagement",
+              "route": "/app/devices",
+              "_route": "/app/devices",
+              "folder": "base",
+              "queryParams": {
+                "settings_sidebar": "disable"
+              }
+            },
+            {
+              "name": "Device Groups",
+              "key": "deviceGroups",
+              "parent_key": "deviceManagement",
+              "route": "/app/device-groups",
+              "folder": "base"
+            },
+            {
+              "name": "Tags",
+              "key": "tags",
+              "parent_key": "deviceManagement",
+              "route": "/app/tags",
+              "folder": "base",
+              "queryParams": {
+                "settings_sidebar": "disable"
+              }
+            }
+          ]
+        },
+        {
+          "name": "User Management",
+          "key": "userManagement",
+          "access_level": [
+            "machine",
+            "assistant"
+          ],
+          "icon": "fa fa-users",
+          "children": [
+            {
+              "name": "Users",
+              "key": "users",
+              "parent_key": "userManagement",
+              "route": "app/user-mt/user-table/users"
+            },
+            {
+              "name": "User Roles",
+              "key": "userRoles",
+              "parent_key": "userManagement",
+              "route": "app/user-mt/user-table/user-roles",
+              "folder": "base"
+            }
+          ]
+        },
+        {
+          "key": "logs",
+          "name": "Logs",
+          "route": "/app/logs",
+          "icon": "fa fa-file-text-o",
+          "access_level": [
+            "machine",
+            "assistant"
+          ],
+          "queryParams": {
+            "settings_sidebar": "disable"
+          }
         }
-    ]
+      ]
 }

@@ -103,11 +103,17 @@ export class TreeViewComponent implements OnInit {
     const node = event.node;
     this.selectedNodeId = node.data.id;
   
-    if (node.hasChildren) {
+    if (node.hasChildren && !node.isExpanded) {
       node.toggleExpanded();
     }
   
     this.nodeSelected.emit(node);
+  }
+
+  nodeLabelClick(node: any) {
+    if (node) {
+      node.toggleExpanded();
+    }
   }
   
 }

@@ -156,7 +156,7 @@ export class HeaderComponent implements OnInit {
 
   constructor(@Inject(DOCUMENT) private document: any, private toasterService: ToasterService, private router: Router, private _auth: AuthService, private appservice: AppService, public commonPopup: CommonPopupService, private _util: UtilityFunctions, private mqttService: MqttService ) {
     this.mqttService.connect();
-    this.router.navigate(['/app/dashboard']);
+    // this.router.navigate(['/app/dashboard']);
     // this.tabs = this._auth.getHeaderTabs() || [];
     // this.headerSubscription = this.appservice.headerTab.asObservable().subscribe((res)=>{
     //   this.currentUrl = router.url;
