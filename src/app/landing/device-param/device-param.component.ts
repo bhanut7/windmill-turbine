@@ -85,8 +85,11 @@ export class DeviceParamComponent implements OnInit {
               if (tempChartOpt?.yAxis?.axisLabel?.formatter) {
                 tempChartOpt.yAxis.axisLabel.formatter = eval(tempChartOpt.yAxis.axisLabel.formatter);
               }
-              if (tempChartOpt?.series?.[0]?.data?.length) {
-                tempChartOpt.series[0].data = respData.data.series[0].data.map((y, index) => [(index / (respData?.data.series[0].data.length/10)), y])
+              for (let i = 0; i < tempChartOpt?.series?.length; i++) {
+                let eachData = tempChartOpt?.series[i]
+                if (eachData?.data?.length) {
+                  eachData.data = respData.data.series[i].data.map((y, index) => [(index / (respData?.data.series[i].data.length/10)), y])
+                }
               }
               this['chartOptions'+chartno] = tempChartOpt;
               this.loader['chart'+chartno] = false;

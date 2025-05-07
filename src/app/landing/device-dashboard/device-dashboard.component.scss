@@ -11,3 +11,7 @@
 .fault-status-title {
     font-weight: bold;
 }
+.asset-dashboard {
+    height: calc(100vh - 5.25rem);
+    overflow-y: auto;
+}

@@ -14,22 +14,25 @@ export class DeviceDashboardComponent implements OnInit {
   public meta: any = {
     deviceName: 'Windmill 1',
     assetName: 'Bearing 1',
-    assetInformation: [
-      { "label": "Site", "value": "Hamburg" },
-      { "label": "Location", "value": "" },
-      { "label": "Line", "value": "Sector 32" },
-      { "label": "Make", "value": "SKF" },
-      { "label": "Equipment", "value": "Windmill" },
-      { "label": "Model", "value": "2307 EKTN9" },
-      { "label": "Asset", "value": "Bearing 1" },
-      { "label": "Downtime cost", "value": "€ 30.000" }
-    ],
+    assetData: {
+      title: 'Asset Information',
+      data: [
+        { "label": "Site", "value": "Hamburg" },
+        { "label": "Location", "value": "" },
+        { "label": "Line", "value": "Sector 32" },
+        { "label": "Make", "value": "SKF" },
+        { "label": "Equipment", "value": "Windmill" },
+        { "label": "Model", "value": "2307 EKTN9" },
+        { "label": "Asset", "value": "Bearing 1" },
+        { "label": "Downtime cost", "value": "€ 30.000" }
+      ]
+    },
     faultStatus: {
       title: 'Fault Status'
     },
     conditions: {
       title: 'Condition and RUL',
-      conditionRul: [
+      data: [
         { "label": "Overall Health", "value": "Outer Race with severe defect", "status": "danger"},
         { "label": "Remaining Useful Life", "value": "21 days of operations" },
         { "label": "Alert", "value": "Anomaly detected on 17-01-2025" }
@@ -37,17 +40,28 @@ export class DeviceDashboardComponent implements OnInit {
       
     }
   };
-  public parameterNames: any = ['Temperature (°c)', 'RPM (hz)', 'Acceleration (m/s²)' ];
-  public tasks: any = Array.from({ length: 3 }).map((_, index) => ({
-    deadline: `07 Aug 20${18 + index}`,
-    projectInitials: `P${index + 1}`,
-    progress: Math.floor(Math.random() * 100),
-    lastUpdate: `${Math.floor(Math.random() * 10)}d`,
-    name: this.parameterNames[index],
-    options: this.getOptions(Math.floor(Math.random() * 100), `Parameter ${Math.floor(Math.random() * 10)}`)
-  }));
+  public parameterData: any = {
+    title: 'Operational Parameters',
+    data:[
+      {
+        name: 'Temperature (°c)',
+        lastUpdated: '1d ago',
+        progress: 73
+      },
+      {
+        name: 'RPM (hz)',
+        lastUpdated: '3d ago',
+        progress: 83
+      },
+      {
+        name: 'Acceleration (m/s²)',
+        lastUpdated: '6d ago',
+        progress: 60
+      }
+    ]
+  };
 
-  getOptions(progress, name) {
+  getOptions(progress) {
     const options = {
       tooltip: {
         formatter: '{b} : {c}%'
@@ -122,6 +136,7 @@ export class DeviceDashboardComponent implements OnInit {
 
   constructor(private router: Router, private appservice: AppService, private toaster: ToasterService) { 
     this.getHiearchyTree();
+    this.frameDataPoints();
   }
 
   ngOnInit(): void {
@@ -144,6 +159,16 @@ export class DeviceDashboardComponent implements OnInit {
     } catch (treeErr) {
       this.toaster.toast('error', 'Error', 'Please try again later.', true);
       console.error(treeErr);
+    }
+  }
+
+  frameDataPoints() {
+    try {
+      for (let eachData of this.parameterData?.data) {
+        eachData['options'] = this.getOptions(eachData?.progress);
+      }
+    } catch (pointErr) {
+      console.error(pointErr);
     }
   }
 
