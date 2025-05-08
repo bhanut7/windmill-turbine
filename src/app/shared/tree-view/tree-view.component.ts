@@ -17,6 +17,7 @@ export class TreeViewComponent implements OnInit {
   };
 
   @Output() nodeSelected = new EventEmitter<TreeNode>();
+  @Input() selectedHierarchyId: any = ''; // Input to receive the hierarchy_id for selection
 
   searchTerm: string = '';
   filteredNodes: any[] = [];
@@ -25,6 +26,9 @@ export class TreeViewComponent implements OnInit {
   originalNodes: any[] = [];
 
   ngOnInit(): void {
+    if (this.selectedHierarchyId) {
+      this.selectNodeById(this.selectedHierarchyId);
+    }
     this.originalNodes = [...this.nodes];
     this.filteredNodes = [...this.originalNodes];
   }
@@ -115,5 +119,52 @@ export class TreeViewComponent implements OnInit {
       node.toggleExpanded();
     }
   }
+
+  // Function to find and select a node by hierarchy_id
+findAndSelectNode(nodes: any[], hierarchy_id: string): boolean {
+  for (const node of nodes) {
+    // Check if the current node matches the hierarchy_id
+    if (node.hierarchy_id === hierarchy_id) {
+      node.selected = true; // Mark the node as selected
+      return true; // Node found
+    }
+
+    // If the node has children, search recursively
+    if (node.children && node.children.length > 0) {
+      const found = this.findAndSelectNode(node.children, hierarchy_id);
+      if (found) {
+        node.expanded = true; // Expand the parent node
+        return true; // Node found in children
+      }
+    }
+  }
+  return false; // Node not found
+}
+
+// Function to handle selection by hierarchy_id
+selectNodeById(hierarchy_id: string): void {
+  // Reset selection and expansion
+  this.resetTree(this.originalNodes);
+
+  // Find and select the node
+  const found = this.findAndSelectNode(this.originalNodes, hierarchy_id);
+
+  if (found) {
+    this.filteredNodes = [...this.originalNodes]; // Update the filtered nodes
+  } else {
+    console.warn('Node with hierarchy_id not found:', hierarchy_id);
+  }
+}
+
+// Utility function to reset the tree (clear selection and collapse all nodes)
+resetTree(nodes: any[]): void {
+  for (const node of nodes) {
+    node.selected = false;
+    node.expanded = false;
+    if (node.children && node.children.length > 0) {
+      this.resetTree(node.children);
+    }
+  }
+}
   
 }
