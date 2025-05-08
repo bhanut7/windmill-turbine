@@ -190,8 +190,20 @@ loadProjects(payload: any): Observable<any> {
 // Asset Dashboard
 
 getHierarchyTree(payload: any): Observable<any> {
-  return this._httplayer.get('assets/jsons/hierarchy-tree.json', payload);
-  // return this._httplayer.post(Config.API.GET_HIERARCHY_TREE, payload);
+  // return this._httplayer.get('assets/jsons/hierarchy-tree.json', payload);
+  return this._httplayer.post(Config.API.GET_HIERARCHY_TREE, payload);
+}
+
+fetchAssetInfo(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.FETCH_ASSET_INFO, payload);
+}
+
+getParameterValues(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.GET_PARAMETER_VALUES, payload);
+}
+
+fetchDeviceCheck(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.FETCH_DEVICE_CHECK, payload);
 }
 
 

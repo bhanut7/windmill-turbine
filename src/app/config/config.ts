@@ -45,7 +45,10 @@ export class Config {
       FETCH_PROJECTS: Config.BASE_API + 'projects/fetch_project_dropdown',
 
       // Asset Dashboard
-      GET_HIERARCHY_TREE: Config.BASE_API + 'levels/fetch_hierarchy'
+      GET_HIERARCHY_TREE: Config.BASE_API + 'levels/fetch_hierarchy',
+      FETCH_ASSET_INFO: Config.BASE_API + 'levels/fetch_asset_info',
+      GET_PARAMETER_VALUES: Config.BASE_API + 'levels/fetch_latest_mqtt',
+      FETCH_DEVICE_CHECK: Config.BASE_API + 'levels/fetch_device_check',
 
          // App Component
         //  GET_TOKEN: Config.BASE_API + 'get_token',

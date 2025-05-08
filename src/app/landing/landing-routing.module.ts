@@ -34,8 +34,9 @@ const routes: Routes = [
       { path: 'parameters', component: ParametersComponent, canActivate: [AuthGuard] },
       { path: 'asset-dashboard', component: DeviceDashboardComponent, canActivate: [AuthGuard] },
       { path: 'asset-dashboard/:id', component: DeviceDashboardComponent, canActivate: [AuthGuard] },
-      { path: 'devices/:id/assets/:assetId', component: DeviceDashboardComponent, canActivate: [AuthGuard] },
-      { path: 'devices/:id/assets/:assetId/:param', component: DeviceParamComponent, canActivate: [AuthGuard] },
+      { path: 'asset-dashboard/:id/:parameterId', component: DeviceParamComponent, canActivate: [AuthGuard] },
+      { path: 'devices/:id/assets/:assetId', component: DeviceDashboardComponent, canActivate: [AuthGuard] }, // not using
+      { path: 'devices/:id/assets/:assetId/:param', component: DeviceParamComponent, canActivate: [AuthGuard] }, // not using
       { path: 'logs', component: LogsComponent, canActivate: [AuthGuard] },
       {
         path: '',

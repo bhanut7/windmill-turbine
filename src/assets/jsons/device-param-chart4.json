@@ -1,12 +1,12 @@
 {
     "status": "success",
-    "title": "Major Defect",
+    "title": "Comparison",
     "data": {
       "tooltip": {
         "trigger": "axis"
       },
       "legend": {
-        "data": ["Major Defect", "Minor Defect"],
+        "data": ["Bearing 1", "Bearing 2"],
         "top": "top"
       },
       "toolbox": {
@@ -45,7 +45,7 @@
         }],
       "series": [
           {
-          "name": "Major Defect",
+          "name": "Bearing 1",
           "type": "line",
           "showSymbol": false,
           "itemStyle": {
@@ -31057,7 +31057,7 @@
             "barWidth": "25%"
             },
             {
-              "name": "Minor Defect",
+              "name": "Bearing 2",
               "type": "line",
               "showSymbol": false,
               "itemStyle": {

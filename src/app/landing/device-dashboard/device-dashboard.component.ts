@@ -17,45 +17,15 @@ export class DeviceDashboardComponent implements OnInit {
   };
   public assetData: any = {
     title: 'Asset Information',
-    data: [
-      { "label": "Site", "value": "Hamburg" },
-      { "label": "Location", "value": "" },
-      { "label": "Line", "value": "Sector 32" },
-      { "label": "Make", "value": "SKF" },
-      { "label": "Equipment", "value": "Windmill" },
-      { "label": "Model", "value": "2307 EKTN9" },
-      { "label": "Asset", "value": "Bearing 1" },
-      { "label": "Downtime cost", "value": "€ 30.000" }
-    ]
+    data: []
   };
   public conditions: any = {
     title: 'Condition and RUL',
-    data: [
-      { "label": "Overall Health", "value": "Outer Race with severe defect", "status": "danger"},
-      { "label": "Remaining Useful Life", "value": "21 days of operations" },
-      { "label": "Alert", "value": "Anomaly detected on 17-01-2025" }
-    ]
-    
+    data: []
   }
   public parameterData: any = {
     title: 'Operational Parameters',
-    data:[
-      {
-        name: 'Temperature (°c)',
-        lastUpdated: '1d ago',
-        progress: 73
-      },
-      {
-        name: 'RPM (hz)',
-        lastUpdated: '3d ago',
-        progress: 83
-      },
-      {
-        name: 'Acceleration (m/s²)',
-        lastUpdated: '6d ago',
-        progress: 60
-      }
-    ]
+    data:[]
   };
 
   getOptions(progress) {
@@ -125,12 +95,15 @@ export class DeviceDashboardComponent implements OnInit {
     animateExpand: true
   };
   public destroy$: Subject<boolean> = new Subject<boolean>();
+  public loader: any = {};
+  public selectedHierarchyId: any = '';
   
   onTreeNodeSelected(event: any) {
     console.log('Selected Node:', event.data);
     try {
       if (event?.data?.is_last) {
-        this.fetchAllData(event.data?.hierarchy_id || '');
+        this.selectedHierarchyId = event.data?.hierarchy_id || '';
+        this.fetchAllData();
       }
     } catch (eventErr) {
       console.error(eventErr);
@@ -140,21 +113,20 @@ export class DeviceDashboardComponent implements OnInit {
 
   constructor(private router: Router, private appservice: AppService, private toaster: ToasterService) { 
     this.getHiearchyTree();
-    this.frameDataPoints();
   }
 
   ngOnInit(): void {
   }
 
-  fetchAllData(hierarchyId: any) {
+  fetchAllData() {
     try {
       const payload: any = [
-        { service: 'getHierarchyMetaDetails', variable: 'assetData' },
-        { service: 'getParametersDetails', variable: 'parameterData' },
-        { service: 'getParameterStatus', variable: 'conditions' }
+        { service: 'fetchAssetInfo', variable: 'assetData' },
+        { service: 'getParameterValues', variable: 'parameterData' },
+        { service: 'fetchDeviceCheck', variable: 'conditions' }
       ]
       payload.forEach(element => {
-        this.makeServiceCall({ hierarchy_id: hierarchyId }, element);
+        this.makeServiceCall({ hierarchy_id: this.selectedHierarchyId }, element);
       });
     } catch (frameErr) {
       console.error(frameErr);
@@ -166,17 +138,25 @@ export class DeviceDashboardComponent implements OnInit {
       if (!payload?.hierarchy_id || !serviceData?.service || !serviceData?.variable) {
         return;
       }
+      this.loader[serviceData?.variable] = true;
       this.appservice[serviceData?.service](payload).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
         if (res && res['status'] === 'success') {
-          this[serviceData?.variable] = res?.data?.data || {};
+          this[serviceData?.variable] = res?.data || {};
+          if (serviceData?.variable === 'parameterData') {
+            this.frameDataPoints();
+          }
+          this.loader[serviceData?.variable] = false;
         } else {
+          this.loader[serviceData?.variable] = false;
           this.toaster.toast('error', 'Error', res['message'] || 'Please try again later.', true);
         }
       }, (resErr) => {
         console.error(resErr);
+        this.loader[serviceData?.variable] = false;
         this.toaster.toast('error', 'Error', 'Please try again later.', true);
       });
     } catch (loadErr) {
+      this.loader[serviceData?.variable] = false;
       this.toaster.toast('error', 'Error', 'Please try again later.', true);
       console.error(loadErr);
     }
@@ -184,20 +164,25 @@ export class DeviceDashboardComponent implements OnInit {
 
   getHiearchyTree() {
     try {
-      const fetchPayload: any = {}
+      const fetchPayload: any = {};
+      this.loader['hierarchy'] = true;
       this.appservice.getHierarchyTree(fetchPayload).pipe(takeUntil(this.destroy$)).subscribe((treeRes: any) => {
         if (treeRes && treeRes['status'] === 'success') {
           this.hierachy = treeRes['data'] || [];
+          this.loader['hierarchy'] = false;
           // this.loadData({parent_id: null});
         } else {
           this.toaster.toast('error', 'Error', treeRes['message'] || 'Please try again later.', true);
+          this.loader['hierarchy'] = false;
         }
       }, (treeResErr) => {
         console.error(treeResErr);
-        this.toaster.toast('error', 'Error', 'Please try again later.', true);
+        this.loader['hierarchy'] = false;
+        // this.toaster.toast('error', 'Error', 'Please try again later.', true);
       });
     } catch (treeErr) {
       this.toaster.toast('error', 'Error', 'Please try again later.', true);
+      this.loader['hierarchy'] = false;
       console.error(treeErr);
     }
   }
@@ -205,6 +190,7 @@ export class DeviceDashboardComponent implements OnInit {
   frameDataPoints() {
     try {
       for (let eachData of this.parameterData?.data) {
+        eachData.progress = Math.round(eachData.progress * 100) / 100;
         eachData['options'] = this.getOptions(eachData?.progress);
       }
     } catch (pointErr) {
@@ -212,9 +198,12 @@ export class DeviceDashboardComponent implements OnInit {
     }
   }
 
-  openAssetAnalysis(analysisId: any) {
+  openAssetAnalysis(task: any) {
     try {
-      this.router.navigate(['/app/devices/1/assets/1/1']);
+      if (!this.selectedHierarchyId || !task.parameter_id) {
+        return;
+      }
+      this.router.navigate([`/app/asset-dashboard/${this.selectedHierarchyId}/${task.parameter_id}`]);
     } catch (analysisErr) {
       console.error(analysisErr)
     }

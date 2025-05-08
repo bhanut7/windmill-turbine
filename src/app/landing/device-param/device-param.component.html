@@ -2,10 +2,10 @@
   <div class="page-inner">
     <div class="card">
       <div class="card-header">
-        <h6 class="title">{{meta?.deviceName}} / {{meta?.assetName}}</h6>
+        <h6 class="title">Asset Detailed Information</h6>
       </div>
       <div class="card-body row m-0 p-3">
-        <div class="card p-0 mb-3">
+        <div class="card p-0 mb-0">
           <div id="accordion" class="card-expansion m-0">
             <div class="card card-expansion-item expanded">
               <div class="card-header border-0" id="headingOne">
@@ -14,13 +14,13 @@
                   <span class="collapse-indicator mr-2">
                     <i class="fa fa-fw fa-caret-right"></i>
                   </span>
-                  <span>Asset Information</span>
+                  <span><em *ngIf="loader?.assetInformation" class="fa fa-spinner fa-spin mr-2"></em>{{assetInformation?.title || 'Asset Information'}}</span>
                 </button>
               </div>
               <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
-                <div class="card-body py-2 d-flex asset-info-border">
+                <div class="card-body py-2 d-flex asset-info-border" *ngIf="assetInformation?.data?.length; else noDataAvailable">
                   <div class="card-footer-item p-0 card-footer-item-bordered"
-                    *ngFor="let eachInfo of meta?.assetInformation | slice:0:4">
+                    *ngFor="let eachInfo of assetInformation?.data | slice:0:4">
                     <div class="metric">
                       <h6 class="metric-value"> {{eachInfo?.value || 'NA'}} </h6>
                       <p class="metric-label"> {{eachInfo?.label || 'NA'}} </p>
@@ -29,7 +29,7 @@
                 </div>
                 <div class="card-body py-2 d-flex asset-info-border">
                   <div class="card-footer-item p-0 card-footer-item-bordered"
-                    *ngFor="let eachInfo of meta?.assetInformation | slice:4:8">
+                    *ngFor="let eachInfo of assetInformation?.data | slice:4:8">
                     <div class="metric">
                       <h6 class="metric-value"> {{eachInfo?.value || 'NA'}} </h6>
                       <p class="metric-label"> {{eachInfo?.label || 'NA'}} </p>
@@ -44,17 +44,18 @@
       
       <div class="col-12 px-3">
         <!-- Date Range Picker -->
-        <div class="col-4 p-0 d-flex justify-content-between align-items-center mb-3">
+        <h6>Latest Data Visualization</h6>
+        <!-- <div class="col-4 p-0 d-flex justify-content-between align-items-center mb-3">
           <label for="dateRangePicker">Date Range:</label>
           <input placeholder="Select Date Range" [(ngModel)]="dateRange['dateRange']" [owlDateTime]="dt2" [max]="maxDate"
             class="form-control d-inline-block" [owlDateTimeTrigger]="dt2" [selectMode]="'range'"
             (ngModelChange)="changeDashboardRange();">
           <owl-date-time #dt2></owl-date-time>
-        </div>
+        </div> -->
     
         <!-- EChart Card -->
          <div class="row p-0 m-0">
-          <ng-container *ngFor="let chartNo of [1,2,3,4]">
+          <ng-container *ngFor="let chartNo of [2,4]">
             <div class="col-12 p-0">
               <div class="card {{chartNo%2 === 0 ? 'ml-2' : 'mr-2' }} device-param-chart">
                 <div class="card-header d-flex justify-content-between">
@@ -66,8 +67,36 @@
               </div>
             </div>
           </ng-container>
+            <div class="col-6 p-0">
+              <div class="card mr-2 device-param-chart">
+                <div class="card-header d-flex justify-content-between">
+                  <h5>{{'Kurtosis'}}</h5>
+                </div>
+                <div class="card-body" *ngIf="chartData['kurtosis']">
+                  <wt-visual-charts [chartOptions]="chartData['kurtosis']"></wt-visual-charts>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 p-0">
+              <div class="card ml-2 device-param-chart">
+                <div class="card-header d-flex justify-content-between">
+                  <h5>{{'Standard Deviation'}}</h5>
+                </div>
+                <div class="card-body" *ngIf="chartData['standardDeviation']">
+                  <wt-visual-charts [chartOptions]="chartData['standardDeviation']"></wt-visual-charts>
+                </div>
+              </div>
+            </div>
          </div>
       </div>
     </div>
   </div>
 </div>
+
+<ng-template #noDataAvailable>
+  <div>
+      <div class="card-body py-2 d-flex asset-info-border">
+          <p class="text-center w-100 mb-0">No Data Available.</p>
+      </div>
+  </div>
+</ng-template>

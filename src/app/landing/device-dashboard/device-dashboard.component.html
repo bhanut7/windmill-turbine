@@ -2,8 +2,10 @@
     <div class="page-inner">
         <div class="row m-0 device-dashboard">
             <div class="col-2 pl-0">
-                <wt-tree-view *ngIf="hierachy?.length" [nodes]="hierachy" [options]="treeOptions" (nodeSelected)="onTreeNodeSelected($event)">
-                </wt-tree-view>
+                <ng-container  *ngIf="!loader?.hierarchy; else loaderTemplate">
+                    <wt-tree-view *ngIf="hierachy?.length" [nodes]="hierachy" [options]="treeOptions" [selectedHierarchyId]="'hierarchy_103'" (nodeSelected)="onTreeNodeSelected($event)">
+                    </wt-tree-view>
+                </ng-container>
             </div>
             <div class="asset-dashboard card col-10 p-0 mb-0">
                 <!-- <div class="card-header">
@@ -20,29 +22,31 @@
                                             <i class="fa fa-fw fa-caret-right"></i>
                                         </span> -->
                                     <button class="btn btn-reset">
-                                        <span>{{ assetData?.title || 'Asset Information'}}</span>
+                                        <span><em *ngIf="loader?.assetData" class="fa fa-spinner fa-spin mr-2"></em>{{ assetData?.title || 'Asset Information'}}</span>
                                     </button>
                                 </div>
-                                <div>
-                                    <div class="card-body py-2 d-flex asset-info-border">
-                                        <div class="card-footer-item p-0 card-footer-item-bordered"
-                                            *ngFor="let eachInfo of assetData?.data | slice:0:4">
-                                            <div class="metric">
-                                                <h6 class="metric-value"> {{eachInfo?.value || 'NA'}} </h6>
-                                                <p class="metric-label"> {{eachInfo?.label || 'NA'}} </p>
+                                <div *ngIf="assetData?.data?.length; else noDataAvailable">
+                                    <ng-container *ngIf="!loader?.assetData;">
+                                        <div class="card-body py-2 d-flex asset-info-border">
+                                            <div class="card-footer-item p-0 card-footer-item-bordered"
+                                                *ngFor="let eachInfo of assetData?.data | slice:0:4">
+                                                <div class="metric">
+                                                    <h6 class="metric-value"> {{eachInfo?.value || 'NA'}} </h6>
+                                                    <p class="metric-label"> {{eachInfo?.label || 'NA'}} </p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="card-body py-2 d-flex asset-info-border">
-                                        <div class="card-footer-item p-0 card-footer-item-bordered"
-                                            *ngFor="let eachInfo of assetData?.data | slice:4:8">
-                                            <div class="metric">
-                                                <h6 class="metric-value"> {{eachInfo?.value || 'NA'}} </h6>
-                                                <p class="metric-label"> {{eachInfo?.label || 'NA'}} </p>
+                                        <div class="card-body py-2 d-flex asset-info-border">
+                                            <div class="card-footer-item p-0 card-footer-item-bordered"
+                                                *ngFor="let eachInfo of assetData?.data | slice:4:8">
+                                                <div class="metric">
+                                                    <h6 class="metric-value"> {{eachInfo?.value || 'NA'}} </h6>
+                                                    <p class="metric-label"> {{eachInfo?.label || 'NA'}} </p>
+                                                </div>
                                             </div>
                                         </div>
+                                    </ng-container>
                                     </div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -55,12 +59,12 @@
                                         <span class="collapse-indicator mr-2">
                                             <i class="fa fa-fw fa-caret-right"></i>
                                         </span>
-                                        <span>{{parameterData?.title || 'Operational Parameters'}}</span>
+                                        <span><em *ngIf="loader?.parameterData" class="fa fa-spinner fa-spin mr-2"></em>{{parameterData?.title || 'Operational Parameters'}}</span>
                                     </button>
                                 </div>
                                 <div id="collapseTwo" class="collapse show row m-0" aria-labelledby="headingTwo"
                                     data-parent="#accordion">
-    
+                                <ng-container *ngIf="parameterData?.data?.length; else noDataAvailable">
                                     <div class="col-lg-6 col-xl-4 pr-0 pb-0 px-2 cursor-pointer"
                                         (click)="openAssetAnalysis(task)" *ngFor="let task of parameterData?.data">
                                         <div class="card card-fluid mb-3" *ngIf="task?.options">
@@ -88,11 +92,12 @@
                                                     <wt-visual-charts [chartOptions]="task.options"></wt-visual-charts>
                                                 </div>
                                                 <p class="card-subtitle text-muted">
-                                                    Progress in {{ task.progress }}% - Last update {{ task.lastUpdated }}
+                                                    Progress in {{ task.progress }}% - Last update {{ task.last_updated }}
                                                 </p>
                                             </div>
                                         </div>
                                     </div>
+                                </ng-container>
                                 </div>
                             </div>
                         </div>
@@ -107,7 +112,7 @@
                                             <span class="collapse-indicator mr-2">
                                                 <i class="fa fa-fw fa-caret-right"></i>
                                             </span>
-                                            <span>{{conditions?.title}}</span>
+                                            <span><em *ngIf="loader?.conditions" class="fa fa-spinner fa-spin mr-2"></em>{{conditions?.title}}</span>
                                         </div>
                                         <ul class="list-inline small text-end mb-0">
                                             <li class="list-inline-item">
@@ -127,7 +132,7 @@
                                 </div>
                                 <div id="collapseFour" class="collapse show row m-0" aria-labelledby="headingFour"
                                     data-parent="#accordion">
-                                    <div class="card-body py-2 d-flex asset-info-border">
+                                    <div class="card-body py-2 d-flex asset-info-border" *ngIf="conditions?.data?.length; else noDataAvailable">
                                         <div class="card-footer-item p-0 card-footer-item-bordered"
                                             *ngFor="let eachInfo of conditions?.data">
                                             <div class="metric">
@@ -147,3 +152,24 @@
         </div>
     </div>
 </div>
+
+<ng-template #loaderTemplate>
+    <div>
+        <div id="loader-wrapper-submaincontent">
+            <div class="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template #noDataAvailable>
+    <div>
+        <div class="card-body py-2 d-flex asset-info-border">
+            <p class="text-center w-100 mb-0">No Data Available. Please select any Asset</p>
+        </div>
+    </div>
+</ng-template>

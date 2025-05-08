@@ -26,11 +26,11 @@ export class TreeViewComponent implements OnInit {
   originalNodes: any[] = [];
 
   ngOnInit(): void {
+    this.originalNodes = [...this.nodes];
+    this.filteredNodes = [...this.originalNodes];
     if (this.selectedHierarchyId) {
       this.selectNodeById(this.selectedHierarchyId);
     }
-    this.originalNodes = [...this.nodes];
-    this.filteredNodes = [...this.originalNodes];
   }
 
   // Utility function to deep copy nodes
