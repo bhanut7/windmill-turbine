@@ -1,6 +1,6 @@
 <div class="main-content">
     <div class="page-inner">
-        <div class="row m-0">
+        <div class="row m-0 device-dashboard">
             <div class="col-2 pl-0">
                 <wt-tree-view *ngIf="hierachy?.length" [nodes]="hierachy" [options]="treeOptions" (nodeSelected)="onTreeNodeSelected($event)">
                 </wt-tree-view>
@@ -9,7 +9,7 @@
                 <!-- <div class="card-header">
                     <h6 class="title">{{meta?.deviceName}} / {{meta?.assetName}}</h6>
                 </div> -->
-                <div class="card-body row m-0 p-3">
+                <div class="card-body overall-card row m-0 p-3">
                     <div class="card p-0 mb-3">
                         <div id="accordion" class="card-expansion m-0">
                             <div class="card card-expansion-item expanded">
@@ -20,13 +20,13 @@
                                             <i class="fa fa-fw fa-caret-right"></i>
                                         </span> -->
                                     <button class="btn btn-reset">
-                                        <span>{{ meta?.assetData?.title || 'Asset Information'}}</span>
+                                        <span>{{ assetData?.title || 'Asset Information'}}</span>
                                     </button>
                                 </div>
                                 <div>
                                     <div class="card-body py-2 d-flex asset-info-border">
                                         <div class="card-footer-item p-0 card-footer-item-bordered"
-                                            *ngFor="let eachInfo of meta?.assetData?.data | slice:0:4">
+                                            *ngFor="let eachInfo of assetData?.data | slice:0:4">
                                             <div class="metric">
                                                 <h6 class="metric-value"> {{eachInfo?.value || 'NA'}} </h6>
                                                 <p class="metric-label"> {{eachInfo?.label || 'NA'}} </p>
@@ -35,7 +35,7 @@
                                     </div>
                                     <div class="card-body py-2 d-flex asset-info-border">
                                         <div class="card-footer-item p-0 card-footer-item-bordered"
-                                            *ngFor="let eachInfo of meta?.assetData?.data | slice:4:8">
+                                            *ngFor="let eachInfo of assetData?.data | slice:4:8">
                                             <div class="metric">
                                                 <h6 class="metric-value"> {{eachInfo?.value || 'NA'}} </h6>
                                                 <p class="metric-label"> {{eachInfo?.label || 'NA'}} </p>
@@ -97,66 +97,39 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card p-0 mb-3">
-                        <div id="accordion" class="card-expansion m-0">
-                            <div class="card card-expansion-item expanded">
-                                <div class="card-header border-0" id="headingThree">
-                                    <button class="btn btn-reset accordion-btn cursor-auto" data-toggle="collapse"
-                                        data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
-                                        <span class="collapse-indicator mr-2">
-                                            <i class="fa fa-fw fa-caret-right"></i>
-                                        </span>
-                                        <span>{{meta?.faultStatus?.title}}</span>
-                                    </button>
-                                </div>
-                                <div id="collapseThree" class="collapse show row m-0" aria-labelledby="headingThree"
-                                    data-parent="#accordion">
-                                    <ul class="list-inline small text-end">
-                                        <li class="list-inline-item">
-                                            <i class="fa fa-fw fa-circle text-success"></i>
-                                            Working Fine
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <i class="fa fa-fw fa-circle text-warning"></i>
-                                            Medium
-                                        </li>
-                                        <li class="list-inline-item">
-                                            <i class="fa fa-fw fa-circle text-danger"></i>
-                                            Fault
-                                        </li>
-                                    </ul>
-                                    <div class="row m-0">
-                                        <div class="col-12 metric-badge">
-                                            <span class="text-success fault-status-title"> Inner Race (Working Fine)</span>
-                                        </div>
-                                        <div class="col-12 metric-badge">
-                                            <span class="text-warning fault-status-title"> outer Race (Medium)</span>
-                                        </div>
-                                        <div class="col-12 metric-badge">
-                                            <span class="text-danger fault-status-title"> Ball or Cage (Fault)</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card p-0 mb-3">
+                    <div class="card p-0 mb-0">
                         <div id="accordion" class="card-expansion m-0">
                             <div class="card card-expansion-item expanded">
                                 <div class="card-header border-0" id="headingFour">
-                                    <button class="btn btn-reset accordion-btn" data-toggle="collapse"
+                                    <button class="btn btn-reset accordion-btn collapseFour" data-toggle="collapse"
                                         data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
-                                        <span class="collapse-indicator mr-2">
-                                            <i class="fa fa-fw fa-caret-right"></i>
-                                        </span>
-                                        <span>{{meta?.conditions?.title}}</span>
+                                        <div>
+                                            <span class="collapse-indicator mr-2">
+                                                <i class="fa fa-fw fa-caret-right"></i>
+                                            </span>
+                                            <span>{{conditions?.title}}</span>
+                                        </div>
+                                        <ul class="list-inline small text-end mb-0">
+                                            <li class="list-inline-item">
+                                                <i class="fa fa-fw fa-circle text-success"></i>
+                                                Working Fine
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <i class="fa fa-fw fa-circle text-warning"></i>
+                                                Medium
+                                            </li>
+                                            <li class="list-inline-item">
+                                                <i class="fa fa-fw fa-circle text-danger"></i>
+                                                Fault
+                                            </li>
+                                        </ul>
                                     </button>
                                 </div>
                                 <div id="collapseFour" class="collapse show row m-0" aria-labelledby="headingFour"
                                     data-parent="#accordion">
                                     <div class="card-body py-2 d-flex asset-info-border">
                                         <div class="card-footer-item p-0 card-footer-item-bordered"
-                                            *ngFor="let eachInfo of meta?.conditions?.data">
+                                            *ngFor="let eachInfo of conditions?.data">
                                             <div class="metric">
                                                 <h6
                                                     class="metric-value {{eachInfo?.status ? 'text-'+eachInfo?.status : ''}}">

@@ -14,4 +14,14 @@
 .asset-dashboard {
     height: calc(100vh - 5.25rem);
     overflow-y: auto;
+    .overall-card {
+        max-height: fit-content;
+        overflow-y: auto;
+    }
+}
+.collapseFour {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
 }

@@ -13,33 +13,30 @@ import { ToasterService } from '../../shared/toastr/toaster.service';
 export class DeviceDashboardComponent implements OnInit {
   public meta: any = {
     deviceName: 'Windmill 1',
-    assetName: 'Bearing 1',
-    assetData: {
-      title: 'Asset Information',
-      data: [
-        { "label": "Site", "value": "Hamburg" },
-        { "label": "Location", "value": "" },
-        { "label": "Line", "value": "Sector 32" },
-        { "label": "Make", "value": "SKF" },
-        { "label": "Equipment", "value": "Windmill" },
-        { "label": "Model", "value": "2307 EKTN9" },
-        { "label": "Asset", "value": "Bearing 1" },
-        { "label": "Downtime cost", "value": "€ 30.000" }
-      ]
-    },
-    faultStatus: {
-      title: 'Fault Status'
-    },
-    conditions: {
-      title: 'Condition and RUL',
-      data: [
-        { "label": "Overall Health", "value": "Outer Race with severe defect", "status": "danger"},
-        { "label": "Remaining Useful Life", "value": "21 days of operations" },
-        { "label": "Alert", "value": "Anomaly detected on 17-01-2025" }
-      ]
-      
-    }
+    assetName: 'Bearing 1'
   };
+  public assetData: any = {
+    title: 'Asset Information',
+    data: [
+      { "label": "Site", "value": "Hamburg" },
+      { "label": "Location", "value": "" },
+      { "label": "Line", "value": "Sector 32" },
+      { "label": "Make", "value": "SKF" },
+      { "label": "Equipment", "value": "Windmill" },
+      { "label": "Model", "value": "2307 EKTN9" },
+      { "label": "Asset", "value": "Bearing 1" },
+      { "label": "Downtime cost", "value": "€ 30.000" }
+    ]
+  };
+  public conditions: any = {
+    title: 'Condition and RUL',
+    data: [
+      { "label": "Overall Health", "value": "Outer Race with severe defect", "status": "danger"},
+      { "label": "Remaining Useful Life", "value": "21 days of operations" },
+      { "label": "Alert", "value": "Anomaly detected on 17-01-2025" }
+    ]
+    
+  }
   public parameterData: any = {
     title: 'Operational Parameters',
     data:[
@@ -131,6 +128,13 @@ export class DeviceDashboardComponent implements OnInit {
   
   onTreeNodeSelected(event: any) {
     console.log('Selected Node:', event.data);
+    try {
+      if (event?.data?.is_last) {
+        this.fetchAllData(event.data?.hierarchy_id || '');
+      }
+    } catch (eventErr) {
+      console.error(eventErr);
+    }
   }
   
 
@@ -140,6 +144,42 @@ export class DeviceDashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  fetchAllData(hierarchyId: any) {
+    try {
+      const payload: any = [
+        { service: 'getHierarchyMetaDetails', variable: 'assetData' },
+        { service: 'getParametersDetails', variable: 'parameterData' },
+        { service: 'getParameterStatus', variable: 'conditions' }
+      ]
+      payload.forEach(element => {
+        this.makeServiceCall({ hierarchy_id: hierarchyId }, element);
+      });
+    } catch (frameErr) {
+      console.error(frameErr);
+    }
+  }
+
+  makeServiceCall(payload: any, serviceData: any) {
+    try {
+      if (!payload?.hierarchy_id || !serviceData?.service || !serviceData?.variable) {
+        return;
+      }
+      this.appservice[serviceData?.service](payload).pipe(takeUntil(this.destroy$)).subscribe((res: any) => {
+        if (res && res['status'] === 'success') {
+          this[serviceData?.variable] = res?.data?.data || {};
+        } else {
+          this.toaster.toast('error', 'Error', res['message'] || 'Please try again later.', true);
+        }
+      }, (resErr) => {
+        console.error(resErr);
+        this.toaster.toast('error', 'Error', 'Please try again later.', true);
+      });
+    } catch (loadErr) {
+      this.toaster.toast('error', 'Error', 'Please try again later.', true);
+      console.error(loadErr);
+    }
   }
 
   getHiearchyTree() {
