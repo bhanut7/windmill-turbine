@@ -49,6 +49,9 @@ export class Config {
       FETCH_ASSET_INFO: Config.BASE_API + 'levels/fetch_asset_info',
       GET_PARAMETER_VALUES: Config.BASE_API + 'levels/fetch_latest_mqtt',
       FETCH_DEVICE_CHECK: Config.BASE_API + 'levels/fetch_device_check',
+      FETCH_RAW_DATA: Config.BASE_API + 'levels/fetch_raw_data',
+      RAW_DATA_COMPARISON: Config.BASE_API + 'levels/raw_data_comparison',
+      FETCH_LEVEL_STATS: Config.BASE_API + 'levels/fetch_stats',
 
          // App Component
         //  GET_TOKEN: Config.BASE_API + 'get_token',

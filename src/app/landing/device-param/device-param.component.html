@@ -55,14 +55,14 @@
     
         <!-- EChart Card -->
          <div class="row p-0 m-0">
-          <ng-container *ngFor="let chartNo of [2,4]">
+          <ng-container *ngFor="let chartType of chartModels">
             <div class="col-12 p-0">
-              <div class="card {{chartNo%2 === 0 ? 'ml-2' : 'mr-2' }} device-param-chart">
+              <div class="card device-param-chart">
                 <div class="card-header d-flex justify-content-between">
-                  <h5>{{titles?.['chart'+chartNo] || 'Chart Visualization'}}</h5>
+                  <h5>{{titles?.[chartType] || 'Chart Visualization'}}</h5>
                 </div>
-                <div class="card-body" *ngIf="this['chartOptions'+chartNo]">
-                  <wt-visual-charts [chartOptions]="this['chartOptions'+chartNo]"></wt-visual-charts>
+                <div class="card-body" *ngIf="this.chartOptions[[chartType]]">
+                  <wt-visual-charts [chartOptions]="this.chartOptions[[chartType]]"></wt-visual-charts>
                 </div>
               </div>
             </div>
@@ -70,7 +70,7 @@
             <div class="col-6 p-0">
               <div class="card mr-2 device-param-chart">
                 <div class="card-header d-flex justify-content-between">
-                  <h5>{{'Kurtosis'}}</h5>
+                  <h5>{{titles?.kurtosis || 'Kurtosis'}}</h5>
                 </div>
                 <div class="card-body" *ngIf="chartData['kurtosis']">
                   <wt-visual-charts [chartOptions]="chartData['kurtosis']"></wt-visual-charts>
@@ -80,7 +80,7 @@
             <div class="col-6 p-0">
               <div class="card ml-2 device-param-chart">
                 <div class="card-header d-flex justify-content-between">
-                  <h5>{{'Standard Deviation'}}</h5>
+                  <h5>{{titles?.standardDeviation || 'Standard Deviation'}}</h5>
                 </div>
                 <div class="card-body" *ngIf="chartData['standardDeviation']">
                   <wt-visual-charts [chartOptions]="chartData['standardDeviation']"></wt-visual-charts>

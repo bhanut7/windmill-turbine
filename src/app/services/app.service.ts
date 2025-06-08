@@ -206,6 +206,18 @@ fetchDeviceCheck(payload: any): Observable<any> {
   return this._httplayer.post(Config.API.FETCH_DEVICE_CHECK, payload);
 }
 
+// Asset In Detail Dashboard
+fetchRawData(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.FETCH_RAW_DATA, payload);
+}
+rawDataComparison(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.RAW_DATA_COMPARISON, payload);
+}
+fetchLevelStats(payload: any): Observable<any> {
+  return this._httplayer.post(Config.API.FETCH_LEVEL_STATS, payload);
+}
+ 
+
 
 
 
@@ -340,10 +352,5 @@ fetchDeviceCheck(payload: any): Observable<any> {
 
   getTemplate(id): Observable<any> {
     return this._httplayer.get(`assets/jsons/level${id}_template.json`);
-  }
-
-  // Device Param Components
-  getDeviceParamChartData(payload?: any): Observable<any> {
-    return this._httplayer.get(`assets/jsons/device-param-chart${payload['chNo']}.json`, payload);
   }
 }

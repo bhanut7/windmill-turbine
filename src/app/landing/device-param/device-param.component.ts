@@ -25,132 +25,25 @@ export class DeviceParamComponent implements OnInit {
   defaultStartDate: Date = this.dateRange.start;
   defaultEndDate: Date = this.dateRange.end;
 
-  public chartOptions1: any;
-  public chartOptions2: any;
-  public chartOptions3: any;
-  public chartOptions4: any;
+  public chartOptions: any = {
+    rawData: {},
+    comparison: {}
+  }
   public chartData: any = {
-    kurtosis: {
-            "tooltip": {
-              "trigger": "axis"
-            },
-            "toolbox": {
-                "show": true,
-                "feature": {
-                    "magicType": {
-                        "type": [
-                            "bar",
-                            "line"
-                        ]
-                    },
-                    "saveAsImage": {}
-                }
-            },
-            "xAxis": {
-              "type": "category",
-              "name": "AssetS",
-              "data": ["Bearing 1", "Bearing 2"],
-              "axisLine": {
-                "onZero": false
-              }
-            },
-          "yAxis": {
-            "type": "value",
-            "name": "Kurtosis",
-            "axisLine": {
-              "show": true,
-            }
-        },
-            "dataZoom": [{
-                "type": "inside"
-              }],
-            "series": [
-              {
-                "name": "Data",
-                "type": "bar",
-                "showSymbol": false,
-                "data": [
-                  {
-                    "value": 0.26,
-                    "itemStyle": { "color": "#28a745" }  // Green
-                  },
-                  {
-                    "value": -0.17,
-                    "itemStyle": { "color": "#dc3545" }  // Red
-                  }
-                ]
-              }
-            ]
-            
-    },
-    standardDeviation: {
-      "tooltip": {
-        "trigger": "axis"
-      },
-      "toolbox": {
-          "show": true,
-          "feature": {
-              "magicType": {
-                  "type": [
-                      "bar",
-                      "line"
-                  ]
-              },
-              "saveAsImage": {}
-          }
-      },
-      "xAxis": {
-        "type": "category",
-        "name": "AssetS",
-        "data": ["Bearing 1", "Bearing 2"],
-        "axisLine": {
-          "onZero": false
-        }
-      },
-    "yAxis": {
-      "type": "value",
-      "name": "SD",
-      "axisLine": {
-        "show": true,
-      }
-  },
-      "dataZoom": [{
-          "type": "inside"
-        }],
-      "series": [
-        {
-          "name": "Data",
-          "type": "bar",
-          "showSymbol": false,
-          "data": [
-            {
-              "value": 2638.32,
-              "itemStyle": { "color": "#28a745" }  // Green
-            },
-            {
-              "value": 1612.64,
-              "itemStyle": { "color": "#dc3545" }  // Red
-            }
-          ]
-        }
-      ]     
-}
+    kurtosis: {},
+    standardDeviation: {}
   };
   public titles: any = {
-    chart1: null,
-    chart2: null,
-    chart3: null,
-    chart4: null,
+    rawData: null,
+    comparison: null,
+    kurtosis: 'Kurtosis',
+    standardDeviation: 'Standard Deviation'
   }
-  public loader: any = {
-    chart1: false,
-    chart2: false,
-    chart3: false,
-    chart4: false,
-  }
+  public loader: any = {}
   public destroy$: Subject<boolean> = new Subject<boolean>();
   public paramterId: any = '';
   public hierarchyId: any = '';
+  public chartModels: any  = ['rawData', 'comparison']
   
   constructor(private appservice: AppService, private toaster: ToasterService, private route: ActivatedRoute) {
     this.route.params.subscribe((params: any) => {
@@ -174,20 +67,24 @@ export class DeviceParamComponent implements OnInit {
   }
 
   initializeChart(): void {
-    // this.loadData(1);
-    this.loadData(2);
-    // this.loadData(3);
-    this.loadData(4);
+    this.chartModels.forEach(eachType => {
+      this.loadData(eachType);
+    });
+    this.fetchStats();
   }
 
 
-    loadData(chartno: any) {
+    loadData(type: any) {
         try {
-          this.loader['chart'+chartno] = true;
-          this.appservice.getDeviceParamChartData({chNo: chartno}).pipe(takeUntil(this.destroy$)).subscribe(respData => {
+          this.loader[type] = true;
+          let serviceCall = 'fetchRawData';
+          if (type === 'comparison') {
+            serviceCall = 'rawDataComparison';
+          }
+          this.appservice[serviceCall]({hierarchy_id: this.hierarchyId}).pipe(takeUntil(this.destroy$)).subscribe(respData => {
             if (respData && respData['status'] === 'success') {
-              this.titles['chart'+chartno] = respData?.title || 'Chart Visualization';
-              let tempChartOpt: any = respData?.data || {};
+              this.titles[type] = respData?.data?.title || 'Chart Visualization';
+              let tempChartOpt: any = respData?.data?.data || {};
               if (tempChartOpt?.xAxis?.axisLabel?.formatter) {
                 tempChartOpt.xAxis.axisLabel.formatter = eval(tempChartOpt.xAxis.axisLabel.formatter);
               }
@@ -199,23 +96,63 @@ export class DeviceParamComponent implements OnInit {
                 console.log(this.getKurtosis(eachData?.data), "Kurtosis");
                 console.log(this.getStandardDeviation(eachData?.data), "StandardDeviation");
                 if (eachData?.data?.length) {
-                  eachData.data = respData.data.series[i].data.map((y, index) => [(index / (respData?.data.series[i].data.length/10)), y])
+                  eachData.data = respData.data?.data?.series[i].data.map((y, index) => [(index / (respData?.data.data.series[i].data.length/10)), y])
                 }
               }
-              this['chartOptions'+chartno] = tempChartOpt;
-              this.loader['chart'+chartno] = false;
+              this.chartOptions[type] = tempChartOpt;
+              this.loader[type] = false;
             } else {
-              this.loader['chart'+chartno] = false;
+              this.loader[type] = false;
               this.toaster.toast('error', 'Error', respData['message'] || 'Error while fetching data.');
             }
           }, (error) => {
-            this.loader['chart'+chartno] = false;
+            this.loader[type] = false;
             this.toaster.toast('error', 'Error', 'Error while fetching data.');
             console.error(error);
           });
         } catch (table_error) {
-          this.loader['chart'+chartno] = false;
+          this.loader[type] = false;
           console.error(table_error)
+        }
+      }
+
+      fetchStats() {
+        try {
+          this.loader['fetchStats'] = true;
+          this.appservice.fetchLevelStats({hierarchy_id: this.hierarchyId}).pipe(takeUntil(this.destroy$)).subscribe(respData => {
+            if (respData && respData['status'] === 'success') {
+              let tempChartOpt: any = respData?.data || {};
+              tempChartOpt.kurtosis = this.formatLabels(tempChartOpt.kurtosis);
+              tempChartOpt.standardDeviation = this.formatLabels(tempChartOpt.standardDeviation)
+              this.chartData = tempChartOpt;
+              this.loader['fetchStats'] = false;
+            } else {
+              this.loader['fetchStats'] = false;
+              this.toaster.toast('error', 'Error', respData['message'] || 'Error while fetching data.');
+            }
+          }, (error) => {
+            this.loader['fetchStats'] = false;
+            this.toaster.toast('error', 'Error', 'Error while fetching data.');
+            console.error(error);
+          });
+        } catch (table_error) {
+          this.loader['fetchStats'] = false;
+          console.error(table_error)
+        }
+      }
+
+      formatLabels(tempChartOpt) {
+        try {
+          if (tempChartOpt?.xAxis?.axisLabel?.formatter) {
+            tempChartOpt.xAxis.axisLabel.formatter = eval(tempChartOpt.xAxis.axisLabel.formatter);
+          }
+          if (tempChartOpt?.yAxis?.axisLabel?.formatter) {
+            tempChartOpt.yAxis.axisLabel.formatter = eval(tempChartOpt.yAxis.axisLabel.formatter);
+          }
+          return tempChartOpt;
+        } catch (labelErr) {
+          console.error(labelErr);
+          return tempChartOpt;
         }
       }
 

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   encryptionEnabled: false,
-  BASE_API: 'https://9124-27-4-57-197.ngrok-free.app/'
+  BASE_API: 'http://localhost:8989/'
 };
 
 /*

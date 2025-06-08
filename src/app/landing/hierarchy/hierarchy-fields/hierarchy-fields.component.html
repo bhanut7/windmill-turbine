@@ -23,11 +23,17 @@
                 </textarea>
     
                 <!-- Input -->
-                <input *ngIf="field.type !== 'textarea'"
+                <input *ngIf="field.type === 'text'"
                   [type]="field.type"
                   class="form-control"
                   [formControlName]="field.key"
                   [placeholder]="'Enter ' + field.label" />
+
+                <ng-select *ngIf="field.type === 'select'" [placeholder]="'Select ' + field.label"
+                  [multiple]="true" bindValue="value" bindLabel="label" class="form-control p-0"
+                  [items]="field['options']"
+                  [formControlName]="field.key">
+                  </ng-select>
     
                 <!-- Validation -->
                 <div *ngIf="formGroup.get(field.key)?.invalid && formGroup.get(field.key)?.touched"
